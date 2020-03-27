@@ -1,0 +1,21 @@
+/* Global styles */
+
+body{
+    color: white;
+    font-family: 'Open Sans', serif;
+    font-weight: 500;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+/* Hovers */
+
+a:hover{
+    color: rgb(155, 155, 155);
+    text-decoration: none;
+
+    transition: all ease-in 0.2s;
+}
