@@ -14,8 +14,8 @@ a{
 /* Hovers */
 
 a:hover{
-    color: rgb(155, 155, 155);
+    color: rgba(42, 87, 236, 0.815);
     text-decoration: none;
 
-    transition: all ease-in 0.2s;
+    transition: all ease-in-out 0.35s;
 }
