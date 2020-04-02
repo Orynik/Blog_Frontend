@@ -1,6 +1,6 @@
 <template>
     <b-container class = "main mt-3">
-        <h1 class = "main-title text-align-left">Все статьи</h1>
+        <h1 class = "main-title text-align-left">Последние статьи</h1>
         <b-row>
             <b-col cols = "9"  class = "article-list">
                 <articleItem></articleItem>
@@ -12,14 +12,14 @@
                         <categoryItem></categoryItem>
                     </ul>
                 </div>
-                <div class = "article-latest-item">
+                <!-- <div class = "article-latest-item">
                     <h2 class = "article-category-title text-center">Последние статьи</h2>
                     <ul>
                         <li><a href="#">О Vue</a></li>
                         <li><a href="#">О Golang</a></li>
                         <li><a href="#">О пиве</a></li>
                     </ul>
-                </div>
+                </div> -->
             </b-col>
         </b-row>
     </b-container>
@@ -75,4 +75,5 @@
             categoryItem
         }
     }
+//TODO: Реализовать загрузку статей на GitLab
 </script>
