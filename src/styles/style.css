@@ -1,0 +1,29 @@
+/* Global styles */
+
+body{
+    color: white;
+    font-family: 'Open Sans', serif;
+    font-weight: 500;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+/* Hovers */
+
+a:hover{
+    color: rgba(42, 87, 236, 0.815);
+    text-decoration: none;
+
+    transition: all ease-in-out 0.35s;
+}
+
+.article-preview > p{
+    display: none;
+}
+.article-preview > p:nth-child(1),
+.article-preview > p:nth-child(2){
+    display: block;
+}
