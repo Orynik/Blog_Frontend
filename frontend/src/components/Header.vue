@@ -1,7 +1,7 @@
 <template>
     <b-navbar type="dark" variant="info" class = "header">
         <b-navbar-brand>
-            <img src = "../assets/logo.png" witdh = "50" height = "45">
+            <img src = "@/assets/logo.png" witdh = "50" height = "45">
         </b-navbar-brand>
         <a href="#">Главная</a>
         <a href="#">Статьи</a>        

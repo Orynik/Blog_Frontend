@@ -66,8 +66,8 @@
     }
 </style>
 <script>
-    import articleItem from "../components/Article-item.vue"
-    import categoryItem from "../components/Category-item.vue"
+    import articleItem from "@/components/Article-item.vue"
+    import categoryItem from "@/components/Category-item.vue"
     
     export default{
         components:{

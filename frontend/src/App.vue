@@ -2,7 +2,7 @@
   <div id = "app">
     <Header class = "bg-black"></Header>
     <section class = "main">
-      <Index></Index>
+      <router-view></router-view>
     </section>
   </div>
 </template>

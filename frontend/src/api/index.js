@@ -1,5 +1,5 @@
-import Article from "../models/Article"
-import Categories from "../models/Categories"
+import Article from "@/models/Article"
+import Categories from "@/models/Categories"
 
 export default{
     getArticles(){
