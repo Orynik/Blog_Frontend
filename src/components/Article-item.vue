@@ -6,7 +6,7 @@
                 <span class = "article-date">{{article.date}}</span>
             </div>
             <h4 class = "article-title">
-                <a href = "#" class = "linkToArticle">{{article.title}}</a>
+                <router-link :to = "{name: 'article', params: {id: article.id,article: article}}" tag="a"  class = "linkToArticle">{{article.title}}</router-link>
             </h4>
             <div class="article-preview" v-html="article.content">
             </div>
@@ -25,7 +25,7 @@ import api from "@/api/index.js";
 export default {
     data(){
         return{
-            articles: api.getArticles()
+            articles: api.getArticles().slice(0,4)
         }
     },
     methods: {

@@ -3,7 +3,7 @@
         <b-navbar-brand>
             <img src = "@/assets/logo.png" witdh = "50" height = "45">
         </b-navbar-brand>
-        <a href="#">Главная</a>
+        <router-link to = "/">Главная</router-link>
         <a href="#">Статьи</a>        
         <b-navbar-nav class = "ml-auto header">
             <a href="#">Регистрация</a>

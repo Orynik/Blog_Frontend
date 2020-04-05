@@ -8,13 +8,11 @@
 </template>
 
 <script>
-import Index from "@/components/Index.vue"
-import Header from "@/components/Header.vue"
+import Header from "@/pages/Header.vue"
 
 export default {
   name: 'App',
   components: {
-    Index,
     Header
   }
 }

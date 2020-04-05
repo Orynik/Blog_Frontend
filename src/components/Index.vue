@@ -12,14 +12,6 @@
                         <categoryItem></categoryItem>
                     </ul>
                 </div>
-                <!-- <div class = "article-latest-item">
-                    <h2 class = "article-category-title text-center">Последние статьи</h2>
-                    <ul>
-                        <li><a href="#">О Vue</a></li>
-                        <li><a href="#">О Golang</a></li>
-                        <li><a href="#">О пиве</a></li>
-                    </ul>
-                </div> -->
             </b-col>
         </b-row>
     </b-container>
