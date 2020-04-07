@@ -4,10 +4,10 @@
             <img src = "@/assets/logo.png" witdh = "50" height = "45">
         </b-navbar-brand>
         <router-link to = "/">Главная</router-link>
-        <router-link to = "articles">Статьи</router-link>
+        <!-- <router-link to = "articles">Статьи</router-link> -->
         <b-navbar-nav class = "ml-auto header">
-            <!-- <a href="#">Регистрация</a> -->
-            <!-- <a href="#">Вход</a> -->
+            <!-- <router-link to = "/reg">Регистрация</router-link> -->
+            <!-- <router-link to = "/login">Вход</router-link> -->
         </b-navbar-nav>        
     </b-navbar>
 </template>

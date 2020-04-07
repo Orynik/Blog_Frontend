@@ -3,19 +3,64 @@
         <h1 class = "main-title text-align-left">Последние статьи</h1>
         <b-row>
             <b-col cols = "9"  class = "article-list">
-                <articleItem></articleItem>
+                <div v-if = "loaded">
+                    <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
+                </div>
+                <div v-else>
+                    Загрузка...
+                </div>
             </b-col>
             <b-col cols = "3" class = "article-category-list ml-auto">
                 <div class = "article-category-item">
                     <h2 class = "article-category-title text-center">Категории</h2>
                     <ul>
-                        <categoryItem></categoryItem>
+                        <li v-for = "category in getCategories" :key = "category.name">
+                            <span class = "category" @click = "handlerCategory(category.name)">{{category.name}}</span>
+                        </li>
                     </ul>
                 </div>
             </b-col>
         </b-row>
     </b-container>
 </template>
+<script>
+    import articleItem from "@/components/Article-item.vue"
+    import {mapGetters,mapActions} from "vuex"
+
+    export default{
+        data(){
+            return{
+                viewsCategory: "",
+                loaded: true, //false
+            }
+        },
+        components:{
+            articleItem,
+        },
+        computed:{
+            ...mapGetters(["getCategories","getArticles"]),
+            Articles(){
+                if(this.viewsCategory == ""){ //Сортировка статей по сатегориям
+                    return this.getArticles;
+                }
+                if(this.viewsCategory == this.viewsCategory){
+                    return this.getArticles.filter(t => t.category == this.viewsCategory);                    
+                }
+                
+            }
+        },
+        methods:{
+            ...mapActions (["fetchCategories","fetchArticles"]),
+            handlerCategory(category){
+                this.viewsCategory = category;
+            }
+        },
+        async mounted() {
+            this.fetchCategories(),
+            this.fetchArticles()
+        },
+    }
+</script>
 <style>
     .main-title{
         margin: 20px 0 25px 0;
@@ -44,16 +89,20 @@
     .article-info-dislikes{
         margin-left: 10px;
     }
-</style>
-<script>
-    import articleItem from "@/components/Article-item.vue"
-    import categoryItem from "@/components/Category-item.vue"
-    
-    export default{
-        components:{
-            articleItem,
-            categoryItem
-        }
+
+    .category{
+        transition: 0.2s ease-in color;
+
+        cursor: pointer
     }
-//TODO: Реализовать загрузку статей на GitLab
-</script>
+
+    .category:hover{
+        color: blue;
+    }
+
+    .linkToArticle{
+        padding: 3px;
+        border: 1px black solid;
+        border-radius: 5px;
+    }
+</style>

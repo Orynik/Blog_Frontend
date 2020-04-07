@@ -7,8 +7,13 @@ export default new Router({
     mode: "history",
     routes: [
         {
-            path: "*",
+            path: "/404",
+            name: "404",
             component: () => import("@/pages/404")
+        },
+        {
+            path: "*",
+            redirect: "404"
         },
         {
             path: "/",
