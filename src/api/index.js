@@ -46,6 +46,11 @@ export default{
                 }
             });
 
+            //Конвертирование статей в вид: число месяц(название) год
+            article.date = new Date(article.date).toLocaleString('ru', {       
+                month: 'long',day: "numeric",year: "numeric"
+            })
+
             return article;
         })
     },

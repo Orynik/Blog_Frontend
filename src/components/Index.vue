@@ -23,18 +23,6 @@
     .main{
         color: black;
     }
-    .article-item,
-    .article-category-item,
-    .article-latest-item{
-        padding: 5px;
-        margin-bottom: 15px;
-        border: 1px solid rgba(177, 177, 177, 0.342);
-        border-radius: 10px;
-
-        color: white;
-
-        background-color: grey;
-    }
 
     .article-item{
         padding: 10px 15px 10px 15px;

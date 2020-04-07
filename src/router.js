@@ -7,6 +7,10 @@ export default new Router({
     mode: "history",
     routes: [
         {
+            path: "*",
+            component: () => import("@/pages/404")
+        },
+        {
             path: "/",
             component: () => import("@/components/Index")
         },
@@ -16,9 +20,5 @@ export default new Router({
             props: true,
             component: () => import("@/components/Article")
         },
-        {
-            path: "*",
-            component: () => import("@/pages/404")
-        }
     ]
 })

@@ -9,6 +9,7 @@
 
 <script>
 import Header from "@/pages/Header.vue"
+import store from "./store/index"
 
 export default {
   name: 'App',
