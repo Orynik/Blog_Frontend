@@ -25,5 +25,9 @@ export default new Router({
             props: true,
             component: () => import("@/components/Article")
         },
+        {
+            path: "/createArticle",
+            component: () => import("@/components/Create")
+        }
     ]
 })

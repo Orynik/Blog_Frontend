@@ -18,7 +18,7 @@
         </div>
     </div>
     <div v-else>
-        На данных момент статей с категорией {{viewsCategory}} нет, но вы можете стать первыми!
+        На данных момент статей с категорией "{{viewsCategory}}" нет, но вы можете стать первыми!
     </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
     //     //     }
     //     // }
     // },
-    // computed: mapGetters(["getArticles"]),
+    computed: mapGetters(["getArticles"]),
     // async mounted() {
     //     this.fetchArticles()
     // },

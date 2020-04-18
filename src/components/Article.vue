@@ -1,5 +1,5 @@
 <template>
-        <b-container>
+    <b-container>
         <div class = "Post article-item">
             <div class = "d-flex justify-content-between">
                 <span class = "article-author">{{getArticles[$route.params.id].author}}</span>
@@ -10,10 +10,16 @@
             </h4>
             <div class="article-preview" v-html="getArticles[$route.params.id].content">
             </div>
-            <div class = "article-info d-flex">
-                <!-- ♥<span class = "article-info-likes"  @click = "like([$route.params.id])" id  = "like">{{getArticles[$route.params.id].likes}}</span> -->
-                <span class = "article-info-comments">⌛ {{getArticles[$route.params.id].comments.length}}</span>
+
+        </div>
+        <h3>Комментарии ({{getArticles[$route.params.id].comments.length}})</h3>
+        <hr>
+        <div class = "comments" v-for = "comment in getArticles[$route.params.id].comments" :key = "comment.id">
+            <a href="#" class = "commentsAuthor">{{comment.author}}</a>
+            <div class = "commentsContent">
+                {{comment.text}}
             </div>
+            <hr>
         </div>
     </b-container>
 </template>
@@ -50,5 +56,16 @@ export default {
 <style>
     .Post{
         border-radius: 0;
+    }
+
+    .commentsAuthor{
+        color: #17a2b8 ;
+    }
+
+    .commentsContent{
+        margin-left: 5px;
+        padding-left: 10px;
+        border-left: 2px rgba(128, 128, 128, 0.479) solid;
+        border-radius: 2px;
     }
 </style>

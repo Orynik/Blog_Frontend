@@ -4,7 +4,7 @@ export default class Comments{
     constructor(id,idArticle,Author,text){
         this.id = id
         this.idArticle = idArticle;
-        this.Author = Author;
+        this.author = Author;
         this.text = text;
     }
 
