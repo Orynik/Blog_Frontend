@@ -19,8 +19,8 @@ export default{
         updateCategories(state,categories){
             state.categories = categories;
         },
-        incLikes(state,idArticles){
-            state.articles[idArticles].likes++
+        addArticle(state,articles){
+            state.articles.push(articles);
         },
         addComment(state,comment){
             // console.log(state.articles.comments);
@@ -35,9 +35,6 @@ export default{
         getArticles(state){
             return state.articles
         },  
-        getLatestArticles(state){
-            return state.articles.slice(0,4)
-        },
         getCategories(state){
             return state.categories;
         }
