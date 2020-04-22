@@ -22,8 +22,9 @@ export default{
         incLikes(state,idArticles){
             state.articles[idArticles].likes++
         },
-        decLikes(state,idArticles){
-            state.articles[idArticles].likes--
+        addComment(state,comment){
+            // console.log(state.articles.comments);
+            state.articles[comment.idArticle].comments.unshift(comment);
         }
     },
     state: {
@@ -33,7 +34,7 @@ export default{
     getters:{
         getArticles(state){
             return state.articles
-        },
+        },  
         getLatestArticles(state){
             return state.articles.slice(0,4)
         },

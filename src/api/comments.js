@@ -15,7 +15,7 @@ const items = [
 export default{
     getComments(){
         return items.map((item) =>{
-            return Comments.createForm(item);
+            return Comments.createComment(item);
         })
     }
 }

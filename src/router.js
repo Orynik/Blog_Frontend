@@ -23,11 +23,11 @@ export default new Router({
             path: "/articles/:id",
             name: "article",
             props: true,
-            component: () => import("@/components/Article")
+            component: () => import("@/components/ArticleItem")
         },
         {
             path: "/createArticle",
-            component: () => import("@/components/Create")
+            component: () => import("@/components/CreateArticle")
         }
     ]
 })

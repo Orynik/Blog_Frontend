@@ -14,6 +14,9 @@
                 <div class = "article-category-item">
                     <h2 class = "article-category-title text-center">Категории</h2>
                     <ul>
+                        <li>
+                            <span class="category" @click = "handlerCategory('all')">Все категории</span>
+                        </li>
                         <li v-for = "category in getCategories" :key = "category.name">
                             <span class = "category" @click = "handlerCategory(category.name)">{{category.name}}</span>
                         </li>
@@ -24,13 +27,13 @@
     </b-container>
 </template>
 <script>
-    import articleItem from "@/components/Article-item.vue"
+    import articleItem from "@/components/IndexArticle.vue"
     import {mapGetters,mapActions} from "vuex"
 
     export default{
         data(){
             return{
-                viewsCategory: "",
+                viewsCategory: "all",
                 loaded: true, //false
             }
         },
@@ -40,7 +43,7 @@
         computed:{
             ...mapGetters(["getCategories","getArticles"]),
             Articles(){
-                if(this.viewsCategory == ""){ //Сортировка статей по сатегориям
+                if(this.viewsCategory == "all"){ //Сортировка статей по сатегориям
                     return this.getArticles;
                 }
                 if(this.viewsCategory == this.viewsCategory){

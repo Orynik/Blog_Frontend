@@ -27,29 +27,7 @@
 import {mapGetters,mapActions} from "vuex" 
 
 export default {
-    // methods:{
-    //     ...mapActions (["fetchArticles"]),
-    //     // ...mapMutations(["incLikes","decLikes"]),
-    //     // like(idx){
-    //     //     // alert(this.getArticles[idx].title)
-
-    //     //     let e = document.getElementById(idx)   
-
-    //     //     if(e.classList.contains("isActive")){
-    //     //         e.classList.remove ("isActive");
-    //     //         this.decLikes(idx);
-    //     //         e.innerHTML = this.getArticles[idx].likes;
-    //     //     }else{
-    //     //         e.classList.add("isActive");
-    //     //         this.incLikes(idx);
-    //     //         e.innerHTML = this.getArticles[idx].likes;
-    //     //     }
-    //     // }
-    // },
     computed: mapGetters(["getArticles"]),
-    // async mounted() {
-    //     this.fetchArticles()
-    // },
     props:[
         "articles", "viewsCategory"
     ]
