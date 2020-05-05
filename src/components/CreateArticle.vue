@@ -1,6 +1,6 @@
  <template>
     <b-container>
-        <!-- <h1>{{getArticles.length}}</h1> -->
+        <h5>Кол-во статей: {{getArticles.length}}</h5>
         <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
         <div class="tabs">
             <input type="radio" name = "tabs" id = "tab-btn-1" checked>
@@ -11,9 +11,9 @@
                 <form >
                     <textarea name="content" v-model = "content" id="content"></textarea>            
                     <div class = "d-flex">
-                        <div class = "category mr-3">
-                            <label for="category">Выберите Категорию:</label><br>
-                            <select name="category" id="category">
+                        <div class = "category-selector mr-3">
+                            <label for="category-name">Выберите Категорию:</label><br>
+                            <select name="category-list" id="category">
                                 <option v-for = "item in getCategories" :key = "item.id" :value = "item.id">{{item.name}}</option>
                             </select>
                         </div>
@@ -110,9 +110,10 @@ export default {
     .tabs>div {
       /* скрыть контент по умолчанию */
       display: none;
-      border: 1px solid #eee;
+      border: 1px solid rgb(121, 121, 121);
       padding: 10px 15px;
       border-radius: 4px;
+      margin-bottom: 10px;
     }
 
     /* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */

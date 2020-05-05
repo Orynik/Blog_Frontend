@@ -11,8 +11,10 @@
             <div class="article-preview" v-html="article.content">
             </div>
             <div class = "article-info d-flex">
-                ♥<span class = "article-info-likes" @click = "like(index)" :id = "index">{{article.likes}}</span>
-                <span class = "article-info-comments">⌛ {{article.comments.length}}</span>
+                <i class = "like-icon mr-2"></i>
+                <span class = "article-info-likes" @click = "like(index)" :id = "index">{{article.likes}}</span>
+                <span class = "article-info-comments d-flex">
+                    <i class = "comments-icon mr-2"></i> {{article.comments.length}}</span>
                 <router-link :to = "{name: 'article', params: {id: index}}" tag="a"  class = "linkToArticle  ml-auto">Перейти к статье</router-link>
             </div>
         </div>
@@ -33,3 +35,25 @@ export default {
     ]
 };
 </script>
+
+<style>
+    .comments-icon,
+    .like-icon{
+        width: 20px;
+        height: 20px;
+    }
+
+    .comments-icon::before,
+    .like-icon::before{
+        display: block;
+        content: url("../assets/interface.png");
+        width: 20px;
+        height: 20px;
+    }
+    .like-icon::before{
+        content: url("../assets/like.png");
+    }
+    .comments-icon::before{
+        content: url("../assets/interface.png");
+    }
+</style>

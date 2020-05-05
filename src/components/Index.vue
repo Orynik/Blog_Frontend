@@ -45,8 +45,7 @@
             Articles(){
                 if(this.viewsCategory == "all"){ //Сортировка статей по сатегориям
                     return this.getArticles;
-                }
-                if(this.viewsCategory == this.viewsCategory){
+                }else{
                     return this.getArticles.filter(t => t.category == this.viewsCategory);                    
                 }
                 
@@ -65,6 +64,7 @@
     }
 </script>
 <style>
+
     .main-title{
         margin: 20px 0 25px 0;
     }
@@ -100,7 +100,7 @@
     }
 
     .category:hover{
-        color: blue;
+        color: #42c1d4;
     }
 
     .linkToArticle{
