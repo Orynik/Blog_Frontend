@@ -12,6 +12,9 @@
     </b-navbar>
 </template>
 <style scoped>
+    .header > a:hover{
+        text-decoration: none;
+    }
     .header > a{
         margin-right: 10px;
     }

@@ -2,13 +2,13 @@
     <b-container>
         <div class = "Post article-item mt-3">
             <div class = "d-flex justify-content-between">
-                <span class = "article-author">{{getArticles[$route.params.id].author}}</span>
-                <span class = "article-date">{{getArticles[$route.params.id].date}}</span>
+                <span class = "article-author">{{CurrentArticle.author}}</span>
+                <span class = "article-date">{{CurrentArticle.date}}</span>
             </div>
             <h4 class = "article-title">
-                {{getArticles[$route.params.id].title}}
+                {{CurrentArticle.title}}
             </h4>
-            <div class="article-preview" v-html="getArticles[$route.params.id].content">
+            <div class="article-full" v-html="CurrentArticle.content">
             </div>
         </div>
         <div class = "createComments mb-5">
@@ -16,9 +16,9 @@
             <b-textarea id = "comment-texts"></b-textarea>
             <button class = "btn btn-primary mt-2" @click = "newComment">Отправить комментарий</button>
         </div>
-        <h3>Комментарии ({{getArticles[$route.params.id].comments.length}})</h3>
+        <h3>Комментарии ({{CurrentArticle.comments.length}})</h3>
         <hr>
-        <div class = "comments" v-for = "comment in getArticles[$route.params.id].comments" :key = "comment.id">
+        <div class = "comments" v-for = "comment in CurrentArticle.comments" :key = "comment.id">
             <a href="#" class = "commentsAuthor">{{comment.author}}</a>
             <div class = "commentsContent">
                 {{comment.text}}
@@ -51,7 +51,13 @@ export default {
             document.getElementById("comment-texts").value = "";
         }
     },
-    computed: mapGetters(["getArticles"])
+    computed: {
+        ...mapGetters(["getCurrentArticle"]),
+        //Функция для поиска и вывода определенной статьи
+        CurrentArticle(){
+            return this.getCurrentArticle(this.$route.params.id)[0];
+        }
+    }
 };
 </script>
 

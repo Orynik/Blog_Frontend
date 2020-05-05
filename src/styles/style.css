@@ -12,7 +12,7 @@ a{
     color: white;
     text-decoration: none;
 
-    transition: all 0.5s ease;
+    transition: all 0.35s ease-out;
 }
 
 .linkToArticle:hover{
@@ -26,6 +26,11 @@ a{
 .article-preview > p{
     display: none;
 }
+
+.article-full >p{
+    display: block;
+}
+
 .article-preview > p:nth-child(1),
 .article-preview > p:nth-child(2){
     display: block;

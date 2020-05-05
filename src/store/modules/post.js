@@ -35,6 +35,12 @@ export default{
         getArticles(state){
             return state.articles
         },  
+        //Поиск нужной статьи после роутинга на страницу XXX:8080/articles/:id
+        getCurrentArticle(state){
+            return id => state.articles.filter(item =>{
+                return item.id === id
+            })
+        },
         getCategories(state){
             return state.categories;
         }

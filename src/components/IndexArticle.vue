@@ -15,12 +15,12 @@
                 <span class = "article-info-likes" @click = "like(index)" :id = "index">{{article.likes}}</span>
                 <span class = "article-info-comments d-flex">
                     <i class = "comments-icon mr-2"></i> {{article.comments.length}}</span>
-                <router-link :to = "{name: 'article', params: {id: index}}" tag="a"  class = "linkToArticle  ml-auto">Перейти к статье</router-link>
+                <router-link :to = "{name: 'article', params: {id: article.id}}" tag="a"  class = "linkToArticle  ml-auto">Перейти к статье</router-link>
             </div>
         </div>
     </div>
     <div v-else>
-        На данных момент статей с категорией "{{viewsCategory}}" нет, но вы можете стать первыми!
+    На данных момент статей с категорией "{{viewsCategory}}" нет, но вы можете стать первыми!
     </div>
 </template>
 

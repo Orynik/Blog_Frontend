@@ -57,15 +57,6 @@ export default{
     getCategories(){
         const items = [
             {
-                name: "Медицина"
-            },
-            {
-                name: "Другое"
-            },
-            {
-                name: "Разработка"
-            },
-            {
                 name: "Frontend"
             },
             {
@@ -79,9 +70,6 @@ export default{
             },
             {
                 name: "JavaScript"
-            },
-            {
-                name: "Angular"
             }
         ];
         return items.map((item) =>{

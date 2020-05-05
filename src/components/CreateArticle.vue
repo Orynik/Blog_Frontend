@@ -4,7 +4,7 @@
         <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
         <div class="tabs">
             <input type="radio" name = "tabs" id = "tab-btn-1" checked>
-            <label for="tab-btn-1" class = "tab">Написание статьи</label>            
+            <label for="tab-btn-1" class = "tab tab-first">Написание статьи</label>
             <input type="radio" name = "tabs" id = "tab-btn-2">
             <label for="tab-btn-2" class = "tab">Предпросмотр</label>
             <div class="content">
@@ -69,6 +69,10 @@ export default {
 }
 </script>
 <style scoped>
+    .tab-first{
+        margin-left: 17px;
+    }
+
     textarea{
         margin-bottom: 10px;
         width: 100%;
