@@ -1,7 +1,6 @@
 bind_addr = ":8080"
 log_level = "debug"
-# log_level = "error"
 
 [store]
-# database_url = "host=localhost dbname=restapi_dev sslmode=disable"
-database_url = "host=localhost port=3306 sslmode=disable"
+#Проверить валидность Database_url...
+database_url = "root:Q1qqqqqq@tcp(localhost:3306)/Blog"

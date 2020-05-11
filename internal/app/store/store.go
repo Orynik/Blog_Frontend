@@ -3,8 +3,7 @@ package store
 import (
 	"database/sql"
 
-	_ "github.com/lib/pq" //...
-	// _ "github.com/go-sql-driver/mysql" // ...
+	_ "github.com/go-sql-driver/mysql" // ...
 )
 
 //Store ...
@@ -22,7 +21,7 @@ func New(config *Config) *Store {
 
 //Open ...
 func (s *Store) Open() error {
-	db, err := sql.Open("postgres", s.config.DatabaseURL)
+	db, err := sql.Open("mysql", s.config.DatabaseURL)
 	if err != nil {
 		return err
 	}

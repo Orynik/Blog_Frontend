@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/BurntSushi/toml"
-	// "github.com/gopherschool/http-rest-api/internal/app/apiserver"
 	"github.com/Kentabr5427/http-rest-api/internal/app/apiserver"
 )
 
