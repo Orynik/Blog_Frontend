@@ -14,7 +14,7 @@
                 <i class = "like-icon mr-2"></i>
                 <span class = "article-info-likes" @click = "like(index)" :id = "index">{{article.likes}}</span>
                 <span class = "article-info-comments d-flex">
-                    <i class = "comments-icon mr-2"></i> {{article.comments.length}}</span>
+                    <i class = "comments-icon mr-2"></i><span class = "comments-counter"> {{article.comments.length}}</span></span>
                 <router-link :to = "{name: 'article', params: {id: article.id}}" tag="a"  class = "linkToArticle  ml-auto">Перейти к статье</router-link>
             </div>
         </div>
@@ -25,14 +25,19 @@
 </template>
 
 <script>
-// import api from "@/api/index.js";
-import {mapGetters,mapActions} from "vuex" 
 
 export default {
-    computed: mapGetters(["getArticles"]),
-    props:[
-        "articles", "viewsCategory"
-    ]
+    //Для тестирования, лучше прописывать properties именно таким образом.
+    props:{
+        articles :{
+            type: Array,
+            // required: true  
+        },
+        viewsCategory:{
+            type: String,
+            //required : true
+        }
+    }
 };
 </script>
 

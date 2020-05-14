@@ -3,11 +3,16 @@
         <h1 class = "main-title text-align-left">Последние статьи</h1>
         <b-row>
             <b-col cols = "9"  class = "article-list">
-                <div v-if = "loaded">
-                    <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
+                <div class="alert alert-danger" role="alert" v-if = "isErrored">
+                    {{errortext}}
                 </div>
                 <div v-else>
-                    Загрузка...
+                    <div v-if = "isloaded">
+                        <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
+                    </div>
+                    <div v-else>
+                        Загрузка...
+                    </div>
                 </div>
             </b-col>
             <b-col cols = "3" class = "article-category-list ml-auto">
@@ -34,7 +39,9 @@
         data(){
             return{
                 viewsCategory: "all",
-                loaded: true, //false
+                isloaded: false,
+                isErrored: false,
+                errortext : ""
             }
         },
         components:{
@@ -48,7 +55,6 @@
                 }else{
                     return this.getArticles.filter(t => t.category == this.viewsCategory);                    
                 }
-                
             }
         },
         methods:{
@@ -57,10 +63,17 @@
                 this.viewsCategory = category;
             }
         },
-        async mounted() {
-            this.fetchCategories(),
-            this.fetchArticles()
-        },
+        created(){
+            this.fetchCategories()
+            let q = this.fetchArticles()  
+            q.then(
+                (result) => this.isloaded = true,
+                (error) => {
+                    this.isErrored = true
+                    this.errortext = error
+                }
+            )
+        }
     }
 </script>
 <style>

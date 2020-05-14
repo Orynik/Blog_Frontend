@@ -5,6 +5,7 @@ export default{
         async fetchArticles(ctx){
             const articles = await api.getArticles();
             ctx.commit('updateArticles',articles)
+            //TODO: сделать обработку ошибок
         },
         async fetchCategories(ctx){
             const categories = await api.getCategories();
@@ -23,7 +24,6 @@ export default{
             state.articles.push(articles);
         },
         addComment(state,comment){
-            // console.log(state.articles.comments);
             state.articles[comment.idArticle].comments.unshift(comment);
         }
     },
