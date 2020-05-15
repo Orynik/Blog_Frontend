@@ -5,7 +5,6 @@ export default{
         async fetchArticles(ctx){
             const articles = await api.getArticles();
             ctx.commit('updateArticles',articles)
-            //TODO: сделать обработку ошибок
         },
         async fetchCategories(ctx){
             const categories = await api.getCategories();

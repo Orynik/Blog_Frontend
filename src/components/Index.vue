@@ -10,7 +10,7 @@
                     <div v-if = "isloaded">
                         <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
                     </div>
-                    <div v-else>
+                    <div class = "loading" v-else>
                         Загрузка...
                     </div>
                 </div>
@@ -18,14 +18,17 @@
             <b-col cols = "3" class = "article-category-list ml-auto">
                 <div class = "article-category-item">
                     <h2 class = "article-category-title text-center">Категории</h2>
-                    <ul>
+                    <ul v-if = "isloaded">
                         <li>
                             <span class="category" @click = "handlerCategory('all')">Все категории</span>
                         </li>
-                        <li v-for = "category in getCategories" :key = "category.name">
+                        <li v-for = "category in getCategories" :key = "category.name" >
                             <span class = "category" @click = "handlerCategory(category.name)">{{category.name}}</span>
                         </li>
                     </ul>
+                    <div class = "my-3 ml-5 loading" v-else>
+                        Загрузка...
+                    </div>
                 </div>
             </b-col>
         </b-row>
@@ -64,14 +67,17 @@
             }
         },
         created(){
-            this.fetchCategories()
-            let q = this.fetchArticles()  
-            q.then(
+            let loadingArticle = this.fetchArticles()  
+            let loadingCategories = this.fetchCategories()
+            loadingArticle.then(
                 (result) => this.isloaded = true,
                 (error) => {
                     this.isErrored = true
                     this.errortext = error
                 }
+            )
+            loadingCategories.then(
+                (result) => this.isloaded 
             )
         }
     }
