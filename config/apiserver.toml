@@ -2,5 +2,4 @@ bind_addr = ":8080"
 log_level = "debug"
 
 [store]
-#Проверить валидность Database_url...
-database_url = "root:Q1qqqqqq@tcp(localhost:3306)/Blog"
+database_url = "root:Q1qqqqqq@tcp(localhost:3306)/user"
