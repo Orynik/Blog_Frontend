@@ -59,7 +59,7 @@ beforeEach(() =>{
     }
 })
 
-describe("Дочерний компонент IndexArticle.vue",() => { 
+describe("Компонент IndexArticle.vue",() => {
     it("Корректное отображение статей, переданных через props", () => {
 
         //Лучше всего сразу монтировать компонент с props, если они имеются, чтобы избежать проблем
@@ -68,15 +68,14 @@ describe("Дочерний компонент IndexArticle.vue",() => {
                 articles: getters.getArticles(),
                 viewsCategory: 'all',
             },stubs: ['router-link']
-            
         })
-        
+
         //Получаем все находящиеся в смонтированном компоненте структуры DOM-дерева, имеющие класс .article-item
         const article_item = wrapper.findAll(".article-item")
 
         //Проверяем полученное кол-во статей
         assert.equal(article_item.length,2,"Всего статей должно быть 2")
-        
+
         //Переменная для получения авторов, далее будут такие для всех сотальных
         const article_author = wrapper.findAll(".article-author");
         const article_counter_comments = wrapper.findAll(".comments-counter")
@@ -84,7 +83,6 @@ describe("Дочерний компонент IndexArticle.vue",() => {
         const article_content = wrapper.findAll(".article-preview")
 
         for(let i = 0; i < getters.getArticles.length; i++){
-
             for(let k = 0; k < getters.getArticles().length; k++){
                 assert(article_counter_comments.at(i).text(), getters.getArticles()[i].comments[k].text,
                 "Текст должен совпадать с текстом переданного комментария")
@@ -95,7 +93,6 @@ describe("Дочерний компонент IndexArticle.vue",() => {
 
             assert(article_title.at(i).text(), getters.getArticles()[i].title,
             "Текст должен совпадать с текстом переданного комментария")
-
             assert(article_content.at(i).text(), getters.getArticles()[i].content,
             "Текст должен совпадать с текстом переданного комментария")
         }

@@ -28,7 +28,7 @@
     </b-container>
 </template>
 <script>
-import {mapGetters,mapActions,mapMutations} from "vuex" 
+import {mapGetters,mapActions,mapMutations} from "vuex"
 import store from "../store/index"
 import Comments from "../models/Comments"
 
@@ -40,8 +40,8 @@ export default {
             const comm = new Comments(
                 10,
                 //TODO:Решить проблему с id ключами
-                this.$route.params.id,
-                "Orynik", 
+                this.CurrentArticle.id,
+                "Orynik",
                 //TODO: Когда будет добавлена авторизация, заменить статического автора на того, кто сейчас авторизован
                 document.getElementById("comment-texts").value
             )

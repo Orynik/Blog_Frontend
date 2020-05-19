@@ -9,7 +9,7 @@
             <label for="tab-btn-2" class = "tab">Предпросмотр</label>
             <div class="content">
                 <form >
-                    <textarea name="content" v-model = "content" id="content"></textarea>            
+                    <textarea name="content" v-model = "content" id="content"></textarea>
                     <div class = "d-flex">
                         <div class = "category-selector mr-3">
                             <label for="category-name">Выберите Категорию:</label><br>

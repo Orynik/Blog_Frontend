@@ -8,12 +8,11 @@ export default class Article{
         this.date = date != "" ? new Date(date) : new Date();
         this.category = category;
         //TODO: Изметить автора и добавить дополнительные поля в класс
-        this.author = 'orynik'; 
+        this.author = 'orynik';
     }
 
     static createForm(data){
         const {id,title,content,date,category} = data;
         return new this(id,title,content,date,category);
     }
-    
 }

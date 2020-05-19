@@ -56,7 +56,7 @@
                 if(this.viewsCategory == "all"){ //Сортировка статей по сатегориям
                     return this.getArticles;
                 }else{
-                    return this.getArticles.filter(t => t.category == this.viewsCategory);                    
+                    return this.getArticles.filter(t => t.category == this.viewsCategory);
                 }
             }
         },
@@ -67,7 +67,7 @@
             }
         },
         created(){
-            let loadingArticle = this.fetchArticles()  
+            let loadingArticle = this.fetchArticles()
             let loadingCategories = this.fetchCategories()
             loadingArticle.then(
                 (result) => this.isloaded = true,
@@ -77,7 +77,7 @@
                 }
             )
             loadingCategories.then(
-                (result) => this.isloaded 
+                (result) => this.isloaded
             )
         }
     }

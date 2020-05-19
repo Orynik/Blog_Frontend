@@ -3,7 +3,7 @@
         <div class = "article-item" v-for = "(article,index) in articles" :key = "article.id">
             <div class = "d-flex justify-content-between">
                 <span class = "article-author">{{article.author}}</span>
-                <span class = "article-date">{{article.date}}</span>    
+                <span class = "article-date">{{article.date}}</span>
             </div>
             <h4 class = "article-title">
                 <h2>{{article.title}}</h2>
@@ -31,7 +31,7 @@ export default {
     props:{
         articles :{
             type: Array,
-            // required: true  
+            // required: true
         },
         viewsCategory:{
             type: String,

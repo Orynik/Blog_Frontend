@@ -108,31 +108,62 @@ describe("Компонент Index.vue", () => {
         })
 
         localVue.nextTick(() => {
-            const category = wrapper.findAll(".category").at(1)
+            //Тест категории Frontend
+
+            let category = wrapper.findAll(".category").at(1)
             category.trigger('click')
             localVue.nextTick(() => {
                 const article_item = wrapper.findAll(".article-item")
 
                 assert.equal(article_item.length,1,"Всего статей должно быть 1")
-            
+
                 const article_author = wrapper.find(".article-author");
                 const article_counter_comments = wrapper.findAll(".comments-counter")
                 const article_title = wrapper.find(".article-title")
                 const article_content = wrapper.find(".article-preview")
-        
+
                 for(let k = 0; k < article_counter_comments.length; k++){
                     assert(article_counter_comments.at(k).text(), getters.getArticles()[0].comments[k].text,
                     "Текст должен совпадать с текстом переданного комментария")
                 }
-        
+
                 assert(article_author.text(), getters.getArticles()[0].author,
                 "Текст должен совпадать с текстом переданного комментария")
-    
+
                 assert(article_title.text(), getters.getArticles()[0].title,
                 "Текст должен совпадать с текстом переданного комментария")
-    
+
                 assert(article_content.text(), getters.getArticles()[0].content,
                 "Текст должен совпадать с текстом переданного комментария")
+
+                //Тест категории All
+                category = wrapper.findAll(".category").at(0)
+                category.trigger('click')
+                localVue.nextTick(() => {
+                    const article_item = wrapper.findAll(".article-item")
+
+                    assert.equal(article_item.length,2,"Всего статей должно быть 2")
+
+                    const article_author = wrapper.findAll(".article-author");
+                    const article_counter_comments = wrapper.findAll(".comments-counter")
+                    const article_title = wrapper.findAll(".article-title")
+                    const article_content = wrapper.findAll(".article-preview")
+
+                    for(let k = 0; k < article_item.length; k++){
+                        for(let j = 0; j < article_counter_comments.length; j++){
+                            assert(article_counter_comments.at(j).text(), getters.getArticles()[k].comments[j].text,
+                            "Текст должен совпадать с текстом переданного комментария")
+                        }
+                        assert(article_author.at(k).text(), getters.getArticles()[k].author,
+                        "Текст должен совпадать с текстом переданного комментария")
+
+                        assert(article_title.at(k).text(), getters.getArticles()[k].title,
+                        "Текст должен совпадать с текстом переданного комментария")
+
+                        assert(article_content.at(k).text(), getters.getArticles()[k].content,
+                        "Текст должен совпадать с текстом переданного комментария")
+                    }
+                })
             })
         })
     })

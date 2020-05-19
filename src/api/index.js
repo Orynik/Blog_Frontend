@@ -8,11 +8,11 @@ import reqCategories from "@/api/request/requestCategories"
 import reqComments from "@/api/request/requestComments"
 
 export default{
+    //TODO: Добавить обработчик ошибок
     async getArticles(){
         const items = await reqArticles.fetchArticle();
-        //TODO: Добавить обработчик ошибок
+
         //Сортирую статьи по "свежести"
-        console.log(items)
         items.sort((a,b) =>{
             return new Date(b.date) - new Date(a.date);
         });
@@ -31,7 +31,7 @@ export default{
             });
 
             //Конвертирование статей в вид: число месяц(название) год
-            article.date = new Date(article.date).toLocaleString('ru', {       
+            article.date = new Date(article.date).toLocaleString('ru', {
                 month: 'long',day: "numeric",year: "numeric"
             })
 
@@ -42,7 +42,6 @@ export default{
         const items = await reqCategories.fetchCategories()
 
         //TODO: Добавить обработчик ошибок
-        
         return items.map((item) =>{
             const name = Categories.createCategories(item);
             return name;
