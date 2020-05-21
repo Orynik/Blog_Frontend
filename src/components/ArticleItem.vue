@@ -13,8 +13,8 @@
         </div>
         <div class = "createComments mb-5">
             <h3>Добавить комментарий:</h3>
-            <b-textarea id = "comment-texts"></b-textarea>
-            <button class = "btn btn-primary mt-2" @click = "newComment">Отправить комментарий</button>
+            <b-textarea id = "comment-texts" v-model = "content"></b-textarea>
+            <button class = "btn btn-primary mt-2" @click = "newComment" :disabled = "submited">Отправить комментарий</button>
         </div>
         <h3>Комментарии ({{CurrentArticle.comments.length}})</h3>
         <hr>
@@ -34,21 +34,31 @@ import Comments from "../models/Comments"
 
 
 export default {
+    data(){
+        return{
+            content: "",
+            submited: false
+        }
+    },
     methods:{
         ...mapMutations(['addComment']),
         newComment(){
+            if(this.content == ""){
+                alert("Недопускается пустой комментарий")
+                return
+            }
             const comm = new Comments(
                 10,
                 //TODO:Решить проблему с id ключами
                 this.CurrentArticle.id,
                 "Orynik",
                 //TODO: Когда будет добавлена авторизация, заменить статического автора на того, кто сейчас авторизован
-                document.getElementById("comment-texts").value
+                this.content
             )
             this.addComment(
                 comm
             );
-            document.getElementById("comment-texts").value = "";
+            this.content = "";
         }
     },
     computed: {

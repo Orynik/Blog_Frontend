@@ -48,3 +48,30 @@ a{
 
     background-color: grey;
 }
+
+.container{
+    color: #000;
+}
+
+.form-auth{
+    border: 2px solid #000;
+    margin-top: 10%;
+    max-width: 350px;
+    height: 250px;
+
+    border-radius: 10px;
+}
+
+.form-auth div{
+    height: 100%;
+
+    padding: 10px 16px 0px 16px;
+}
+
+.form-auth-input{
+    margin-bottom: 15px;
+}
+
+.form-auth-submit{
+    margin-top: 15px;
+}

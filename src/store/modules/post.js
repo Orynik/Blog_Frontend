@@ -1,4 +1,5 @@
 import api from "@/api/index"
+import userService from "@/api/userService"
 
 export default{
     actions: {
@@ -9,6 +10,12 @@ export default{
         async fetchCategories(ctx){
             const categories = await api.getCategories();
             ctx.commit('updateCategories',categories)
+        },
+        async register(ctx,user){
+            alert("ok!")
+            userService.register(user).then(
+                alert("Получилось")
+            )
         }
 
     },
@@ -29,6 +36,7 @@ export default{
                     break
                 }
             }
+            return true
         }
     },
     state: {

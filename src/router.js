@@ -28,6 +28,14 @@ export default new Router({
         {
             path: "/createArticle",
             component: () => import("@/components/CreateArticle")
+        },
+        {
+            path: "/registration",
+            component: () => import("@/components/Registration")
+        },
+        {
+            path: "/login",
+            component: () => import("@/components/Login")
         }
     ]
 })
