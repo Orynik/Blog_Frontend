@@ -1,7 +1,10 @@
-package store
+package sqlstore
 
 import (
+	"database/sql"
+
 	"github.com/Kentabr5427/http-rest-api/internal/app/model"
+	"github.com/Kentabr5427/http-rest-api/internal/app/store"
 )
 
 //UserRepository ...
@@ -10,13 +13,13 @@ type UserRepository struct {
 }
 
 //Create ...
-func (r *UserRepository) Create(u *model.User) (*model.User, error) {
+func (r *UserRepository) Create(u *model.User) error {
 	if err := u.Validate(); err != nil {
-		return nil, err
+		return err
 	}
 
 	if err := u.BeforeCreate(); err != nil {
-		return nil, err
+		return err
 	}
 
 	//данные записываються в бд, но невозращается строка!!!
@@ -24,7 +27,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	v, err := r.store.db.Exec("INSERT INTO user (`email`, `encryptedPassword`) VALUES(?,?)", &u.Email, &u.EncryptedPassword)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	//Далее следует проверка в модуле userrepository_test.go
@@ -32,26 +35,14 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	_, err = v.LastInsertId()
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return u, nil
-
-	// if v, err := r.store.db.Query("INSERT INTO user (`email`, `encryptedPassword`) VALUES(?,?)", &u.Email, &u.EncryptedPassword); err != nil {
-	// 	v.Scan(&u.ID)
-	// 	fmt.Println(&u.ID)
-	// 	return nil, err
-	// }
+	return nil
 }
 
 //FindByEmail ...
 func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
-	// u := &model.User{}
-	// if _, err := r.store.db.Exec("SELECT (`id`, `email`, `encryptedPassword`) FROM user WHERE email = '?'", &u.Email); err != nil {
-	// 	return nil, err
-	// }
-	// return u, nil
-
 	u := &model.User{}
 
 	if err := r.store.db.QueryRow(
@@ -59,7 +50,11 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		email).Scan(
 		&u.ID,
 		&u.Email,
-		&u.EncryptedPassword); err != nil {
+		&u.EncryptedPassword,
+	); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, store.ErrRecordNotFound
+		}
 		return nil, err
 	}
 
