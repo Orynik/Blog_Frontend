@@ -12,6 +12,8 @@ export default new Router({
             component: () => import("@/pages/404")
         },
         {
+            //Перед каждым новым роутом делать 
+            // /blogongo-vue/, чтобы работало на сервере
             path: "/",
             redirect: "/blogongo-vue/"
         },
