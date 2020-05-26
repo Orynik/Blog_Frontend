@@ -2,6 +2,15 @@ stages:
   - test
   - pages
 
+test:
+  image: node:latest
+  stage: test
+  script:
+    - npm install
+    - npm run test:unit
+  only:
+    - master
+    
 pages:
   image: node:latest
   stage: deploy
@@ -14,13 +23,5 @@ pages:
   artifacts:
     paths:
       - public
-  only:
-    - master
-test:
-  image: node:latest
-  stage: test
-  script:
-    - npm install
-    - npm run test:unit
   only:
     - master
