@@ -3,45 +3,94 @@
         <h1 class = "main-title text-align-left">Последние статьи</h1>
         <b-row>
             <b-col cols = "9"  class = "article-list">
-                <articleItem></articleItem>
+                <div class="alert alert-danger" role="alert" v-if = "isErrored">
+                    {{errortext}}
+                </div>
+                <div v-else>
+                    <div v-if = "isloaded">
+                        <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
+                    </div>
+                    <div class = "loading" v-else>
+                        Загрузка...
+                    </div>
+                </div>
             </b-col>
             <b-col cols = "3" class = "article-category-list ml-auto">
                 <div class = "article-category-item">
                     <h2 class = "article-category-title text-center">Категории</h2>
-                    <ul>
-                        <categoryItem></categoryItem>
+                    <ul v-if = "isloaded">
+                        <li>
+                            <span class="category" @click = "handlerCategory('all')">Все категории</span>
+                        </li>
+                        <li v-for = "category in getCategories" :key = "category.name" >
+                            <span class = "category" @click = "handlerCategory(category.name)">{{category.name}}</span>
+                        </li>
                     </ul>
+                    <div class = "my-3 ml-5 loading" v-else>
+                        Загрузка...
+                    </div>
                 </div>
-                <!-- <div class = "article-latest-item">
-                    <h2 class = "article-category-title text-center">Последние статьи</h2>
-                    <ul>
-                        <li><a href="#">О Vue</a></li>
-                        <li><a href="#">О Golang</a></li>
-                        <li><a href="#">О пиве</a></li>
-                    </ul>
-                </div> -->
             </b-col>
         </b-row>
     </b-container>
 </template>
+<script>
+    import articleItem from "@/components/IndexArticle.vue"
+    import {mapGetters,mapActions} from "vuex"
+
+    export default{
+        data(){
+            return{
+                viewsCategory: "all",
+                isloaded: false,
+                isErrored: false,
+                errortext : ""
+            }
+        },
+        components:{
+            articleItem,
+        },
+        computed:{
+            ...mapGetters(["getCategories","getArticles"]),
+            Articles(){
+                if(this.viewsCategory == "all"){ //Сортировка статей по сатегориям
+                    return this.getArticles;
+                }else{
+                    return this.getArticles.filter(t => t.category == this.viewsCategory);
+                }
+            }
+        },
+        methods:{
+            ...mapActions (["fetchCategories","fetchArticles","fetchComments"]),
+            handlerCategory(category){
+                this.viewsCategory = category;
+            }
+        },
+        created(){
+            let loadingArticle = this.fetchArticles()
+            let loadingCategories = this.fetchCategories()
+            this.fetchComments();
+            loadingArticle.then(
+                (result) => this.isloaded = true,
+                (error) => {
+                    this.isErrored = true
+                    this.errortext = error
+                }
+            )
+            loadingCategories.then(
+                (result) => this.isloaded
+            )
+        }
+    }
+</script>
 <style>
+
+
     .main-title{
         margin: 20px 0 25px 0;
     }
     .main{
         color: black;
-    }
-    .article-item,
-    .article-category-item,
-    .article-latest-item{
-        padding: 5px;
-        margin-bottom: 15px;
-        border: 1px solid rgba(177, 177, 177, 0.342);
-        border-radius: 10px;
-
-        color: white;
-
-        background-color: grey;
     }
 
     .article-item{
@@ -64,16 +113,20 @@
     .article-info-dislikes{
         margin-left: 10px;
     }
-</style>
-<script>
-    import articleItem from "@/components/Article-item.vue"
-    import categoryItem from "@/components/Category-item.vue"
-    
-    export default{
-        components:{
-            articleItem,
-            categoryItem
-        }
+
+    .category{
+        transition: 0.2s ease-in color;
+
+        cursor: pointer
     }
-//TODO: Реализовать загрузку статей на GitLab
-</script>
+
+    .category:hover{
+        color: #42c1d4;
+    }
+
+    .linkToArticle{
+        padding: 3px;
+        border: 1px black solid;
+        border-radius: 5px;
+    }
+</style>

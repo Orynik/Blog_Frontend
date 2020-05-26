@@ -4,26 +4,74 @@ body{
     color: white;
     font-family: 'Open Sans', serif;
     font-weight: 500;
+    
+    overflow-y: scroll;
 }
 
 a{
     color: white;
     text-decoration: none;
+
+    transition: all 0.35s ease-out;
 }
 
-/* Hovers */
-
-a:hover{
-    color: rgba(42, 87, 236, 0.815);
+.linkToArticle:hover{
+    color: black;
     text-decoration: none;
-
-    transition: all ease-in-out 0.35s;
+    background-color: rgb(184, 177, 177);
 }
+
+/* Article styles */
 
 .article-preview > p{
     display: none;
 }
+
+.article-full >p{
+    display: block;
+}
+
 .article-preview > p:nth-child(1),
 .article-preview > p:nth-child(2){
     display: block;
+}
+
+.article-item,
+.article-category-item,
+.article-latest-item{
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(177, 177, 177, 0.342);
+    border-radius: 10px;
+
+    color: white;
+
+    background-color: grey;
+}
+
+.container{
+    color: #000;
+}
+
+.form-auth{
+    border: 2px solid #000;
+    margin-top: 10%;
+    max-width: 350px;
+    height: 250px;
+
+    border-radius: 10px;
+}
+
+.form-auth div{
+    height: 100%;
+
+    padding: 10px 16px 0px 16px;
+}
+
+.form-auth-input{
+    margin-bottom: 15px;
+}
+
+.form-auth-submit{
+    margin-top: 15px;
 }

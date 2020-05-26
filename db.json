@@ -1,0 +1,45 @@
+{
+  "Articles": [
+    {
+      "id": 1,
+      "title": "321231",
+      "content": "TestqweqweqweqecqwewECqw\nec\nqwec\nqwec\nqw\nceq\n",
+      "likes": 0,
+      "comments": [],
+      "date": "2020-05-26",
+      "category": "Backend",
+      "author": "orynik"
+    }
+  ],
+  "Category": [
+    {
+      "name": "Frontend"
+    },
+    {
+      "name": "Backend"
+    },
+    {
+      "name": "C#"
+    },
+    {
+      "name": "Golang"
+    },
+    {
+      "name": "JavaScript"
+    },
+    {
+      "name": "Другое"
+    }
+  ],
+  "Comments": [
+    {
+      "id": 1,
+      "idArticle": 1,
+      "author": "Orynik",
+      "text": "Da"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

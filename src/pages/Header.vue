@@ -3,15 +3,18 @@
         <b-navbar-brand>
             <img src = "@/assets/logo.png" witdh = "50" height = "45">
         </b-navbar-brand>
-        <a href="#">Главная</a>
-        <a href="#">Статьи</a>        
+        <router-link to = "/">Главная</router-link>
+        <router-link to = "/createArticle">Написать свою статью</router-link>
         <b-navbar-nav class = "ml-auto header">
-            <a href="#">Регистрация</a>
-            <a href="#">Вход</a>
-        </b-navbar-nav>        
+            <router-link to = "/registration">Регистрация</router-link>
+            <router-link to = "/login">Вход</router-link>
+        </b-navbar-nav>
     </b-navbar>
 </template>
 <style scoped>
+    .header > a:hover{
+        text-decoration: none;
+    }
     .header > a{
         margin-right: 10px;
     }
