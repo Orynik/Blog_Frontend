@@ -48,11 +48,11 @@ export default {
                 return
             }
             const comm = new Comments(
-                10,
+                11,
                 //TODO:Решить проблему с id ключами
                 this.CurrentArticle.id,
                 "Orynik",
-                //TODO: Когда будет добавлена авторизация, заменить статического автора на того, кто сейчас авторизован
+                //TODO: Когда бу    дет добавлена авторизация, заменить статического автора на того, кто сейчас авторизован
                 this.content
             )
             this.addComment(

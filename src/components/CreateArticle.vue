@@ -1,27 +1,40 @@
  <template>
     <b-container>
-        <h5>Кол-во статей: {{getArticles.length}}</h5>
         <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
-        <div class="tabs">
+        <div class="tabs" v-if="!isCreated">
+            <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
+                Произошла непредвиденная ошибка. Попробуйте позже.
+            </b-alert>
+            <b-alert id = "error_empty" variant="warning" show fade v-if = "isEmpty">
+                Исправте возникшую(ие) ошибку(и):
+                <ul>
+                    <li v-for = 'item of validateErrors' :key = "item.id">
+                        {{item}}
+                    </li>
+                </ul>
+            </b-alert>
             <input type="radio" name = "tabs" id = "tab-btn-1" checked>
             <label for="tab-btn-1" class = "tab tab-first">Написание статьи</label>
             <input type="radio" name = "tabs" id = "tab-btn-2">
             <label for="tab-btn-2" class = "tab">Предпросмотр</label>
             <div class="content">
-                <form >
+                <form>
                     <textarea name="content" v-model = "content" id="content"></textarea>
                     <div class = "d-flex">
                         <div class = "category-selector mr-3">
                             <label for="category-name">Выберите Категорию:</label><br>
-                            <select name="category-list" id="category">
-                                <option v-for = "item in getCategories" :key = "item.id" :value = "item.id">{{item.name}}</option>
+                            <select class = "form-control" name="category-list" id="category" v-model = "category">
+                                <option></option>
+                                <option v-for = "item in getCategories" :key = "item.id" :value = "item.name">
+                                    {{item.name}}
+                                </option>
                             </select>
                         </div>
                         <div class="title mr-3">
                             <label for="title">Укажите заголовок статьи:</label><br>
-                            <input type="text" name="title" id="title">
-                            <button type="button" @click="deployArticle()" class = "ml-auto align-self-end">Отправить</button>
+                            <input class = "form-control" type="text" name="title" id="title" v-model="title">
                         </div>
+                        <button type="button" @click="validateForm()" class = "btn btn-primary ml-auto form-submit">Отправить</button>
                     </div>
                 </form>
             </div>
@@ -32,39 +45,95 @@
 
             </div>
         </div>
+        <div id = "success_block" v-if="isCreated">
+            <b-alert variant="success" show fade v-if = "isCreated">Ваша статья успешно добавлена на сервер </b-alert>
+            <router-link to="/" class = "btn btn-primary">Вернуться на главную</router-link>
+        </div>
     </b-container>
 </template>
 <script>
-import {mapGetters,mapMutations} from "vuex"
-import store from "../store/index"
+import {mapGetters,mapMutations, mapActions} from "vuex"
 import Article from "../models/Article"
 
 export default {
     data(){
         return{
+            title: "",
             content: "",
+            category: "",
+
+            isCreated: false,
+            isErrored: false,
+            isEmpty: false,
+            validateErrors: []
         }
     },
     computed:{
-        ...mapGetters(["getCategories","getArticles"]),
+        ...mapGetters(["getCategories"]),
     },
     methods:{
-        ...mapMutations(["addArticle"]),
-        deployArticle(){
-            alert(new Date().toDateString({
-                month: 'long',day: "numeric",year: "numeric"
-            }));
+        ...mapActions(["postArticle"]),
+        validateForm(){
+            if(this.isErrored) this.isErrored = false
+
+            this.validateErrors = {}
+
+            if(this.content && this.title && this.category){
+                this.isEmpty = false
+                this.deployArticle().then(
+                    (result) => {
+                        if(result == "done"){
+                            console.log("nehallo")
+                            this.isCreated = true
+                            console.log(this.isCreated)
+                        }else{
+                            console.log("hallo")
+                            this.isErrored = true
+                        }
+                    }
+                )
+            }else{
+                if(!this.content){
+                    this.validateErrors["content"] = ("Поле с текстом не может быть пустым")
+                }else{
+                    delete this.validateErrors["content"]
+                }
+
+                if(!this.title){
+                    this.validateErrors["title"] = ("У статьи должен быть заголовок")
+                }else{
+                    delete this.validateErrors["title"]
+                }
+
+                if(!this.category){
+                    this.validateErrors["category"] = ("У статьи должна быть указана категория")
+                }else{
+                    delete this.validateErrors["category"]
+                }
+
+                this.isEmpty = true
+            }
+        },
+        async deployArticle(){
+            let date = new Date()
+            let willHaveZero = "";
+
+            //Формирование даты
+            if(date.getMonth() < 9){
+                willHaveZero = "0"
+            }
+            let stringDate = `${date.getFullYear()}-${willHaveZero}${date.getMonth() + 1}-${date.getDate()}`
+
             const article = new Article(
-                8,
-                document.getElementById('title'),
-                document.getElementById("content").value,
-                new Date(),
-                this.category
+                0,
+                this.title,
+                this.content,
+                stringDate,
+                this.category,
             );
-            this.addArticle(
-                article
-            );
-        }
+
+            return await this.postArticle(article)
+        },
     }
 }
 </script>
@@ -78,9 +147,12 @@ export default {
         width: 100%;
         height: 400px;
     }
-    button[type="submit"]{
-        float: right;
+
+    .form-submit{
+        margin-bottom: 0;
+        flex-basis: 230px;
     }
+
     .tabs {
       /* max-width: 350px; */
       margin-left: auto;
@@ -91,6 +163,7 @@ export default {
         margin-bottom: 0;
         border: 1px solid gray;
         border-bottom: 0;
+        padding: 0 5px 0 5px;
 
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
@@ -113,11 +186,15 @@ export default {
 
     .tabs>div {
       /* скрыть контент по умолчанию */
-      display: none;
       border: 1px solid rgb(121, 121, 121);
       padding: 10px 15px;
       border-radius: 4px;
       margin-bottom: 10px;
+    }
+
+    .content,
+    .preview{
+        display: none;
     }
 
     /* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */

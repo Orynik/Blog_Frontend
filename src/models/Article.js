@@ -5,7 +5,7 @@ export default class Article{
         this.content = content;
         this.likes = 0;
         this.comments = [];
-        this.date = date != "" ? new Date(date) : new Date();
+        this.date = date
         this.category = category;
         //TODO: Изметить автора и добавить дополнительные поля в класс
         this.author = 'orynik';

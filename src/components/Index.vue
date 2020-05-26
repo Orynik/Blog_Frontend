@@ -61,7 +61,7 @@
             }
         },
         methods:{
-            ...mapActions (["fetchCategories","fetchArticles"]),
+            ...mapActions (["fetchCategories","fetchArticles","fetchComments"]),
             handlerCategory(category){
                 this.viewsCategory = category;
             }
@@ -69,6 +69,7 @@
         created(){
             let loadingArticle = this.fetchArticles()
             let loadingCategories = this.fetchCategories()
+            this.fetchComments();
             loadingArticle.then(
                 (result) => this.isloaded = true,
                 (error) => {

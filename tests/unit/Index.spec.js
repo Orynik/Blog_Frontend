@@ -24,6 +24,9 @@ beforeEach(() =>{
         },
         fetchCategories: () =>{
             //...
+        },
+        fetchComments: () => {
+            //...
         }
     }
     getters = {
@@ -67,7 +70,7 @@ describe("Компонент Index.vue", () => {
     it("Проверка корректного отображения геттера категорий (Vuex)", () => {
         //Монтируем компонент вместе с тестовым Vuex
         const wrapper = mount(Index, {
-            store, 
+            store,
             localVue,
             stubs: ['router-link']
         })

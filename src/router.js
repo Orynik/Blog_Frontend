@@ -8,15 +8,20 @@ export default new Router({
     routes: [
         {
             path: "/404",
-            name: "404",
+            name: "4040",
             component: () => import("@/pages/404")
+        },
+        {
+            path: "/",
+            redirect: "/blogongo-vue/"
         },
         {
             path: "*",
             redirect: "404"
         },
         {
-            path: "/",
+            path: "/blogongo-vue/",
+            name: "root",
             component: () => import("@/components/Index")
         },
         {

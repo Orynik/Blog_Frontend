@@ -53,5 +53,11 @@ export default{
         return items.map((item) =>{
             return Comments.createComment(item);
         })
+    },
+    async postArticle(article){
+        return await reqArticles.postArticle(article)
+    },
+    postComment(comment){
+        reqComments.postComment(comment)
     }
 }
