@@ -12,3 +12,9 @@ pages:
       - public
   only:
     - master
+test:
+  image: node:latest
+  stage: deploy
+  script:
+    - npm install
+    - npm run test:unit
