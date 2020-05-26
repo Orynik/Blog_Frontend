@@ -1,6 +1,6 @@
 stages:
   - test
-  - pages
+  - deploy
 
 test:
   image: node:latest
