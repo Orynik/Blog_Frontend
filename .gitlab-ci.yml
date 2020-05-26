@@ -1,6 +1,6 @@
 stages:
-    - test
-    - pages
+  - test
+  - pages
 
 pages:
   image: node:latest
