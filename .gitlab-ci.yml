@@ -1,3 +1,7 @@
+stages:
+    - test
+    - pages
+
 pages:
   image: node:latest
   stage: deploy
@@ -14,7 +18,9 @@ pages:
     - master
 test:
   image: node:latest
-  stage: deploy
+  stage: test
   script:
     - npm install
     - npm run test:unit
+  only:
+    - master
