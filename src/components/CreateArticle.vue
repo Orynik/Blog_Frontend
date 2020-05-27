@@ -83,11 +83,8 @@ export default {
                 this.deployArticle().then(
                     (result) => {
                         if(result == "done"){
-                            console.log("nehallo")
                             this.isCreated = true
-                            console.log(this.isCreated)
                         }else{
-                            console.log("hallo")
                             this.isErrored = true
                         }
                     }
@@ -122,13 +119,12 @@ export default {
             if(date.getMonth() < 9){
                 willHaveZero = "0"
             }
-            let stringDate = `${date.getFullYear()}-${willHaveZero}${date.getMonth() + 1}-${date.getDate()}`
 
             const article = new Article(
                 0,
                 this.title,
                 this.content,
-                stringDate,
+                new Date(),
                 this.category,
             );
 
