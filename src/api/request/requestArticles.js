@@ -26,9 +26,7 @@ export default{
         })
 
         if(!(await response).ok){
-            if(response.status != 201){
-                return `Ошибка HTTP: ${response.status}`
-            }
+            return `Ошибка HTTP: ${response.status}`
         }
         return "done"
     }

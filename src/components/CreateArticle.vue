@@ -91,19 +91,19 @@ export default {
                 )
             }else{
                 if(!this.content){
-                    this.validateErrors["content"] = ("Поле с текстом не может быть пустым")
+                    this.validateErrors["content"] = "Поле с текстом не может быть пустым"
                 }else{
                     delete this.validateErrors["content"]
                 }
 
                 if(!this.title){
-                    this.validateErrors["title"] = ("У статьи должен быть заголовок")
+                    this.validateErrors["title"] = "У статьи должен быть заголовок"
                 }else{
                     delete this.validateErrors["title"]
                 }
 
                 if(!this.category){
-                    this.validateErrors["category"] = ("У статьи должна быть указана категория")
+                    this.validateErrors["category"] = "У статьи должна быть указана категория"
                 }else{
                     delete this.validateErrors["category"]
                 }
@@ -112,13 +112,6 @@ export default {
             }
         },
         async deployArticle(){
-            let date = new Date()
-            let willHaveZero = "";
-
-            //Формирование даты
-            if(date.getMonth() < 9){
-                willHaveZero = "0"
-            }
 
             const article = new Article(
                 0,

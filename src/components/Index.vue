@@ -8,7 +8,7 @@
                 </div>
                 <div v-else>
                     <div v-if = "isloaded">
-                        <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
+                        <articleItem :articles = Articles :viewsCategory = viewsCategory></articleItem>
                     </div>
                     <div class = "loading" v-else>
                         Загрузка...

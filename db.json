@@ -2,42 +2,32 @@
   "Articles": [
     {
       "id": 1,
-      "title": "3",
-      "content": "2112",
+      "title": "test",
+      "content": "data",
       "likes": 0,
       "comments": [],
-      "date": "2020-05-27T04:52:18.902Z",
+      "date": "2020-05-28T01:32:29.413Z",
       "category": "Golang",
       "author": "orynik"
     },
     {
       "id": 2,
-      "title": "3",
-      "content": "12312312",
+      "title": "тест 3",
+      "content": "проверка #2",
       "likes": 0,
       "comments": [],
-      "date": "2020-05-27T04:53:27.168Z",
-      "category": "JavaScript",
+      "date": "2020-05-28T02:02:37.170Z",
+      "category": "Golang",
       "author": "orynik"
     },
     {
       "id": 3,
-      "title": "12",
-      "content": "123123123",
+      "title": "3",
+      "content": "123",
       "likes": 0,
       "comments": [],
-      "date": "2020-05-27T04:54:53.805Z",
-      "category": "Golang",
-      "author": "orynik"
-    },
-    {
-      "id": 4,
-      "title": "2",
-      "content": "3",
-      "likes": 0,
-      "comments": [],
-      "date": "2020-05-27T04:57:53.325Z",
-      "category": "Golang",
+      "date": "2020-05-28T02:20:04.375Z",
+      "category": "JavaScript",
       "author": "orynik"
     }
   ],
@@ -64,9 +54,24 @@
   "Comments": [
     {
       "id": 1,
+      "idArticle": 1,
+      "author": "Orynik",
+      "text": "2",
+      "date": "2020-05-28T02:17:36.856Z"
+    },
+    {
+      "id": 2,
+      "idArticle": 2,
+      "author": "Orynik",
+      "text": "23",
+      "date": "2020-05-28T02:18:35.782Z"
+    },
+    {
+      "id": 3,
       "idArticle": 3,
       "author": "Orynik",
-      "text": "123"
+      "text": "3",
+      "date": "2020-05-28T02:22:16.663Z"
     }
   ],
   "profile": {

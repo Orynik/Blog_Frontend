@@ -40,21 +40,35 @@ export default{
         },
         addComment(state,comment){
             let currentCommentID = 0;
+
             for(let i = 0 ; i< state.comments.length;i++){
                 if(state.comments[i].id > currentCommentID){
                     currentCommentID = state.comments[i].id
                 }
             }
+
             comment.id = currentCommentID + 1
 
-            state.comments.unshift(comment)
-            for(let numOfArticle = 0; numOfArticle < state.articles.length; numOfArticle++){
-                if (state.articles[numOfArticle].id === comment.idArticle){
-                    state.articles[numOfArticle].comments.unshift(comment)
-                    break
-                }
-            }
-            api.postComment(comment)
+            api.postComment(comment).then(
+                //В случае возвращение успешного промиса мы записываем в локальное
+                //хранилище коммент
+                () => {
+                    comment.date = new Date(comment.date).toLocaleString('ru', {
+                        month: 'long',day: "numeric",year: "numeric",hour: 'numeric',minute: 'numeric'
+                    })
+        
+                    state.comments.unshift(comment)
+        
+                    for(let numOfArticle = 0; numOfArticle < state.articles.length; numOfArticle++){
+                        if (state.articles[numOfArticle].id === comment.idArticle){
+                            state.articles[numOfArticle].comments.unshift(comment)
+                            break
+                        }
+                    }
+                },
+                (error) => alert(error)
+            )
+
             return true
         }
     },

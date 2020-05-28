@@ -19,7 +19,10 @@
         <h3>Комментарии ({{CurrentArticle.comments.length}})</h3>
         <hr>
         <div class = "comments" v-for = "comment in CurrentArticle.comments" :key = "comment.id">
-            <a href="#" class = "commentsAuthor">{{comment.author}}</a>
+            <div class = "d-flex justify-content-between">
+                <a href="#" class = "commentsAuthor">{{comment.author}}</a>
+                <span>{{comment.date}}</span>
+            </div>
             <div class = "commentsContent">
                 {{comment.text}}
             </div>
@@ -28,10 +31,8 @@
     </b-container>
 </template>
 <script>
-import {mapGetters,mapActions,mapMutations} from "vuex"
-import store from "../store/index"
+import {mapGetters,mapMutations} from "vuex"
 import Comments from "../models/Comments"
-
 
 export default {
     data(){
@@ -48,12 +49,11 @@ export default {
                 return
             }
             const comm = new Comments(
-                11,
-                //TODO:Решить проблему с id ключами
+                0,
                 this.CurrentArticle.id,
                 "Orynik",
-                //TODO: Когда бу    дет добавлена авторизация, заменить статического автора на того, кто сейчас авторизован
-                this.content
+                this.content,
+                new Date()
             )
             this.addComment(
                 comm

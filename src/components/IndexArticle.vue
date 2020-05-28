@@ -25,17 +25,16 @@
 </template>
 
 <script>
-
 export default {
     //Для тестирования, лучше прописывать properties именно таким образом.
     props:{
         articles :{
             type: Array,
-            // required: true
+            required: true
         },
         viewsCategory:{
             type: String,
-            //required : true
+            required : true
         }
     }
 };

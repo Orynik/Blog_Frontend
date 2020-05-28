@@ -6,8 +6,8 @@
         <router-link to = "/">Главная</router-link>
         <router-link to = "/createArticle">Написать свою статью</router-link>
         <b-navbar-nav class = "ml-auto header">
-            <router-link to = "/registration">Регистрация</router-link>
-            <router-link to = "/login">Вход</router-link>
+            <!-- <router-link to = "/registration">Регистрация</router-link>
+            <router-link to = "/login">Вход</router-link> -->
         </b-navbar-nav>
     </b-navbar>
 </template>
