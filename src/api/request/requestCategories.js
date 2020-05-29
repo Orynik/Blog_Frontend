@@ -4,7 +4,7 @@ export default{
             method: "GET",
         })
 
-        if(response.ok){
+        if((await response).ok){
             const data = await response.json();
             return await Object.values(data)
         }else{

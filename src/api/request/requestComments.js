@@ -4,7 +4,7 @@ export default{
             method: "GET",
         })
 
-        if(response.ok){
+        if((await response).ok){
             const data = await response.json();
 
             return await Object.values(data)
@@ -20,7 +20,6 @@ export default{
                 'Content-Type': 'application/json'
             }
         })
-
 
         if(!(await response).ok){
             throw new Error((await response).status + ":" + (await response).statusText)

@@ -11,6 +11,9 @@
             <div class="article-full" v-html="CurrentArticle.content">
             </div>
         </div>
+        <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
+            Произошла непредвиденная ошибка, мы не смогли добавить ваш комментарий. Попробуйте позже.
+        </b-alert>
         <div class = "createComments mb-5">
             <h3>Добавить комментарий:</h3>
             <b-textarea id = "comment-texts" v-model = "content"></b-textarea>
@@ -31,23 +34,27 @@
     </b-container>
 </template>
 <script>
-import {mapGetters,mapMutations} from "vuex"
+import {mapGetters, mapActions} from "vuex"
 import Comments from "../models/Comments"
 
 export default {
     data(){
         return{
             content: "",
-            submited: false
+            submited: false,
+            isErrored: false
         }
     },
     methods:{
-        ...mapMutations(['addComment']),
-        newComment(){
+        ...mapActions(['postComment']),
+        async newComment(){
             if(this.content == ""){
                 alert("Недопускается пустой комментарий")
                 return
             }
+
+            this.submited = true
+
             const comm = new Comments(
                 0,
                 this.CurrentArticle.id,
@@ -55,9 +62,19 @@ export default {
                 this.content,
                 new Date()
             )
-            this.addComment(
+
+            let result = await this.postComment(
                 comm
             );
+
+            if(result != true){
+                this.isErrored = true
+                this.submited = false
+                return
+            }
+
+            this.isErrored = false
+            this.submited = false
             this.content = "";
         }
     },
@@ -65,6 +82,7 @@ export default {
         ...mapGetters(["getCurrentArticle"]),
         //Функция для поиска и вывода определенной статьи
         CurrentArticle(){
+            console.log(this.$route)
             return this.getCurrentArticle(this.$route.params.id)[0];
         }
     }

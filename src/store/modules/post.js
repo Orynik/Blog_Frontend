@@ -1,6 +1,4 @@
 import api from "@/api/index"
-import userService from "@/api/userService"
-import { Store } from "vuex";
 
 export default{
     actions: {
@@ -26,6 +24,31 @@ export default{
             };
             article.id = currentArticleID + 1;
             return await api.postArticle(article)
+        },
+        async postComment(ctx,comment){
+            let currentCommentID = 0;
+
+            for(let i = 0 ; i< ctx.state.comments.length;i++){
+                if(ctx.state.comments[i].id > currentCommentID){
+                    currentCommentID = ctx.state.comments[i].id
+                }
+            }
+
+            comment.id = currentCommentID + 1
+
+            let data = api.postComment(comment).then(
+                //В случае возвращение успешного промиса мы записываем в локальное
+                //хранилище коммент
+                () => {
+                    ctx.commit("addComment",comment)
+                    return true
+                },
+                (error) => {
+                    return new Error(error)
+                }
+            )
+
+            return data
         }
     },
     mutations:{
@@ -39,37 +62,18 @@ export default{
             state.categories = categories;
         },
         addComment(state,comment){
-            let currentCommentID = 0;
+            comment.date = new Date(comment.date).toLocaleString('ru', {
+                month: 'long',day: "numeric",year: "numeric",hour: 'numeric',minute: 'numeric'
+            })
 
-            for(let i = 0 ; i< state.comments.length;i++){
-                if(state.comments[i].id > currentCommentID){
-                    currentCommentID = state.comments[i].id
+            state.comments.unshift(comment)
+
+            for(let numOfArticle = 0; numOfArticle < state.articles.length; numOfArticle++){
+                if (state.articles[numOfArticle].id === comment.idArticle){
+                    state.articles[numOfArticle].comments.unshift(comment)
+                    break
                 }
             }
-
-            comment.id = currentCommentID + 1
-
-            api.postComment(comment).then(
-                //В случае возвращение успешного промиса мы записываем в локальное
-                //хранилище коммент
-                () => {
-                    comment.date = new Date(comment.date).toLocaleString('ru', {
-                        month: 'long',day: "numeric",year: "numeric",hour: 'numeric',minute: 'numeric'
-                    })
-        
-                    state.comments.unshift(comment)
-        
-                    for(let numOfArticle = 0; numOfArticle < state.articles.length; numOfArticle++){
-                        if (state.articles[numOfArticle].id === comment.idArticle){
-                            state.articles[numOfArticle].comments.unshift(comment)
-                            break
-                        }
-                    }
-                },
-                (error) => alert(error)
-            )
-
-            return true
         }
     },
     state: {

@@ -1,5 +1,3 @@
-//TODO: Реализовать вывод и запись комментариев к статье
-//TODO: Реализовать запись в бд и обновление с помощью REST.API
 export default class Comments{
     constructor(id,idArticle,author,text,date){
         this.id = id
