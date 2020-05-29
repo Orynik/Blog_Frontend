@@ -1,6 +1,8 @@
 package teststore
 
 import (
+	"database/sql"
+
 	"github.com/Kentabr5427/http-rest-api/internal/app/model"
 	"github.com/Kentabr5427/http-rest-api/internal/app/store"
 )
@@ -8,6 +10,7 @@ import (
 //Store ...
 type Store struct {
 	userRepository *UserRepository
+	db             *sql.DB
 }
 
 //New ...
@@ -23,7 +26,7 @@ func (s *Store) User() store.UserRepository {
 
 	s.userRepository = &UserRepository{
 		store: s,
-		users: make(map[string]*model.User),
+		users: make(map[int]*model.User),
 	}
 
 	return s.userRepository

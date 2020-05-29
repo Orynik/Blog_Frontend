@@ -11,7 +11,7 @@ type UserRepository struct {
 	//т.к пока мы находимся в данном пакете, он видит конкретно teststore.Store,
 	//а не внешний sqlstore.Store
 	store *Store
-	users map[string]*model.User
+	users map[int]*model.User
 }
 
 //Create ...
@@ -24,19 +24,30 @@ func (r *UserRepository) Create(u *model.User) error {
 		return err
 	}
 
-	r.users[u.Email] = u
-	u.ID = len(r.users)
+	u.ID = len(r.users) + 1
+	r.users[u.ID] = u
 
 	return nil
 }
 
 //FindByEmail ...
 func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
-	u, ok := r.users[email]
 
-	if !ok {
-		return nil, store.ErrRecordNotFound
+	for _, itemMap := range r.users {
+		if itemMap.Email == email {
+			return itemMap, nil
+		}
+	}
+	return nil, store.ErrRecordNotFound
+}
+
+//Find ...
+func (r *UserRepository) Find(id int) (*model.User, error) {
+
+	if _, ok := r.users[id]; ok {
+		return r.users[id], nil
 	}
 
-	return u, nil
+	return nil, store.ErrRecordNotFound
+
 }
