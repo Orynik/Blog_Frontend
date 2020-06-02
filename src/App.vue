@@ -9,12 +9,16 @@
 
 <script>
 import Header from "@/pages/Header.vue"
-import store from "./store/index"
+import { mapActions } from "vuex"
 
 export default {
   name: 'App',
   components: {
     Header
+  },
+  methods: mapActions(["getEmailUser"]),
+  async created(){
+    await this.getEmailUser()
   }
 }
 </script>
