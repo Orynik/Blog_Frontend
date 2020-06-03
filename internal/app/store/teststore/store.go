@@ -9,8 +9,9 @@ import (
 
 //Store ...
 type Store struct {
-	userRepository *UserRepository
-	db             *sql.DB
+	userRepository    *UserRepository
+	db                *sql.DB
+	articleRepository *ArticlesRepository
 }
 
 //New ...
@@ -30,4 +31,18 @@ func (s *Store) User() store.UserRepository {
 	}
 
 	return s.userRepository
+}
+
+//Article ...
+func (s *Store) Article() store.ArticlesRepository {
+	if s.articleRepository != nil {
+		return s.articleRepository
+	}
+
+	s.articleRepository = &ArticlesRepository{
+		store:    s,
+		articles: make(map[int]*model.Article, 5),
+	}
+
+	return s.articleRepository
 }

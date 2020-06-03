@@ -8,3 +8,9 @@ type UserRepository interface {
 	Find(int) (*model.User, error)
 	FindByEmail(string) (*model.User, error)
 }
+
+//ArticlesRepository ...
+type ArticlesRepository interface {
+	Create(*model.Article) error
+	GetArticles() ([]*model.Article, error)
+}

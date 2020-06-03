@@ -8,10 +8,6 @@ import (
 
 //User ...
 type User struct {
-	// ID                int `db:"id"`
-	// Email             string
-	// EncryptedPassword string
-	// Password          string
 	ID                int    `json:"id"`
 	Email             string `json:"email"`
 	EncryptedPassword string `json:"-"`
