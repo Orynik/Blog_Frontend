@@ -4,13 +4,15 @@ export default{
     actions: {
         async register(ctx,user){
             const request = await api.register(user)
-            if(request == true){
-                return true
-            }
+            return request
         },
         async login(ctx,user){
-            await api.login(user)
-            ctx.commit("updateAuth",user["email"])
+            const request = await api.login(user)
+            if(request == true){
+                ctx.commit("updateAuth",user["email"])
+            }else{
+                return request
+            }
         },
         async getEmailUser(ctx){
             if(document.cookie != ""){
@@ -31,7 +33,6 @@ export default{
         cleanAuth(store){
             store.email = ""
             store.isAuthed = false
-            document.cookie = "";
         }
     },
     state: {

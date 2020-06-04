@@ -55,35 +55,43 @@ export default {
 
             this.submited = true
 
-            const comm = new Comments(
-                0,
-                this.CurrentArticle.id,
-                "Orynik",
-                this.content,
-                new Date()
-            )
-
-            let result = await this.postComment(
-                comm
-            );
-
-            if(result != true){
-                this.isErrored = true
+            if(this.email == ""){
+                alert("Комментарии могут оставлять только авторизованные пользователи")
                 this.submited = false
                 return
             }
 
-            this.isErrored = false
-            this.submited = false
-            this.content = "";
+            const comm = new Comments(
+                0,
+                this.CurrentArticle.id,
+                this.email,
+                this.content,
+                new Date()
+            )
+
+            await this.postComment(
+                comm
+            ).then(
+                () => {
+                    this.isErrored = false
+                    this.submited = false
+                    this.content = "";
+                },
+                (error) => {
+                    this.isErrored = true
+                    this.submited = false
+                }
+            )
         }
     },
     computed: {
-        ...mapGetters(["getCurrentArticle"]),
+        ...mapGetters(["getCurrentArticle","getEmail"]),
         //Функция для поиска и вывода определенной статьи
         CurrentArticle(){
-            console.log(this.$route)
             return this.getCurrentArticle(this.$route.params.id)[0];
+        },
+        email(){
+            return this.getEmail
         }
     }
 };

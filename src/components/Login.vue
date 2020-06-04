@@ -1,6 +1,9 @@
 <template>
     <b-container  class = "mx-auto container">
         <h1 class = "text-center pt-4">Авторизация</h1>
+        <div class="alert alert-warning" role="alert" v-if = "isErrored">
+           {{errorText}}
+        </div>
         <form class = "mx-auto form-auth" v-if="!isAuth">
             <div class = "d-flex flex-column mx-auto">
                 <label for="email">Почта:</label>
@@ -22,17 +25,30 @@ export default {
     data(){
         return {
             user: {
+            //TODO: Доделать обработку ошибок
                 password: "",
-                email: ""
+                email: "",
             },
             submitted: false,
+            isErrored: false,
+            errorText: ""
         };
     },
     methods:{
         ...mapActions(['login']),
-        handleSubmit(){
+        async handleSubmit(){
             this.submitted = true;
-            this.login(this.user)
+            await this.login(this.user).catch(
+                (error) => {
+                    alert(error)
+                    if(error == "Error: not auth"){
+                        this.errorText = "Неверно введены логин или пароль."
+                    }if(error == "Error: server errored"){
+                        this.errorText = "Ошибка сервера. Попробуйте повторить запрос позже"
+                    }
+                    this.isErrored = true
+                }
+            )
         }
     },
     computed: {

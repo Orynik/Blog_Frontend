@@ -6,10 +6,12 @@ export default{
             mode: "cors"
         })
 
-        if((await request).ok){
+        if(request.status == 201){
             return true
+        }if(request.status == 500){
+            throw new Error("server errored")
         }else{
-            throw new error((await request).status + " : " + (await request).statusText)
+            throw new Error((await request).status + " : " + (await request).statusText)
         }
     },
     async login(user){
@@ -20,8 +22,14 @@ export default{
             mode: "cors",
         })
 
-        for (let [key, value] of request.headers) {
-            console.log(`${key} = ${value}`);
+        if(request.status == 200){
+            return true
+        }if(request.status == 401){
+            throw new Error("not auth")
+        }if(request.status == 500){
+            throw new Error("server errored")
+        }else{
+            throw new Error((await request).status + " : " + (await request).statusText)
         }
     },
     async cookiesLogin(){
@@ -36,7 +44,7 @@ export default{
                 }
             },
             (err) => {
-                return new error(err)
+                return new Error(err)
             }
         )
 

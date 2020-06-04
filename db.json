@@ -29,6 +29,16 @@
       "date": "2020-05-28T02:20:04.375Z",
       "category": "JavaScript",
       "author": "orynik"
+    },
+    {
+      "id": 4,
+      "title": "Da da ya",
+      "content": "rqwrqrqr",
+      "likes": 0,
+      "comments": [],
+      "date": "2020-06-04T07:27:23.938Z",
+      "category": "JavaScript",
+      "author": "durak1@gmail.ru"
     }
   ],
   "Category": [
@@ -268,6 +278,34 @@
       "author": "Orynik",
       "text": "23",
       "date": "2020-06-02T14:52:59.675Z"
+    },
+    {
+      "id": 32,
+      "idArticle": 3,
+      "author": "durak1@gmail.ru",
+      "text": "4324",
+      "date": "2020-06-04T07:18:15.169Z"
+    },
+    {
+      "id": 33,
+      "idArticle": 3,
+      "author": "durak1@gmail.ru",
+      "text": "nu i cho",
+      "date": "2020-06-04T07:20:44.420Z"
+    },
+    {
+      "id": 34,
+      "idArticle": 4,
+      "author": "durak1@gmail.ru",
+      "text": "nu vnature",
+      "date": "2020-06-04T07:30:10.399Z"
+    },
+    {
+      "id": 35,
+      "idArticle": 4,
+      "author": "cookezy@cocc.ru",
+      "text": "И не поспоришь",
+      "date": "2020-06-04T07:30:39.791Z"
     }
   ],
   "profile": {
