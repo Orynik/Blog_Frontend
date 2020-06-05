@@ -3,11 +3,29 @@ import api from "@/api/userService"
 export default{
     actions: {
         async register(ctx,user){
-            const request = await api.register(user)
+            const request = await api.register(user).catch(
+                (error) => {
+                    if(error == "Error: server errored"){
+                        return "Ошибка сервера. Попробуйте повторить запрос позже"
+                    }else{
+                        return "Ошибка сервера. Попробуйте повторить запрос позже"
+                    }
+                }
+            )
             return request
         },
         async login(ctx,user){
-            const request = await api.login(user)
+            const request = await api.login(user).catch(
+                (error) => {
+                    if(error == "Error: not auth"){
+                        return "Неверно введены логин или пароль."
+                    }if(error == "Error: server errored"){
+                        return "Ошибка сервера. Попробуйте повторить запрос позже"
+                    }else{
+                        return "Ошибка сервера. Попробуйте повторить запрос позже"
+                    }
+                }
+            )
             if(request == true){
                 ctx.commit("updateAuth",user["email"])
             }else{
@@ -41,11 +59,9 @@ export default{
     },
     getters: {
         getStatusAuth(store){
-            // console.log(store.isAuthed)
             return store.isAuthed
         },
         getEmail(store){
-            // console.log(store.email)
             return store.email
         }
     }

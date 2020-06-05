@@ -39,25 +39,17 @@ export default {
     methods:{
         ...mapActions(['register']),
         async handleSubmit(e){
-            let state
             this.submitted = true;
-            this.register(this.user).then(
-                (result) => {
-                    state = true
-                    this.isCreated = true
-                    this.submitted = false;
-                },
-                (error) => {
-                    state = error
-                    if(error == "Error: server errored"){
-                        this.errorText = "Ошибка сервера. Попробуйте повторить запрос позже"
-                    }else{
-                        this.errorText = "Ошибка сервера. Попробуйте повторить запрос позже"
-                    }
-                    this.isErrored = true
-                    this.submitted = false;
-                }
-            )
+            let result = await this.register(this.user)
+
+            if(result == true){
+                this.isCreated = true
+            }else{
+                this.errorText = result
+                this.isErrored = true
+            }
+
+            this.submitted = false
         }
     }
 }

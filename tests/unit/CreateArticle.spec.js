@@ -23,6 +23,7 @@ let articles = [
         "id": 2, "title": "Golang API","content": "qweqweqweqwewqewqeqw",  "date": "2020-03-01","category": "Backend"
     },
 ]
+let state
 
 beforeEach(() => {
     getters = {
@@ -44,6 +45,9 @@ beforeEach(() => {
                     "name": "JavaScript"
                 }
             ]
+        },
+        getEmail(){
+            return state.email
         }
     },
     actions = {
@@ -58,11 +62,15 @@ beforeEach(() => {
             article.id = currentArticleID + 1;
             articles.push(article)
             return "done"
-        }
+        },
     },
+    state = {
+        email: "test@user.com"
+    }
     store = new Vuex.Store({
         getters,
-        actions
+        actions,
+        state
     })
 });
 
@@ -119,6 +127,18 @@ describe('Компонент CreateArticle.vue', () => {
             localVue.nextTick(function(){
                 assert.equal(wrapper.find("#error_empty").text(),"Исправте возникшую(ие) ошибку(и):  Поле с текстом не может быть пустым  У статьи должен быть заголовок")
             })
+        })
+        it("Вывод сообщения об необходимости авторизации", () => {
+            state.email = ""
+            const wrapper = mount(CreateArticle, {
+                localVue,
+                store,
+                ArticleModel,
+                stubs: ['router-link']
+            })
+            
+            assert.equal(wrapper.find(".alert-danger").text(),"Статьи могут писать только авторизованные пользователи")
+
         })
     })
     describe('Проверка правильной обработки данных методами', () => {

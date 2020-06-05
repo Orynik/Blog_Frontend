@@ -25,7 +25,6 @@ export default {
     data(){
         return {
             user: {
-            //TODO: Доделать обработку ошибок
                 password: "",
                 email: "",
             },
@@ -38,17 +37,11 @@ export default {
         ...mapActions(['login']),
         async handleSubmit(){
             this.submitted = true;
-            await this.login(this.user).catch(
-                (error) => {
-                    alert(error)
-                    if(error == "Error: not auth"){
-                        this.errorText = "Неверно введены логин или пароль."
-                    }if(error == "Error: server errored"){
-                        this.errorText = "Ошибка сервера. Попробуйте повторить запрос позже"
-                    }
-                    this.isErrored = true
-                }
-            )
+            let result = await this.login(this.user)
+            if(result != true){
+                this.errorText = result
+                this.isErrored = true
+            }
         }
     },
     computed: {

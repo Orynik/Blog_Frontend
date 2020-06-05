@@ -101,7 +101,7 @@ describe("Компонент Index.vue", () => {
     })
     it("Статьи фильтруются по нажатию на фильтр", ()=>{
         const wrapper = mount(Index, {
-            store, 
+            store,
             localVue,
             stubs: ['router-link']
         })
