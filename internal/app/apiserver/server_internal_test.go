@@ -15,6 +15,40 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestServer_HandleArticlesGet(t *testing.T) {
+
+	testCases := []struct {
+		name         string
+		payload      interface{}
+		expectedCode int
+	}{
+		{
+			name: "valid",
+			payload: map[string]string{
+				"Title":    "Golang",
+				"Date":     "2020-05-28T01:32:29.413Z",
+				"Category": "Backend",
+				"Author":   "Cookies@chort.ru",
+				"Content":  "LoremIpsum",
+			},
+			expectedCode: http.StatusOK,
+		},
+	}
+	store := teststore.New()
+	a := model.TestArticles(t)
+	store.Article().Create(a)
+	secretKey := []byte("secret")
+	s := newServer(store, sessions.NewCookieStore(secretKey))
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req, _ := http.NewRequest(http.MethodGet, "/articles/get", nil)
+
+			s.handleArticlesGet().ServeHTTP(rec, req)
+			assert.Equal(t, tc.expectedCode, rec.Code)
+		})
+	}
+}
 func TestServer_AuthenticateUser(t *testing.T) {
 	store := teststore.New()
 	u := model.TestUser(t)
@@ -53,6 +87,37 @@ func TestServer_AuthenticateUser(t *testing.T) {
 			cookieStr, _ := sc.Encode(sessionName, tc.cookieValue)
 			req.Header.Set("Cookie", fmt.Sprintf("%s=%s", sessionName, cookieStr))
 			s.autheticateUser(handler).ServeHTTP(rec, req)
+			assert.Equal(t, tc.expectedCode, rec.Code)
+		})
+	}
+}
+
+func TestServer_HendleArticlesCreate(t *testing.T) {
+	s := newServer(teststore.New(), sessions.NewCookieStore([]byte("secret")))
+	testCases := []struct {
+		name         string
+		payload      interface{}
+		expectedCode int
+	}{
+		{
+			name: "valid",
+			payload: map[string]string{
+				"Title":    "Qwe",
+				"Date":     "06.06.2001",
+				"Category": "Books",
+				"Author":   "Roman",
+				"Content":  "Porn",
+			},
+			expectedCode: http.StatusCreated,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			b := &bytes.Buffer{}
+			json.NewEncoder(b).Encode(tc.payload)
+			req, _ := http.NewRequest(http.MethodPost, "/article/post", b)
+			s.ServeHTTP(rec, req)
 			assert.Equal(t, tc.expectedCode, rec.Code)
 		})
 	}

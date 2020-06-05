@@ -40,7 +40,7 @@ func (r *ArticlesRepository) GetArticles() ([]*model.Article, error) {
 
 	arrayOfArticles := make([]*model.Article, 0)
 
-	row, err := r.store.db.Query("SELECT `title`, `date`, `category`, `author`, `content` FROM articles")
+	row, err := r.store.db.Query("SELECT `id`, `title`, `date`, `category`, `author`, `content` FROM articles")
 
 	if err != nil {
 		return nil, err
@@ -48,7 +48,7 @@ func (r *ArticlesRepository) GetArticles() ([]*model.Article, error) {
 
 	for row.Next() {
 		article := &model.Article{}
-		err := row.Scan(&article.Title, &article.Date, &article.Category, &article.Author, &article.Content)
+		err := row.Scan(&article.ID, &article.Title, &article.Date, &article.Category, &article.Author, &article.Content)
 
 		if err != nil {
 			return nil, err

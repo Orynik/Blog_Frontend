@@ -57,13 +57,87 @@ func (s *server) configureRouter() {
 	s.router.Use(s.logRequest)
 	s.router.Use(handlers.CORS(handlers.AllowCredentials()))
 	s.router.Use(handlers.CORS(handlers.AllowedOrigins([]string{"http://192.168.0.102:8080", "http://orynik.gitlab.io"})))
-	s.router.HandleFunc("/users", s.hadleUsersCreate()).Methods("POST")
+	s.router.HandleFunc("/users", s.handleUsersCreate()).Methods("POST")
 	s.router.HandleFunc("/sessions", s.handleSessionsCreate()).Methods("POST")
+
+	s.router.HandleFunc("/articles/post", s.handleArticlesPost()).Methods("POST")
+	s.router.HandleFunc("/articles/get", s.handleArticlesGet()).Methods("GET")
 
 	private := s.router.PathPrefix("/private").Subrouter()
 	private.Use(s.autheticateUser)
 	private.HandleFunc("/whoami", s.handleWhoami()).Methods("GET")
 }
+
+//................
+func (s *server) handleArticlesPost() http.HandlerFunc {
+	type request struct {
+		Title    string `json:"title"`
+		Date     string `json:"date"`
+		Category string `json:"category"`
+		Author   string `json:"author"`
+		Content  string `json:"content"`
+	}
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		req := &request{}
+		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.error(w, r, http.StatusBadRequest, err)
+			return
+
+		}
+		a := &model.Article{
+			Title:    req.Title,
+			Date:     req.Date,
+			Category: req.Category,
+			Author:   req.Author,
+			Content:  req.Content,
+		}
+		if err := s.store.Article().Create(a); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
+		s.respond(w, r, http.StatusCreated, a)
+	}
+}
+
+//.....................
+func (s *server) handleArticlesGet() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		arr, err := s.store.Article().GetArticles()
+		if err != nil {
+			s.error(w, r, http.StatusInternalServerError, err)
+			return
+		}
+		s.respond(w, r, http.StatusOK, arr)
+	}
+}
+
+func (s *server) handleUsersCreate() http.HandlerFunc {
+	type request struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		req := &request{}
+		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.error(w, r, http.StatusBadRequest, err)
+			return
+		}
+
+		u := &model.User{
+			Email:    req.Email,
+			Password: req.Password,
+		}
+		if err := s.store.User().Create(u); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
+
+		u.Sanitize()
+		s.respond(w, r, http.StatusCreated, u)
+	}
+} //...
 
 func (s *server) setRequestID(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -122,33 +196,6 @@ func (s *server) handleWhoami() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		s.respond(w, r, http.StatusOK, r.Context().Value(ctxKeyUser).(*model.User))
 
-	}
-}
-
-func (s *server) hadleUsersCreate() http.HandlerFunc {
-	type request struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-	}
-
-	return func(w http.ResponseWriter, r *http.Request) {
-		req := &request{}
-		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
-			s.error(w, r, http.StatusBadRequest, err)
-			return
-		}
-
-		u := &model.User{
-			Email:    req.Email,
-			Password: req.Password,
-		}
-		if err := s.store.User().Create(u); err != nil {
-			s.error(w, r, http.StatusUnprocessableEntity, err)
-			return
-		}
-
-		u.Sanitize()
-		s.respond(w, r, http.StatusCreated, u)
 	}
 }
 
