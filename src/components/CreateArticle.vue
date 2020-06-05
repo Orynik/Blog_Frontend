@@ -1,19 +1,22 @@
  <template>
-    <b-container>
-        <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
-        <div v-if = 'email != ""'>
+    <transition name = "CA" appear>
+        <b-container>
+            <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
+            <div v-if = 'email != ""'>
             <div class="tabs" v-if="!isCreated">
                 <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
                     Произошла непредвиденная ошибка. Попробуйте позже.
                 </b-alert>
-                <b-alert id = "error_empty" variant="warning" show fade v-if = "isEmpty">
-                    Исправте возникшую(ие) ошибку(и):
-                    <ul>
-                        <li v-for = 'item of validateErrors' :key = "item.id">
-                            {{item}}
-                        </li>
-                    </ul>
-                </b-alert>
+                <transition name = "fade">
+                    <b-alert id = "error_empty" variant="warning" show v-if = "isEmpty">
+                        Исправте возникшую(ие) ошибку(и):
+                        <transition-group name = "Articles" tag = "ul" >
+                            <li v-for = '(item,idx) of validateErrors' :key = "idx">
+                                {{item}}
+                            </li>
+                        </transition-group>
+                    </b-alert>
+                </transition>
                 <input type="radio" name = "tabs" id = "tab-btn-1" checked>
                 <label for="tab-btn-1" class = "tab tab-first">Написание статьи</label>
                 <input type="radio" name = "tabs" id = "tab-btn-2">
@@ -46,15 +49,22 @@
 
                 </div>
             </div>
-        </div>
-        <div class="alert alert-danger" role="alert" v-else>
-            Статьи могут писать только авторизованные пользователи
-        </div>
-        <div id = "success_block" v-if="isCreated">
-            <b-alert variant="success" show fade v-if = "isCreated">Ваша статья успешно добавлена на сервер </b-alert>
-            <router-link to="/" class = "btn btn-primary">Вернуться на главную</router-link>
-        </div>
-    </b-container>
+            </div>
+            <transition name = "CA" appear>
+                <div class="alert alert-danger" role="alert" v-if = 'email == ""'>
+                    Статьи могут писать только авторизованные пользователи
+                </div>
+            </transition>
+            <transition name = "CA">
+                <div id = "success_block" v-if="isCreated">
+                    <b-alert variant="success" show fade v-if = "isCreated">
+                        Ваша статья успешно добавлена на сервер.
+                    </b-alert>
+                    <router-link to="/" class = "btn btn-primary">Вернуться на главную</router-link>
+                </div>
+            </transition>
+        </b-container>
+    </transition>
 </template>
 <script>
 import {mapGetters,mapMutations, mapActions} from "vuex"

@@ -1,37 +1,41 @@
 <template>
-    <b-container>
-        <div class = "Post article-item mt-3">
-            <div class = "d-flex justify-content-between">
-                <span class = "article-author">{{CurrentArticle.author}}</span>
-                <span class = "article-date">{{CurrentArticle.date}}</span>
+    <transition name = "fade" appear>
+        <b-container class = "main">
+            <div class = "Post article-item mt-3">
+                <div class = "d-flex justify-content-between">
+                    <span class = "article-author">{{CurrentArticle.author}}</span>
+                    <span class = "article-date">{{CurrentArticle.date}}</span>
+                </div>
+                <h4 class = "article-title">
+                    {{CurrentArticle.title}}
+                </h4>
+                <div class="article-full" v-html="CurrentArticle.content">
+                </div>
             </div>
-            <h4 class = "article-title">
-                {{CurrentArticle.title}}
-            </h4>
-            <div class="article-full" v-html="CurrentArticle.content">
+            <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
+                Произошла непредвиденная ошибка, мы не смогли добавить ваш комментарий. Попробуйте позже.
+            </b-alert>
+            <div class = "createComments mb-5">
+                <h3>Добавить комментарий:</h3>
+                <b-textarea id = "comment-texts" v-model = "content"></b-textarea>
+                <button class = "btn btn-primary mt-2" @click = "newComment" :disabled = "submited">Отправить комментарий</button>
             </div>
-        </div>
-        <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
-            Произошла непредвиденная ошибка, мы не смогли добавить ваш комментарий. Попробуйте позже.
-        </b-alert>
-        <div class = "createComments mb-5">
-            <h3>Добавить комментарий:</h3>
-            <b-textarea id = "comment-texts" v-model = "content"></b-textarea>
-            <button class = "btn btn-primary mt-2" @click = "newComment" :disabled = "submited">Отправить комментарий</button>
-        </div>
-        <h3>Комментарии ({{CurrentArticle.comments.length}})</h3>
-        <hr>
-        <div class = "comments" v-for = "comment in CurrentArticle.comments" :key = "comment.id">
-            <div class = "d-flex justify-content-between">
-                <a href="#" class = "commentsAuthor">{{comment.author}}</a>
-                <span>{{comment.date}}</span>
-            </div>
-            <div class = "commentsContent">
-                {{comment.text}}
-            </div>
+            <h3>Комментарии ({{CurrentArticle.comments.length}})</h3>
             <hr>
-        </div>
-    </b-container>
+            <transition-group name = "fade" appear>
+                <div class = "comments" v-for = "comment in CurrentArticle.comments" :key = "comment.id">
+                    <div class = "d-flex justify-content-between">
+                        <a href="#" class = "commentsAuthor">{{comment.author}}</a>
+                        <span>{{comment.date}}</span>
+                    </div>
+                    <div class = "commentsContent">
+                        {{comment.text}}
+                    </div>
+                    <hr>
+                </div>
+            </transition-group>
+        </b-container>
+    </transition>
 </template>
 <script>
 import {mapGetters, mapActions} from "vuex"
@@ -98,6 +102,10 @@ export default {
 </script>
 
 <style>
+    .main{
+        min-height: 100vh
+    }
+
     .Post{
         border-radius: 0;
     }

@@ -4,7 +4,7 @@ body{
     color: white;
     font-family: 'Open Sans', serif;
     font-weight: 500;
-    
+
     overflow-y: scroll;
 }
 
@@ -51,6 +51,7 @@ a{
 
 .container{
     color: #000;
+    min-height: 100vh;
 }
 
 .form-auth{
@@ -74,4 +75,36 @@ a{
 
 .form-auth-submit{
     margin-top: 15px;
+}
+
+/* Animation <transition> */
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .7s ease;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.CA-enter-active {
+    transition: opacity .7s ease;
+}
+.CA-leave-active{
+    transition: opacity .7s ease-out;
+}
+
+.CA-enter, .CA-leave-to {
+    opacity: 0;
+}
+
+.Articles-enter-active {
+    transition: opacity .55s ease-in;
+}
+
+.Articles-leave-active{
+    transition: opacity .2s ease-out;
+}
+
+.Articles-enter, .Articles-leave-to {
+    opacity: 0;
 }

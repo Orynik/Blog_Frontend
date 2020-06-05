@@ -28,6 +28,7 @@ export default{
             )
             if(request == true){
                 ctx.commit("updateAuth",user["email"])
+                return request
             }else{
                 return request
             }
