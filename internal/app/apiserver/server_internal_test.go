@@ -15,6 +15,71 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestServer_HandleCommentsPost(t *testing.T) {
+
+	s := newServer(teststore.New(), sessions.NewCookieStore([]byte("secret")))
+	testCases := []struct {
+		name         string
+		payload      interface{}
+		expectedCode int
+	}{
+		{
+			name: "valid",
+			payload: map[string]string{
+				"Article": "1",
+				"Author":  "Backend",
+				"Text":    "qwe",
+				"Date":    "2020-05-28T01:32:29.413Z",
+			},
+			expectedCode: http.StatusCreated,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			b := &bytes.Buffer{}
+			json.NewEncoder(b).Encode(tc.payload)
+			req, _ := http.NewRequest(http.MethodPost, "/comments/post", b)
+			s.ServeHTTP(rec, req)
+			assert.Equal(t, tc.expectedCode, rec.Code)
+		})
+	}
+}
+
+func TestServer_HandleCommentsGet(t *testing.T) {
+
+	testCases := []struct {
+		name         string
+		payload      interface{}
+		expectedCode int
+	}{
+		{
+			name: "valid",
+			payload: map[string]string{
+				"id":      "1",
+				"article": "1",
+				"author":  "Backend1",
+				"text":    "qwe",
+				"Date":    "2020-05-28T01:32:29.413Z",
+			},
+			expectedCode: http.StatusOK,
+		},
+	}
+	store := teststore.New()
+	a := model.TestComment(t)
+	store.Comment().Create(a)
+	secretKey := []byte("secret")
+	s := newServer(store, sessions.NewCookieStore(secretKey))
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req, _ := http.NewRequest(http.MethodGet, "/comments/get", nil)
+
+			s.handleCommentsGet().ServeHTTP(rec, req)
+			assert.Equal(t, tc.expectedCode, rec.Code)
+		})
+	}
+}
 func TestServer_HandleArticlesGet(t *testing.T) {
 
 	testCases := []struct {
@@ -92,7 +157,7 @@ func TestServer_AuthenticateUser(t *testing.T) {
 	}
 }
 
-func TestServer_HendleArticlesCreate(t *testing.T) {
+func TestServer_HandleArticlesCreate(t *testing.T) {
 	s := newServer(teststore.New(), sessions.NewCookieStore([]byte("secret")))
 	testCases := []struct {
 		name         string
@@ -116,7 +181,7 @@ func TestServer_HendleArticlesCreate(t *testing.T) {
 			rec := httptest.NewRecorder()
 			b := &bytes.Buffer{}
 			json.NewEncoder(b).Encode(tc.payload)
-			req, _ := http.NewRequest(http.MethodPost, "/article/post", b)
+			req, _ := http.NewRequest(http.MethodPost, "/articles/post", b)
 			s.ServeHTTP(rec, req)
 			assert.Equal(t, tc.expectedCode, rec.Code)
 		})

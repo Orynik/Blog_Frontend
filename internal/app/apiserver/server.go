@@ -63,6 +63,9 @@ func (s *server) configureRouter() {
 	s.router.HandleFunc("/articles/post", s.handleArticlesPost()).Methods("POST")
 	s.router.HandleFunc("/articles/get", s.handleArticlesGet()).Methods("GET")
 
+	s.router.HandleFunc("/comments/post", s.handleCommentsPost()).Methods("POST")
+	s.router.HandleFunc("/comments/get", s.handleCommentsGet()).Methods("GET")
+
 	private := s.router.PathPrefix("/private").Subrouter()
 	private.Use(s.autheticateUser)
 	private.HandleFunc("/whoami", s.handleWhoami()).Methods("GET")
@@ -138,6 +141,47 @@ func (s *server) handleUsersCreate() http.HandlerFunc {
 		s.respond(w, r, http.StatusCreated, u)
 	}
 } //...
+
+func (s *server) handleCommentsGet() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		arr, err := s.store.Comment().GetComments()
+		if err != nil {
+			s.error(w, r, http.StatusInternalServerError, err)
+			return
+		}
+		s.respond(w, r, http.StatusOK, arr)
+	}
+}
+
+func (s *server) handleCommentsPost() http.HandlerFunc {
+	type request struct {
+		ID      int    `json:"id"`
+		Article int    `json:"idArticle"`
+		Author  string `json:"author"`
+		Text    string `json:"text"`
+		Date    string `json:"date"`
+	}
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		req := &request{}
+		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.error(w, r, http.StatusBadRequest, err)
+			return
+		}
+		a := &model.Comment{
+			ID:      req.ID,
+			Article: req.Article,
+			Author:  req.Author,
+			Text:    req.Text,
+			Date:    req.Date,
+		}
+		if err := s.store.Comment().Create(a); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
+		s.respond(w, r, http.StatusCreated, a)
+	}
+}
 
 func (s *server) setRequestID(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

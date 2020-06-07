@@ -14,3 +14,9 @@ type ArticlesRepository interface {
 	Create(*model.Article) error
 	GetArticles() ([]*model.Article, error)
 }
+
+//CommentRepository ...
+type CommentRepository interface {
+	Create(*model.Comment) error
+	GetComments() ([]*model.Comment, error)
+}

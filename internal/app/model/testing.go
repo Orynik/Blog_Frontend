@@ -20,3 +20,14 @@ func TestArticles(t *testing.T) *Article {
 		Content:  "LoremIpsum",
 	}
 }
+
+//TestComment ...
+func TestComment(t *testing.T) *Comment {
+	return &Comment{
+		ID:      0,
+		Article: 123,
+		Author:  "qwe",
+		Text:    "qwe",
+		Date:    "qwe",
+	}
+}
