@@ -8,14 +8,11 @@ import reqCategories from "@/api/request/requestCategories"
 import reqComments from "@/api/request/requestComments"
 
 export default{
-    //TODO: Добавить обработчик ошибок
     async getArticles(){
         const items = await reqArticles.fetchArticle();
 
-        //Сортирую статьи по "свежести"
-        items.sort((a,b) =>{
-            return new Date(b.date) - new Date(a.date);
-        });
+        //Сортирую статьи по дате
+        items.sort(dataSort);
 
         //Получаю массив комментариев
         const comm = await this.getComments();
@@ -30,9 +27,9 @@ export default{
                 }
             });
 
-            //Конвертирование статей в вид: число месяц(название) год
+            //Конвертирование статей в вид: Месяц, день, год, время публикации
             article.date = new Date(article.date).toLocaleString('ru', {
-                month: 'long',day: "numeric",year: "numeric"
+                month: 'long',day: "numeric",year: "numeric",hour: 'numeric',minute: 'numeric'
             })
 
             return article;
@@ -43,21 +40,30 @@ export default{
 
         //TODO: Добавить обработчик ошибок
         return items.map((item) =>{
-            const name = Categories.createCategories(item);
-            return name;
+            return Categories.createCategories(item);
         })
     },
     async getComments(){
         const items = await reqComments.fetchComments();
 
+        items.sort(dataSort);
+
         return items.map((item) =>{
+            item.date = new Date(item.date).toLocaleString('ru', {
+                month: 'long',day: "numeric",year: "numeric",hour: 'numeric',minute: 'numeric'
+            })
+
             return Comments.createComment(item);
         })
     },
     async postArticle(article){
         return await reqArticles.postArticle(article)
     },
-    postComment(comment){
-        reqComments.postComment(comment)
+    async postComment(comment){
+        return await reqComments.postComment(comment)
     }
+}
+
+function dataSort(a,b){
+    return new Date(b.date) - new Date(a.date);
 }

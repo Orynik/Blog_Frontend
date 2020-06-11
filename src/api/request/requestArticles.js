@@ -1,8 +1,9 @@
 export default{
     async fetchArticle(){
 
-        let response = await fetch("http://localhost:3000/Articles",{
+        let response = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/articles/get",{
             method: "GET",
+            mode: "cors"
         })
 
         if((await response).ok){
@@ -17,18 +18,14 @@ export default{
         }
     },
     async postArticle(article){
-        let response = fetch("http://localhost:3000/Articles",{
+        let response = fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/articles/post",{
             method: "POST",
+            mode: "cors",
             body: JSON.stringify(article),
-            headers: {
-                'Content-Type': 'application/json'
-            }
         })
 
         if(!(await response).ok){
-            if(response.status != 201){
-                return `Ошибка HTTP: ${response.status}`
-            }
+            return `Ошибка HTTP: ${response.status}`
         }
         return "done"
     }

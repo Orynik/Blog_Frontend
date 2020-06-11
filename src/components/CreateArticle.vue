@@ -1,55 +1,70 @@
  <template>
-    <b-container>
-        <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
-        <div class="tabs" v-if="!isCreated">
-            <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
-                Произошла непредвиденная ошибка. Попробуйте позже.
-            </b-alert>
-            <b-alert id = "error_empty" variant="warning" show fade v-if = "isEmpty">
-                Исправте возникшую(ие) ошибку(и):
-                <ul>
-                    <li v-for = 'item of validateErrors' :key = "item.id">
-                        {{item}}
-                    </li>
-                </ul>
-            </b-alert>
-            <input type="radio" name = "tabs" id = "tab-btn-1" checked>
-            <label for="tab-btn-1" class = "tab tab-first">Написание статьи</label>
-            <input type="radio" name = "tabs" id = "tab-btn-2">
-            <label for="tab-btn-2" class = "tab">Предпросмотр</label>
-            <div class="content">
-                <form>
-                    <textarea name="content" v-model = "content" id="content"></textarea>
-                    <div class = "d-flex">
-                        <div class = "category-selector mr-3">
-                            <label for="category-name">Выберите Категорию:</label><br>
-                            <select class = "form-control" name="category-list" id="category" v-model = "category">
-                                <option></option>
-                                <option v-for = "item in getCategories" :key = "item.id" :value = "item.name">
-                                    {{item.name}}
-                                </option>
-                            </select>
+    <transition name = "CA" appear>
+        <b-container>
+            <h1 class = "align-center w-auto mx-auto"> Создание статей </h1>
+            <div v-if = 'email != ""'>
+            <div class="tabs" v-if="!isCreated">
+                <b-alert id = "error_http" variant="danger" show fade v-if = "isErrored">
+                    Произошла непредвиденная ошибка. Попробуйте позже.
+                </b-alert>
+                <transition name = "fade">
+                    <b-alert id = "error_empty" variant="warning" show v-if = "isEmpty">
+                        Исправте возникшую(ие) ошибку(и):
+                        <transition-group name = "Articles" tag = "ul" >
+                            <li v-for = '(item,idx) of validateErrors' :key = "idx">
+                                {{item}}
+                            </li>
+                        </transition-group>
+                    </b-alert>
+                </transition>
+                <input type="radio" name = "tabs" id = "tab-btn-1" checked>
+                <label for="tab-btn-1" class = "tab tab-first">Написание статьи</label>
+                <input type="radio" name = "tabs" id = "tab-btn-2">
+                <label for="tab-btn-2" class = "tab">Предпросмотр</label>
+                <div class="content">
+                    <form>
+                        <textarea name="content" v-model = "content" id="content"></textarea>
+                        <div class = "d-flex">
+                            <div class = "category-selector mr-3">
+                                <label for="category-name">Выберите Категорию:</label><br>
+                                <select class = "form-control" name="category-list" id="category" v-model = "category">
+                                    <option></option>
+                                    <option v-for = "item in getCategories" :key = "item.id" :value = "item.name">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="title mr-3">
+                                <label for="title">Укажите заголовок статьи:</label><br>
+                                <input class = "form-control" type="text" name="title" id="title" v-model="title">
+                            </div>
+                            <button type="button" @click="validateForm()" class = "btn btn-primary ml-auto form-submit">Отправить</button>
                         </div>
-                        <div class="title mr-3">
-                            <label for="title">Укажите заголовок статьи:</label><br>
-                            <input class = "form-control" type="text" name="title" id="title" v-model="title">
-                        </div>
-                        <button type="button" @click="validateForm()" class = "btn btn-primary ml-auto form-submit">Отправить</button>
-                    </div>
-                </form>
-            </div>
-            <div class="preview" v-if = "content == ''">
+                    </form>
+                </div>
+                <div class="preview" v-if = "content == ''">
                 Тут будет показана ваша статья!
-            </div>
-            <div class="preview" v-html="content" v-else>
+                </div>
+                <div class="preview" v-html="content" v-else>
 
+                </div>
             </div>
-        </div>
-        <div id = "success_block" v-if="isCreated">
-            <b-alert variant="success" show fade v-if = "isCreated">Ваша статья успешно добавлена на сервер </b-alert>
-            <router-link to="/" class = "btn btn-primary">Вернуться на главную</router-link>
-        </div>
-    </b-container>
+            </div>
+            <transition name = "CA" appear>
+                <div class="alert alert-danger" role="alert" v-if = 'email == ""'>
+                    Статьи могут писать только авторизованные пользователи
+                </div>
+            </transition>
+            <transition name = "CA">
+                <div id = "success_block" v-if="isCreated">
+                    <b-alert variant="success" show fade v-if = "isCreated">
+                        Ваша статья успешно добавлена на сервер.
+                    </b-alert>
+                    <router-link to="/" class = "btn btn-primary">Вернуться на главную</router-link>
+                </div>
+            </transition>
+        </b-container>
+    </transition>
 </template>
 <script>
 import {mapGetters,mapMutations, mapActions} from "vuex"
@@ -69,7 +84,10 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(["getCategories"]),
+        ...mapGetters(["getCategories","getEmail"]),
+        email(){
+            return this.getEmail
+        }
     },
     methods:{
         ...mapActions(["postArticle"]),
@@ -83,30 +101,27 @@ export default {
                 this.deployArticle().then(
                     (result) => {
                         if(result == "done"){
-                            console.log("nehallo")
                             this.isCreated = true
-                            console.log(this.isCreated)
                         }else{
-                            console.log("hallo")
                             this.isErrored = true
                         }
                     }
                 )
             }else{
                 if(!this.content){
-                    this.validateErrors["content"] = ("Поле с текстом не может быть пустым")
+                    this.validateErrors["content"] = "Поле с текстом не может быть пустым"
                 }else{
                     delete this.validateErrors["content"]
                 }
 
                 if(!this.title){
-                    this.validateErrors["title"] = ("У статьи должен быть заголовок")
+                    this.validateErrors["title"] = "У статьи должен быть заголовок"
                 }else{
                     delete this.validateErrors["title"]
                 }
 
                 if(!this.category){
-                    this.validateErrors["category"] = ("У статьи должна быть указана категория")
+                    this.validateErrors["category"] = "У статьи должна быть указана категория"
                 }else{
                     delete this.validateErrors["category"]
                 }
@@ -115,20 +130,12 @@ export default {
             }
         },
         async deployArticle(){
-            let date = new Date()
-            let willHaveZero = "";
-
-            //Формирование даты
-            if(date.getMonth() < 9){
-                willHaveZero = "0"
-            }
-            let stringDate = `${date.getFullYear()}-${willHaveZero}${date.getMonth() + 1}-${date.getDate()}`
-
             const article = new Article(
                 0,
                 this.title,
+                this.email,
                 this.content,
-                stringDate,
+                new Date(),
                 this.category,
             );
 

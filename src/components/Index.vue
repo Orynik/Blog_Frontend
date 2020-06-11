@@ -1,5 +1,6 @@
 <template>
-    <b-container class = "main mt-3">
+    <transition name = "fade" appear>
+        <b-container class = "main mt-3">
         <h1 class = "main-title text-align-left">Последние статьи</h1>
         <b-row>
             <b-col cols = "9"  class = "article-list">
@@ -8,7 +9,7 @@
                 </div>
                 <div v-else>
                     <div v-if = "isloaded">
-                        <articleItem :articles=Articles :viewsCategory = viewsCategory></articleItem>
+                        <articleItem :articles = Articles :viewsCategory = viewsCategory></articleItem>
                     </div>
                     <div class = "loading" v-else>
                         Загрузка...
@@ -18,21 +19,24 @@
             <b-col cols = "3" class = "article-category-list ml-auto">
                 <div class = "article-category-item">
                     <h2 class = "article-category-title text-center">Категории</h2>
-                    <ul v-if = "isloaded">
+                    <transition-group name = "Articles" appear>
+                        <ul v-if = "isloaded" :key = "isloaded">
                         <li>
                             <span class="category" @click = "handlerCategory('all')">Все категории</span>
                         </li>
                         <li v-for = "category in getCategories" :key = "category.name" >
                             <span class = "category" @click = "handlerCategory(category.name)">{{category.name}}</span>
                         </li>
-                    </ul>
-                    <div class = "my-3 ml-5 loading" v-else>
+                        </ul>
+                        <div class = "my-3 ml-5 loading" v-show = "!isloaded" :key = "!isloaded">
                         Загрузка...
-                    </div>
+                        </div>
+                    </transition-group>
                 </div>
             </b-col>
         </b-row>
-    </b-container>
+        </b-container>
+    </transition>
 </template>
 <script>
     import articleItem from "@/components/IndexArticle.vue"
@@ -84,13 +88,12 @@
     }
 </script>
 <style>
-
-
     .main-title{
         margin: 20px 0 25px 0;
     }
     .main{
         color: black;
+        min-height: 100vh;
     }
 
     .article-item{

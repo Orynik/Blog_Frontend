@@ -1,10 +1,10 @@
 export default{
     async fetchCategories(){
-        let response = await fetch("http://localhost:3000/Category",{
+        let response = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/categories/get",{
             method: "GET",
         })
 
-        if(response.ok){
+        if((await response).ok){
             const data = await response.json();
             return await Object.values(data)
         }else{

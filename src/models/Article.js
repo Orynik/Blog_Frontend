@@ -1,5 +1,5 @@
 export default class Article{
-    constructor(id, title, content,date,category){
+    constructor(id, title,author, content,date,category){
         this.id = id;
         this.title = title;
         this.content = content;
@@ -7,12 +7,11 @@ export default class Article{
         this.comments = [];
         this.date = date
         this.category = category;
-        //TODO: Изметить автора и добавить дополнительные поля в класс
-        this.author = 'orynik';
+        this.author = author;
     }
 
     static createForm(data){
-        const {id,title,content,date,category} = data;
-        return new this(id,title,content,date,category);
+        const {id,title,author,content,date,category} = data;
+        return new this(id,title,author,content,date,category);
     }
 }

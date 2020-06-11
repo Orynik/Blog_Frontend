@@ -101,7 +101,7 @@ describe("Компонент Index.vue", () => {
     })
     it("Статьи фильтруются по нажатию на фильтр", ()=>{
         const wrapper = mount(Index, {
-            store, 
+            store,
             localVue,
             stubs: ['router-link']
         })
@@ -112,7 +112,6 @@ describe("Компонент Index.vue", () => {
 
         localVue.nextTick(() => {
             //Тест категории Frontend
-
             let category = wrapper.findAll(".category").at(1)
             category.trigger('click')
             localVue.nextTick(() => {
