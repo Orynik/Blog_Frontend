@@ -1,6 +1,6 @@
 export default{
     async fetchComments(){
-        let response = await fetch("http://localhost:3000/Comments",{
+        let response = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/comments/get",{
             method: "GET",
         })
 
@@ -13,12 +13,9 @@ export default{
         }
     },
     async postComment(comment){
-        let response = fetch("http://localhost:3000/Comments",{
+        let response = fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/comments/post",{
             method: "POST",
             body: JSON.stringify(comment),
-            headers: {
-                'Content-Type': 'application/json'
-            }
         })
 
         if(!(await response).ok){

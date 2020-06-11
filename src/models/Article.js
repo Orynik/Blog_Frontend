@@ -7,7 +7,6 @@ export default class Article{
         this.comments = [];
         this.date = date
         this.category = category;
-        //TODO: Изметить автора и добавить дополнительные поля в класс
         this.author = author;
     }
 

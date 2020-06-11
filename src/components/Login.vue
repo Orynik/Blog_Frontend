@@ -50,7 +50,6 @@ export default {
             this.submitted = true;
             let result = await this.login(this.user)
             if(result != true){
-                alert(result)
                 this.errorText = result
                 this.isErrored = true
             }

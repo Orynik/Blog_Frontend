@@ -1,6 +1,6 @@
 export default{
     async register(user){
-        let request = await fetch("http://192.168.0.102:4444/users",{
+        let request = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/users",{
             method: "POST",
             body: JSON.stringify(user),
             mode: "cors"
@@ -15,7 +15,7 @@ export default{
         }
     },
     async login(user){
-        let request = await fetch("http://192.168.0.102:4444/sessions",{
+        let request = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/sessions",{
             method: "POST",
             body: JSON.stringify(user),
             credentials: "include",
@@ -33,7 +33,7 @@ export default{
         }
     },
     async cookiesLogin(){
-        let request = await fetch("http://192.168.0.102:4444/private/whoami",{
+        let request = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/private/whoami",{
             method: "GET",
             credentials: "include",
             mode: "cors",

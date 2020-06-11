@@ -112,7 +112,6 @@ describe("Компонент Index.vue", () => {
 
         localVue.nextTick(() => {
             //Тест категории Frontend
-
             let category = wrapper.findAll(".category").at(1)
             category.trigger('click')
             localVue.nextTick(() => {
