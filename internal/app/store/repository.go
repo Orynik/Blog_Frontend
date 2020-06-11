@@ -20,3 +20,9 @@ type CommentRepository interface {
 	Create(*model.Comment) error
 	GetComments() ([]*model.Comment, error)
 }
+
+//CategoryRepository ...
+type CategoryRepository interface {
+	Create(*model.Category) error
+	GetCategories() ([]*model.Category, error)
+}

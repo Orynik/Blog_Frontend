@@ -281,3 +281,63 @@ func TestServer_HandleSessionsCreate(t *testing.T) {
 		})
 	}
 }
+
+func TestServer_HandleCategoryPost(t *testing.T) {
+
+	s := newServer(teststore.New(), sessions.NewCookieStore([]byte("secret")))
+	testCases := []struct {
+		name         string
+		payload      interface{}
+		expectedCode int
+	}{
+		{
+			name: "valid",
+			payload: map[string]string{
+				"Category": "Backend",
+			},
+			expectedCode: http.StatusCreated,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			b := &bytes.Buffer{}
+			json.NewEncoder(b).Encode(tc.payload)
+			req, _ := http.NewRequest(http.MethodPost, "/categories/post", b)
+			s.ServeHTTP(rec, req)
+			assert.Equal(t, tc.expectedCode, rec.Code)
+		})
+	}
+}
+
+func TestServer_HandleCategoryGet(t *testing.T) {
+
+	testCases := []struct {
+		name         string
+		payload      interface{}
+		expectedCode int
+	}{
+		{
+			name: "valid",
+			payload: map[string]string{
+				"id":       "1",
+				"category": "Backend123",
+			},
+			expectedCode: http.StatusOK,
+		},
+	}
+	store := teststore.New()
+	a := model.TestCategory(t)
+	store.Category().Create(a)
+	secretKey := []byte("secret")
+	s := newServer(store, sessions.NewCookieStore(secretKey))
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := httptest.NewRecorder()
+			req, _ := http.NewRequest(http.MethodGet, "/categories/get", nil)
+
+			s.handleCategoriesGet().ServeHTTP(rec, req)
+			assert.Equal(t, tc.expectedCode, rec.Code)
+		})
+	}
+}

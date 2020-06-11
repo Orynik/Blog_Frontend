@@ -63,12 +63,50 @@ func (s *server) configureRouter() {
 	s.router.HandleFunc("/articles/post", s.handleArticlesPost()).Methods("POST")
 	s.router.HandleFunc("/articles/get", s.handleArticlesGet()).Methods("GET")
 
+	s.router.HandleFunc("/categories/post", s.handleCategoriesPost()).Methods("POST")
+	s.router.HandleFunc("/categories/get", s.handleCategoriesGet()).Methods("GET")
+
 	s.router.HandleFunc("/comments/post", s.handleCommentsPost()).Methods("POST")
 	s.router.HandleFunc("/comments/get", s.handleCommentsGet()).Methods("GET")
 
 	private := s.router.PathPrefix("/private").Subrouter()
 	private.Use(s.autheticateUser)
 	private.HandleFunc("/whoami", s.handleWhoami()).Methods("GET")
+}
+
+func (s *server) handleCategoriesGet() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		arr, err := s.store.Category().GetCategories()
+		if err != nil {
+			s.error(w, r, http.StatusInternalServerError, err)
+			return
+		}
+		s.respond(w, r, http.StatusOK, arr)
+	}
+}
+
+func (s *server) handleCategoriesPost() http.HandlerFunc {
+	type request struct {
+		ID       int    `json:"id"`
+		Category string `json:"category"`
+	}
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		req := &request{}
+		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.error(w, r, http.StatusBadRequest, err)
+			return
+
+		}
+		a := &model.Category{
+			Category: req.Category,
+		}
+		if err := s.store.Category().Create(a); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
+		s.respond(w, r, http.StatusCreated, a)
+	}
 }
 
 //................

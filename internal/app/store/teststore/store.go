@@ -9,10 +9,11 @@ import (
 
 //Store ...
 type Store struct {
-	userRepository    *UserRepository
-	db                *sql.DB
-	articleRepository *ArticlesRepository
-	commentRepository *CommentRepository
+	userRepository     *UserRepository
+	db                 *sql.DB
+	articleRepository  *ArticlesRepository
+	commentRepository  *CommentRepository
+	categoryRepository *CategoriesRepository
 }
 
 //New ...
@@ -60,4 +61,18 @@ func (s *Store) Comment() store.CommentRepository {
 	}
 
 	return s.commentRepository
+}
+
+//Category ...
+func (s *Store) Category() store.CategoryRepository {
+	if s.categoryRepository != nil {
+		return s.categoryRepository
+	}
+
+	s.categoryRepository = &CategoriesRepository{
+		store:      s,
+		categories: make(map[int]*model.Category, 5),
+	}
+
+	return s.categoryRepository
 }

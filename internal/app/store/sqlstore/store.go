@@ -9,10 +9,11 @@ import (
 
 //Store ...
 type Store struct {
-	db                *sql.DB
-	userRepository    *UserRepository
-	articleRepository *ArticlesRepository
-	commentRepository *CommentRepository
+	db                 *sql.DB
+	userRepository     *UserRepository
+	articleRepository  *ArticlesRepository
+	commentRepository  *CommentRepository
+	categoryRepository *CategoryRepository
 }
 
 //New ...
@@ -59,4 +60,17 @@ func (s *Store) Comment() store.CommentRepository {
 	}
 
 	return s.commentRepository
+}
+
+//Category ...
+func (s *Store) Category() store.CategoryRepository {
+	if s.categoryRepository != nil {
+		return s.categoryRepository
+	}
+
+	s.categoryRepository = &CategoryRepository{
+		store: s,
+	}
+
+	return s.categoryRepository
 }

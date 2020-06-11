@@ -1,7 +1,7 @@
 package teststore
 
 import (
-	"github.com/Kentabr5427/http-rest-api/internal/app/model"
+	"github.com/Kentabr5427/http-rest-api/internal/app/model" // ...
 )
 
 //ArticlesRepository ...

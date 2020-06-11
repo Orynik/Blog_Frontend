@@ -31,3 +31,11 @@ func TestComment(t *testing.T) *Comment {
 		Date:    "qwe",
 	}
 }
+
+//TestCategory ...
+func TestCategory(t *testing.T) *Category {
+	return &Category{
+		ID:       0,
+		Category: "Backend",
+	}
+}
