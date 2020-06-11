@@ -1,9 +1,9 @@
 export default class Categories{
-    constructor(name){
-        this.name = name
+    constructor(category){
+        this.category = category
     }
     static createCategories(data){
-        const {name} = data
-        return new this(name)
+        const {id,category} = data
+        return new this(category)
     }
 }

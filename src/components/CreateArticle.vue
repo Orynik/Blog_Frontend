@@ -29,8 +29,8 @@
                                 <label for="category-name">Выберите Категорию:</label><br>
                                 <select class = "form-control" name="category-list" id="category" v-model = "category">
                                     <option></option>
-                                    <option v-for = "item in getCategories" :key = "item.id" :value = "item.name">
-                                        {{item.name}}
+                                    <option v-for = "item in getCategories" :key = "item.id" :value = "item.category">
+                                        {{item.category}}
                                     </option>
                                 </select>
                             </div>

@@ -37,7 +37,6 @@ export default{
     },
     async getCategories(){
         const items = await reqCategories.fetchCategories()
-
         //TODO: Добавить обработчик ошибок
         return items.map((item) =>{
             return Categories.createCategories(item);

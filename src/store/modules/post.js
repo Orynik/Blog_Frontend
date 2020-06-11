@@ -8,6 +8,7 @@ export default{
         },
         async fetchCategories(ctx){
             const categories = await api.getCategories();
+            console.log(categories)
             ctx.commit('updateCategories',categories)
         },
         async fetchComments(ctx){

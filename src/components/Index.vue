@@ -24,8 +24,8 @@
                         <li>
                             <span class="category" @click = "handlerCategory('all')">Все категории</span>
                         </li>
-                        <li v-for = "category in getCategories" :key = "category.name" >
-                            <span class = "category" @click = "handlerCategory(category.name)">{{category.name}}</span>
+                        <li v-for = "category in getCategories" :key = "category.category" >
+                            <span class = "category" @click = "handlerCategory(category.category)">{{category.category}}</span>
                         </li>
                         </ul>
                         <div class = "my-3 ml-5 loading" v-show = "!isloaded" :key = "!isloaded">
