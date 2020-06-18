@@ -53,6 +53,7 @@ export default {
 
             if(result == true){
                 this.isCreated = true
+                this.isErrored = false
             }else{
                 this.errorText = result
                 this.isErrored = true
