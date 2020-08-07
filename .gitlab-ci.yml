@@ -1,0 +1,27 @@
+stages:
+  - test
+  - deploy
+
+test:
+  image: node:latest
+  stage: test
+  script:
+    - npm install
+    - npm run test:unit
+  only:
+    - master
+    
+pages:
+  image: node:latest
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    - mv public public-vue
+    - mv dist public
+    - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

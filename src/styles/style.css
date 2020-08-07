@@ -1,0 +1,110 @@
+/* Global styles */
+
+body{
+    color: white;
+    font-family: 'Open Sans', serif;
+    font-weight: 500;
+
+    overflow-y: scroll;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+
+    transition: all 0.35s ease-out;
+}
+
+.linkToArticle:hover{
+    color: black;
+    text-decoration: none;
+    background-color: rgb(184, 177, 177);
+}
+
+/* Article styles */
+
+.article-preview > p{
+    display: none;
+}
+
+.article-full >p{
+    display: block;
+}
+
+.article-preview > p:nth-child(1),
+.article-preview > p:nth-child(2){
+    display: block;
+}
+
+.article-item,
+.article-category-item,
+.article-latest-item{
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(177, 177, 177, 0.342);
+    border-radius: 10px;
+
+    color: white;
+
+    background-color: grey;
+}
+
+.container{
+    color: #000;
+    min-height: 100vh;
+}
+
+.form-auth{
+    border: 2px solid #000;
+    margin-top: 10%;
+    max-width: 350px;
+    min-height: 250px;
+
+    border-radius: 10px;
+}
+
+.form-auth div{
+    height: 100%;
+
+    padding: 10px 16px 10px 16px;
+}
+
+.form-auth-input{
+    margin-bottom: 15px;
+}
+
+.form-auth-submit{
+    margin-top: 15px;
+}
+
+/* Animation <transition> */
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .7s ease;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.CA-enter-active {
+    transition: opacity .7s ease;
+}
+.CA-leave-active{
+    transition: opacity .7s ease-out;
+}
+
+.CA-enter, .CA-leave-to {
+    opacity: 0;
+}
+
+.Articles-enter-active {
+    transition: opacity .55s ease-in;
+}
+
+.Articles-leave-active{
+    transition: opacity .2s ease-out;
+}
+
+.Articles-enter, .Articles-leave-to {
+    opacity: 0;
+}
