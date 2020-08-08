@@ -32,10 +32,10 @@
 > git clone https://gitlab.com/Orynik/blogongo-vue.git
 
 * Создать базу данных и импортировать туда таблицы
-`mysql -u root -p `
-`create database user;`
->  use user;
->  source <путь-до-папки-с-проектом>/backend/migrations/latest.sql
+> 1. `mysql -u root -p `
+> 2. `create database user;`
+> 3.  `use user;`
+> 4. `source <путь-до-папки-с-проектом>/backend/migrations/latest.sql`
 > Если все прошло удачно, то при запуске команды show tables будут отображены 4 таблицы:
 > 1. articles
 > 2. comments
@@ -43,11 +43,11 @@
 > 4. category
 
 * Скомпилировать файл запуска сервера и запустить
-> cd backend && make build
-./apiserver (Для Linux) apiserver.exe (для Windows)
+> 1. `cd backend && make build`
+> 2. `./apiserver` (Для Linux) или `apiserver.exe` (для Windows)
 
 * Запустить средство установки зависимостей для фронтенд части
-> cd - && npm install
-> npm run serve
+> 1. `cd - && npm install`
+> 2. `npm run serve`
 
 * Перейти по ссылке, которая была выведена в конце прошлого пункта (обычно, это localhost:8080)
