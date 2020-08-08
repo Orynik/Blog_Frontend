@@ -1,6 +1,6 @@
 export default{
     async fetchComments(){
-        let response = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/comments/get",{
+        let response = await fetch("http://localhost:4444/comments/get",{
             method: "GET",
         })
 
@@ -13,7 +13,7 @@ export default{
         }
     },
     async postComment(comment){
-        let response = fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/comments/post",{
+        let response = fetch("http://localhost:4444/comments/post",{
             method: "POST",
             body: JSON.stringify(comment),
         })

@@ -1,6 +1,6 @@
 export default{
     async fetchCategories(){
-        let response = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/categories/get",{
+        let response = await fetch("http://localhost:4444/categories/get",{
             method: "GET",
         })
 
