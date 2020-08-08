@@ -1,7 +1,7 @@
 export default{
     async fetchArticle(){
 
-        let response = await fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/articles/get",{
+        let response = await fetch("http://localhost:4444/articles/get",{
             method: "GET",
             mode: "cors"
         })
@@ -18,7 +18,7 @@ export default{
         }
     },
     async postArticle(article){
-        let response = fetch("http://ovz1.dkrovel.n50jp.vps.myjino.ru/articles/post",{
+        let response = fetch("http://localhost:4444/articles/post",{
             method: "POST",
             mode: "cors",
             body: JSON.stringify(article),
