@@ -32,8 +32,8 @@
 > git clone https://gitlab.com/Orynik/blogongo-vue.git
 
 * Создать базу данных и импортировать туда таблицы
->  mysql -u root -p 
->  create database user;
+>  `mysql -u root -p `
+>  `create database user;`
 >  use user;
 >  source <путь-до-папки-с-проектом>/backend/migrations/latest.sql
 > Если все прошло удачно, то при запуске команды show tables будут отображены 4 таблицы:
