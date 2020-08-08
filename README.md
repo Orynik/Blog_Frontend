@@ -44,7 +44,7 @@
 
 * Скомпилировать файл запуска сервера и запустить
 > cd backend && make build
-> ./apiserver (Для Linux) apiserver.exe (для Windows)
+./apiserver (Для Linux) apiserver.exe (для Windows)
 
 * Запустить средство установки зависимостей для фронтенд части
 > cd - && npm install
