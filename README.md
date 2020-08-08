@@ -37,10 +37,10 @@
 >  use user;
 >  source <путь-до-папки-с-проектом>/backend/migrations/latest.sql
 > Если все прошло удачно, то при запуске команды show tables будут отображены 4 таблицы:
-   * articles
-   * comments
-   * users
-   * category
+> 1. articles
+> 2. comments
+> 3. users
+> 4. category
 
 * Скомпилировать файл запуска сервера и запустить
 > cd backend && make build
