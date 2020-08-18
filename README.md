@@ -1,6 +1,9 @@
 # Курсовая работа по теме "Разработка SPA-приложения `Блог` "
 * * *
-Оригинал работы: https://gitlab.com/Orynik/blogongo-vue
+### Репозиторий разделен на две части: Backend и Frontend, ниже прикреплена оригинальная ссылка на курсовой
+Оригинал работы: https://gitlab.com/Orynik/blogongo-vue \
+Frontend: https://github.com/Orynik/Frontend_Blog \
+Backend: https://github.com/Orynik/Backend_Blog
 * * *
 В качестве основных технологий использовались:
 * Vue.js (Фреймворк javascript)
