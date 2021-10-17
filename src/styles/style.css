@@ -54,31 +54,6 @@ a{
     min-height: 100vh;
 }
 
-.form-auth{
-    border: 2px solid #000;
-    margin-top: 10%;
-    max-width: 350px;
-    min-height: 250px;
-
-    border-radius: 10px;
-}
-
-.form-auth div{
-    height: 100%;
-
-    padding: 10px 16px 10px 16px;
-}
-
-.form-auth-input{
-    margin-bottom: 15px;
-}
-
-.form-auth-submit{
-    margin-top: 15px;
-}
-
-/* Animation <transition> */
-
 .fade-enter-active, .fade-leave-active {
     transition: opacity .7s ease;
 }

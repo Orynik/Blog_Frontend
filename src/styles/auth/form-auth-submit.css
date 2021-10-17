@@ -1,0 +1,14 @@
+.form-auth-submit{
+  height: 55px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  border-radius: 10px;
+
+  background-color: #000;
+}
+
+.form-auth-submit:hover{
+  background-color: rgba(0,0,0,0.8);
+}

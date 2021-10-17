@@ -1,0 +1,16 @@
+.form-auth_input-text
+{
+  padding-left: 13px;
+  height: 40px;
+
+  font-size: 14px;
+
+  border-radius: 5px;
+
+
+  border-color: #000;
+  -moz-border-top-colors: #000;
+  -moz-border-right-colors: #000;
+  -moz-border-bottom-colors: #000;
+  -moz-border-left-colors: #000;
+}
