@@ -32,9 +32,15 @@
     </transition>
     <transition name="fade" appear>
       <b-col>
-        <b-container class="d-flex justify-content-center align-items-center">
+        <b-container
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
           <transition name="fade">
-            <div class="alert alert-warning" role="alert" v-if="isErrored">
+            <div
+              class="alert alert-warning w-100"
+              role="alert"
+              v-show="isErrored"
+            >
               {{ errorText }}
             </div>
           </transition>
@@ -48,7 +54,7 @@
               </router-link>
             </div>
           </transition>
-          <transition name="fade">
+          <transition name="form">
             <form
               class="form-auth d-flex flex-column align-items-between"
               v-if="!isAuth"
