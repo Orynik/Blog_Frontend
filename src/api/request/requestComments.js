@@ -1,6 +1,6 @@
 export default{
     async fetchComments(){
-        let response = await fetch("http://localhost:4444/comments/get",{
+        let response = await fetch("http://localhost:3000/comments",{
             method: "GET",
         })
 
@@ -13,7 +13,7 @@ export default{
         }
     },
     async postComment(comment){
-        let response = fetch("http://localhost:4444/comments/post",{
+        let response = fetch("http://localhost:3000/comments",{
             method: "POST",
             body: JSON.stringify(comment),
         })

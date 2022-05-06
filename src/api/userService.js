@@ -1,6 +1,6 @@
 export default{
     async register(user){
-        let request = await fetch("http://localhost:4444/users",{
+        let request = await fetch("http://localhost:3000/users",{
             method: "POST",
             body: JSON.stringify(user),
             mode: "cors"
@@ -15,7 +15,7 @@ export default{
         }
     },
     async login(user){
-        let request = await fetch("http://localhost:4444/sessions",{
+        let request = await fetch("http://localhost:3000/sessions",{
             method: "POST",
             body: JSON.stringify(user),
             credentials: "include",

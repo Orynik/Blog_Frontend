@@ -1,6 +1,6 @@
 export default{
     async fetchCategories(){
-        let response = await fetch("http://localhost:4444/categories/get",{
+        let response = await fetch("http://localhost:3000/categories",{
             method: "GET",
         })
 
