@@ -1,91 +1,154 @@
 <template>
-    <transition name = "fade" appear>
-        <b-container class = "main mt-3">
-        <h1 class = "main-title text-align-left">Последние статьи</h1>
-        <b-row>
-            <b-col cols = "9"  class = "article-list">
-                <div class="alert alert-danger" role="alert" v-if = "isErrored">
-                    {{errortext}}
-                </div>
-                <div v-else>
-                    <div v-if = "isloaded">
-                        <articleItem :articles = Articles :viewsCategory = viewsCategory></articleItem>
-                    </div>
-                    <div class = "loading" v-else>
-                        Загрузка...
-                    </div>
-                </div>
-            </b-col>
-            <b-col cols = "3" class = "article-category-list ml-auto">
-                <div class = "article-category-item">
-                    <h2 class = "article-category-title text-center">Категории</h2>
-                    <transition-group name = "Articles" appear>
-                        <ul v-if = "isloaded" :key = "isloaded">
-                        <li>
-                            <span class="category" @click = "handlerCategory('all')">Все категории</span>
-                        </li>
-                        <li v-for = "category in getCategories" :key = "category.category" >
-                            <span class = "category" @click = "handlerCategory(category.category)">{{category.category}}</span>
-                        </li>
-                        </ul>
-                        <div class = "my-3 ml-5 loading" v-show = "!isloaded" :key = "!isloaded">
-                        Загрузка...
-                        </div>
-                    </transition-group>
-                </div>
-            </b-col>
-        </b-row>
-        </b-container>
-    </transition>
+  <transition
+    name="fade"
+    appear
+  >
+    <b-container
+      class="main mt-3"
+    >
+      <h1
+        class="main-title text-align-left"
+      >
+        Последние статьи
+      </h1>
+
+      <b-row>
+        <b-col
+          cols="9"
+          class="article-list"
+        >
+          <div
+            v-if="isErrored"
+            class="alert alert-danger"
+            role="alert"
+          >
+            {{ errortext }}
+          </div>
+          <div
+            v-else
+          >
+            <div
+              v-if="isloaded"
+            >
+              <articleItem
+                :articles="Articles"
+                :views-category="viewsCategory"
+              />
+            </div>
+            <div
+              v-else
+              class="loading"
+            >
+              Загрузка...
+            </div>
+          </div>
+        </b-col>
+
+        <b-col
+          cols="3"
+          class="article-category-list ml-auto"
+        >
+          <div
+            class="article-category-item"
+          >
+            <h2
+              class="article-category-title text-center"
+            >
+              Категории
+            </h2>
+
+            <transition-group
+              name="Articles"
+              appear
+            >
+              <ul
+                v-if="isloaded"
+                :key="isloaded"
+              >
+                <li>
+                  <span
+                    class="category"
+                    @click="handlerCategory('all')"
+                  >
+                    Все категории
+                  </span>
+                </li>
+
+                <li
+                  v-for="category in getCategories"
+                  :key="category.category"
+                >
+                  <span
+                    class="category"
+                    @click="handlerCategory(category.category)"
+                  >
+                    {{ category.category }}
+                  </span>
+                </li>
+              </ul>
+
+              <div
+                v-show="!isloaded"
+                :key="!isloaded"
+                class="my-3 ml-5 loading"
+              >
+                Загрузка...
+              </div>
+            </transition-group>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
+  </transition>
 </template>
 <script>
-    import articleItem from "@/components/IndexArticle.vue"
-    import {mapGetters,mapActions} from "vuex"
+import articleItem from '@/components/IndexArticle.vue'
+import { mapGetters, mapActions } from 'vuex'
 
-    export default{
-        data(){
-            return{
-                viewsCategory: "all",
-                isloaded: false,
-                isErrored: false,
-                errortext : ""
-            }
-        },
-        components:{
-            articleItem,
-        },
-        computed:{
-            ...mapGetters(["getCategories","getArticles"]),
-            Articles(){
-                if(this.viewsCategory == "all"){ //Сортировка статей по сатегориям
-                    return this.getArticles;
-                }else{
-                    return this.getArticles.filter(t => t.category == this.viewsCategory);
-                }
-            }
-        },
-        methods:{
-            ...mapActions (["fetchCategories","fetchArticles","fetchComments"]),
-            handlerCategory(category){
-                this.viewsCategory = category;
-            }
-        },
-        created(){
-            let loadingArticle = this.fetchArticles()
-            let loadingCategories = this.fetchCategories()
-            this.fetchComments();
-            loadingArticle.then(
-                (result) => this.isloaded = true,
-                (error) => {
-                    this.isErrored = true
-                    this.errortext = error
-                }
-            )
-            loadingCategories.then(
-                (result) => this.isloaded
-            )
-        }
+export default {
+  components: {
+    articleItem
+  },
+  data () {
+    return {
+      viewsCategory: 'all',
+      isloaded: false,
+      isErrored: false,
+      errortext: ''
     }
+  },
+  computed: {
+    ...mapGetters(['getCategories', 'getArticles']),
+    Articles () {
+      if (this.viewsCategory === 'all') { // Сортировка статей по сатегориям
+        return this.getArticles
+      } else {
+        return this.getArticles.filter(t => t.category === this.viewsCategory)
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['fetchCategories', 'fetchArticles', 'fetchComments']),
+    handlerCategory (category) {
+      this.viewsCategory = category
+    }
+  },
+  created () {
+    const loadingArticle = this.fetchArticles()
+    const loadingCategories = this.fetchCategories()
+    this.fetchComments()
+    loadingArticle.then(
+      (result) => this.isloaded = true,
+      (error) => {
+        this.isErrored = true
+        this.errortext = error
+      }
+    )
+    loadingCategories.then(
+      (result) => this.isloaded
+    )
+  }
+}
 </script>
 <style>
     .main-title{

@@ -1,15 +1,14 @@
 <template>
-    <div class = "nf">
-        <h1>404</h1>
-        <span>Страница не найдена</span>
-    </div>
+  <div class="nf">
+    <h1>404</h1>
+    <span>Страница не найдена</span>
+  </div>
 </template>
 <style>
     .nf{
         position: absolute;
         bottom: 30%;
         left: 40%;
-
 
         color: black;
     }
