@@ -15,10 +15,6 @@ module.exports = {
     'vue/multi-word-component-names': 0
   },
 
-  parserOptions: {
-    parser: '@typescript-eslint/parser'
-  },
-
   overrides: [
     {
       files: [
