@@ -1,9 +1,10 @@
 {
   "name": "frontend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --mode development",
+    "mock": "vue-cli-service serve --mode mock",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "rest": "json-server db.json"

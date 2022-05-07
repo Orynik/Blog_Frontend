@@ -1,27 +1,29 @@
-export default{
-    async fetchComments(){
-        let response = await fetch("http://localhost:3000/comments",{
-            method: "GET",
-        })
+const RestURL = process.env.VUE_APP_REST_API_URL
 
-        if((await response).ok){
-            const data = await response.json();
+export default {
+  async fetchComments () {
+    const response = await fetch(`${RestURL}/comments`, {
+      method: 'GET'
+    })
 
-            return await Object.values(data)
-        }else{
-            throw new Error(`Ошибка HTTP: ${response.status}`)
-        }
-    },
-    async postComment(comment){
-        let response = fetch("http://localhost:3000/comments",{
-            method: "POST",
-            body: JSON.stringify(comment),
-        })
+    if ((await response).ok) {
+      const data = await response.json()
 
-        if(!(await response).ok){
-            throw new Error((await response).status + ":" + (await response).statusText)
-        }
-
-        return "done"
+      return await Object.values(data)
+    } else {
+      throw new Error(`Ошибка HTTP: ${response.status}`)
     }
+  },
+  async postComment (comment) {
+    const response = fetch(`${RestURL}/comments`, {
+      method: 'POST',
+      body: JSON.stringify(comment)
+    })
+
+    if (!(await response).ok) {
+      throw new Error((await response).status + ':' + (await response).statusText)
+    }
+
+    return 'done'
+  }
 }
