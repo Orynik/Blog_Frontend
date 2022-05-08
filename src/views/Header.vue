@@ -7,8 +7,8 @@
     <b-navbar-brand>
       <img
         src="@/assets/logo.png"
-        width="50"
         height="45"
+        alt="logo"
       >
     </b-navbar-brand>
     <router-link to="/">
@@ -44,19 +44,19 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  methods: {
-    ...mapGetters(['getStatusAuth', 'getEmail']),
-    ...mapMutations(['cleanAuth']),
-    clear () {
-      this.cleanAuth()
-    }
-  },
   computed: {
     isAuth () {
       return this.getStatusAuth()
     },
     email () {
       return this.getEmail()
+    }
+  },
+  methods: {
+    ...mapGetters(['getStatusAuth', 'getEmail']),
+    ...mapMutations(['cleanAuth']),
+    clear () {
+      this.cleanAuth()
     }
   }
 }

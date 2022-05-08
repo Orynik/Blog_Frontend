@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '/404',
       name: '4040',
-      component: () => import('@/pages/404')
+      component: () => import('@/views/404')
     },
     {
       // Редирект для корретнной работы на GitLab Pages
@@ -23,25 +23,25 @@ export default new Router({
     {
       path: '/blogongo-vue/',
       name: 'root',
-      component: () => import('@/components/Index')
+      component: () => import('@/pages/ArticlesPage')
     },
     {
       path: '/articles/:id',
       name: 'article',
-      props: true,
-      component: () => import('@/components/ArticleItem')
+      params: true,
+      component: () => import('@/pages/ArticlesPage/_components/ArticlesPageCard/index')
     },
     {
       path: '/createArticle',
-      component: () => import('@/components/CreateArticle')
+      component: () => import('@/pages/ArticlesPage/_components/ArticlesPageAdd/index')
     },
     {
       path: '/registration',
-      component: () => import('@/components/Registration')
+      component: () => import('@/pages/Registration/index')
     },
     {
       path: '/login',
-      component: () => import('@/components/Login')
+      component: () => import('@/pages/Login/index')
     }
   ]
 })

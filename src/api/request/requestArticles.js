@@ -1,7 +1,5 @@
 const RestURL = process.env.VUE_APP_REST_API_URL
 
-console.log(RestURL, process.env)
-
 export default {
   async fetchArticle () {
     const response = await fetch(`${RestURL}/articles`, {
@@ -11,7 +9,7 @@ export default {
 
     if ((await response).ok) {
       const data = await response.json()
-      /* Сменил, так как статический xxx/Article.json неправильно обрабатывает json,
+      /* Сменил, так как статический xxx/ArticlesPage.json неправильно обрабатывает json,
             и не разбивает его Object.values в [0] индекс, а нормальный REST заполянет
             весь массив
             */

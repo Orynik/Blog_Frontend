@@ -94,6 +94,7 @@
 
 <script>
 export default {
+  name: 'ArticlesNameItem',
   // Для тестирования, лучше прописывать properties именно таким образом.
   props: {
     articles: {
@@ -118,14 +119,14 @@ export default {
     .comments-icon::before,
     .like-icon::before{
         display: block;
-        content: url("../assets/interface.png");
+        content: url("../../../assets/interface.png");
         width: 20px;
         height: 20px;
     }
     .like-icon::before{
-        content: url("../assets/like.png");
+        content: url("../../../assets/like.png");
     }
     .comments-icon::before{
-        content: url("../assets/interface.png");
+        content: url("../../../assets/interface.png");
     }
 </style>

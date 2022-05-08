@@ -101,7 +101,7 @@
       "author": "durak1@gmail.ru"
     }
   ],
-  "Category": [
+  "Categories": [
     {
       "name": "Frontend"
     },
@@ -415,6 +415,15 @@
       "author": "durak1@gmail.ru",
       "text": "3",
       "date": "2020-06-05T09:52:37.049Z"
+    },
+    {
+      "id": 43
+    },
+    {
+      "id": 44
+    },
+    {
+      "id": 45
     }
   ],
   "profile": {

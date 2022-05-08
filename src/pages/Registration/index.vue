@@ -171,18 +171,18 @@ export default {
 </script>
 
 <style scoped>
-@import "../styles/auth/form-auth.css";
-@import "../styles/auth/form-auth_input-text.css";
-@import "../styles/auth/form-auth_label.css";
-@import "../styles/auth/form-auth-submit.css";
+@import "../../styles/auth/form-auth.css";
+@import "../../styles/auth/form-auth_input-text.css";
+@import "../../styles/auth/form-auth_label.css";
+@import "../../styles/auth/form-auth-submit.css";
 
-@import "../styles/auth/auth-banner-text.css";
-@import "../styles/auth/auth-banner.css";
-@import "../styles/auth/auth-banner_title.css";
-@import "../styles/auth/auth-banner_describe.css";
-@import "../styles/auth/auth-banner_button-action.css";
+@import "../../styles/auth/auth-banner-text.css";
+@import "../../styles/auth/auth-banner.css";
+@import "../../styles/auth/auth-banner_title.css";
+@import "../../styles/auth/auth-banner_describe.css";
+@import "../../styles/auth/auth-banner_button-action.css";
 
 .auth-banner {
-  background-image: url("../assets/regLeftImage.jpg");
+  background-image: url("../../assets/regLeftImage.jpg");
 }
 </style>

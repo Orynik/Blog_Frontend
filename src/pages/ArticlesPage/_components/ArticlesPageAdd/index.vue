@@ -200,7 +200,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Article from '../models/Article'
+import Article from '../../../../models/Article'
 
 export default {
   data () {
@@ -232,7 +232,7 @@ export default {
         this.isEmpty = false
         this.deployArticle().then(
           (result) => {
-            if (result == 'done') {
+            if (result === 'done') {
               this.isCreated = true
             } else {
               this.isErrored = true

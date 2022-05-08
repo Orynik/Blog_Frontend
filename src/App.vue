@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from '@/pages/Header.vue'
+import Header from '@/views/Header.vue'
 import { mapActions } from 'vuex'
 
 export default {
@@ -16,9 +16,9 @@ export default {
   components: {
     Header
   },
-  methods: mapActions(['getEmailUser']),
   async created () {
     await this.getEmailUser()
-  }
+  },
+  methods: mapActions(['getEmailUser'])
 }
 </script>

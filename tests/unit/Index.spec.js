@@ -1,8 +1,8 @@
 import { assert } from 'chai'
 import { mount, createLocalVue } from '@vue/test-utils'
 
-import Index from '@/components/Index'
-import IndexArticle from '@/components/IndexArticle'
+import Index from '@/pages/ArticlesPage'
+import IndexArticle from '@/pages/ArticlesPage/_components/ArticlesPageItem'
 
 import Vuex from 'vuex'
 import Bootstrap from 'bootstrap-vue'
@@ -76,7 +76,7 @@ beforeEach(() => {
   })
 })
 
-describe('Компонент Index.vue', () => {
+describe('Компонент ArticlesPageItem.vue', () => {
   it('Проверка корректного отображения геттера категорий (Vuex)', () => {
     // Монтируем компонент вместе с тестовым Vuex
     const wrapper = mount(Index, {

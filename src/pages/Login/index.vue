@@ -150,6 +150,12 @@ export default {
       errorText: ''
     }
   },
+  computed: {
+    ...mapGetters(['getStatusAuth']),
+    isAuth () {
+      return this.getStatusAuth
+    }
+  },
   methods: {
     ...mapActions(['login']),
     async handleSubmit (event) {
@@ -159,31 +165,25 @@ export default {
       this.submitted = true
 
       const result = await this.login(this.user)
-      if (result != true) {
+      if (result !== true) {
         this.errorText = result
         this.isErrored = true
       }
       this.submitted = false
-    }
-  },
-  computed: {
-    ...mapGetters(['getStatusAuth']),
-    isAuth () {
-      return this.getStatusAuth
     }
   }
 }
 </script>
 
 <style>
-@import "../styles/auth/form-auth.css";
-@import "../styles/auth/form-auth_input-text.css";
-@import "../styles/auth/form-auth_label.css";
-@import "../styles/auth/form-auth-submit.css";
+@import "../../styles/auth/form-auth.css";
+@import "../../styles/auth/form-auth_input-text.css";
+@import "../../styles/auth/form-auth_label.css";
+@import "../../styles/auth/form-auth-submit.css";
 
-@import "../styles/auth/auth-banner-text.css";
-@import "../styles/auth/auth-banner.css";
-@import "../styles/auth/auth-banner_title.css";
-@import "../styles/auth/auth-banner_describe.css";
-@import "../styles/auth/auth-banner_button-action.css";
+@import "../../styles/auth/auth-banner-text.css";
+@import "../../styles/auth/auth-banner.css";
+@import "../../styles/auth/auth-banner_title.css";
+@import "../../styles/auth/auth-banner_describe.css";
+@import "../../styles/auth/auth-banner_button-action.css";
 </style>

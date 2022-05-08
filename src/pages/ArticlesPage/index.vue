@@ -30,7 +30,7 @@
             <div
               v-if="isloaded"
             >
-              <articleItem
+              <ArticlesNameItem
                 :articles="Articles"
                 :views-category="viewsCategory"
               />
@@ -102,12 +102,13 @@
   </transition>
 </template>
 <script>
-import articleItem from '@/components/IndexArticle.vue'
+import ArticlesNameItem from '@/pages/ArticlesPage/_components/ArticlesPageItem'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'ArticlesPage',
   components: {
-    articleItem
+    ArticlesNameItem
   },
   data () {
     return {
@@ -127,16 +128,9 @@ export default {
       }
     }
   },
-  methods: {
-    ...mapActions(['fetchCategories', 'fetchArticles', 'fetchComments']),
-    handlerCategory (category) {
-      this.viewsCategory = category
-    }
-  },
   created () {
     const loadingArticle = this.fetchArticles()
     const loadingCategories = this.fetchCategories()
-    this.fetchComments()
     loadingArticle.then(
       (result) => this.isloaded = true,
       (error) => {
@@ -147,6 +141,12 @@ export default {
     loadingCategories.then(
       (result) => this.isloaded
     )
+  },
+  methods: {
+    ...mapActions(['fetchCategories', 'fetchArticles', 'fetchComments']),
+    handlerCategory (category) {
+      this.viewsCategory = category
+    }
   }
 }
 </script>

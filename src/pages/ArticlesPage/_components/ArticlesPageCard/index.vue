@@ -23,7 +23,7 @@
         </div>
 
         <h4
-            class="article-title"
+          class="article-title"
         >
           {{ CurrentArticle.title }}
         </h4>
@@ -45,7 +45,7 @@
       </b-alert>
 
       <div
-          class="createComments mb-5"
+        class="createComments mb-5"
       >
         <h3>Добавить комментарий:</h3>
 
@@ -102,14 +102,25 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Comments from '../models/Comments'
+import Comments from '../../../../models/Comments'
 
 export default {
+  name: 'ArticlePage',
   data () {
     return {
       content: '',
       submited: false,
       isErrored: false
+    }
+  },
+  computed: {
+    ...mapGetters(['getCurrentArticle', 'getEmail']),
+    // Функция для поиска и вывода определенной статьи
+    CurrentArticle () {
+      return this.getCurrentArticle(this.$route.params.id)[0]
+    },
+    email () {
+      return this.getEmail
     }
   },
   methods: {
@@ -122,11 +133,11 @@ export default {
 
       this.submited = true
 
-      if (this.email === '') {
-        alert('Комментарии могут оставлять только авторизованные пользователи')
-        this.submited = false
-        return
-      }
+      // if (this.email === '') {
+      //   alert('Комментарии могут оставлять только авторизованные пользователи')
+      //   this.submited = false
+      //   return
+      // }
 
       const comm = new Comments(
         0,
@@ -144,21 +155,11 @@ export default {
           this.submited = false
           this.content = ''
         },
-        (error) => {
+        () => {
           this.isErrored = true
           this.submited = false
         }
       )
-    }
-  },
-  computed: {
-    ...mapGetters(['getCurrentArticle', 'getEmail']),
-    // Функция для поиска и вывода определенной статьи
-    CurrentArticle () {
-      return this.getCurrentArticle(this.$route.params.id)[0]
-    },
-    email () {
-      return this.getEmail
     }
   }
 }

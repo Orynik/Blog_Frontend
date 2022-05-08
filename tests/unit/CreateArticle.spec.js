@@ -1,7 +1,7 @@
 import { assert } from 'chai'
 import { mount, createLocalVue } from '@vue/test-utils'
 
-import CreateArticle from '@/components/CreateArticle'
+import CreateArticle from '@/pages/ArticlesPage/_components/ArticlesPageAdd'
 import ArticleModel from '@/models/Article'
 
 import Vuex from 'vuex'
@@ -57,8 +57,8 @@ beforeEach(() => {
       for (let i = 0; i < arrayOfArticles.length; i++) {
         if (arrayOfArticles[i].id > currentArticleID) {
           currentArticleID = arrayOfArticles[i].id
-        };
-      };
+        }
+      }
       article.id = currentArticleID + 1
       articles.push(article)
       return 'done'
@@ -74,7 +74,7 @@ beforeEach(() => {
   })
 })
 
-describe('Компонент CreateArticle.vue', () => {
+describe('Компонент index.vue', () => {
   describe('Проверка отрисовки', () => {
     it('Проверка отображения уведомбения об удачной записи статьи', () => {
       const wrapper = mount(CreateArticle, {
