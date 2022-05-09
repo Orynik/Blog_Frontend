@@ -4,33 +4,33 @@
     appear
   >
     <b-container
+      v-if="!isLoading && objCurrentArticle"
       class="main"
     >
       <div
-        class="Post article-item mt-3
-"
+        class="Post article-item mt-3"
       >
         <div
           class="d-flex justify-content-between"
         >
           <span
             class="article-author"
-          >{{ CurrentArticle.author }}</span>
+          >{{ objCurrentArticle.author }}</span>
 
           <span
             class="article-date"
-          >{{ CurrentArticle.date }}</span>
+          >{{ objCurrentArticle.date }}</span>
         </div>
 
         <h4
           class="article-title"
         >
-          {{ CurrentArticle.title }}
+          {{ objCurrentArticle.title }}
         </h4>
 
         <div
           class="article-full"
-          v-html="CurrentArticle.content"
+          v-html="objCurrentArticle.content"
         />
       </div>
 
@@ -63,7 +63,7 @@
         </button>
       </div>
 
-      <h3>Комментарии ({{ CurrentArticle.comments.length }})</h3>
+      <h3>Комментарии ({{ objCurrentArticle.comments.length }})</h3>
 
       <hr>
 
@@ -72,7 +72,7 @@
         appear
       >
         <div
-          v-for="comment in CurrentArticle.comments"
+          v-for="comment in objCurrentArticle.comments"
           :key="comment.id"
           class="comments"
         >
@@ -86,7 +86,7 @@
               {{ comment.author }}
             </a>
 
-            <span>{{ comment.date }}</span>
+            <span>{{ formatDate(comment.date) }}</span>
           </div>
 
           <div
@@ -101,8 +101,12 @@
   </transition>
 </template>
 <script>
+import ArticleApi from '@/pages/ArticlesPage/_api'
+
 import { mapGetters, mapActions } from 'vuex'
-import Comments from '../../../../models/Comments'
+import Comments from '@/models/Comments'
+
+import formatDate from '@/helpers/formatDate'
 
 export default {
   name: 'ArticlePage',
@@ -110,34 +114,46 @@ export default {
     return {
       content: '',
       submited: false,
-      isErrored: false
+      isLoading: true,
+      isErrored: false,
+      objCurrentArticle: {}
     }
   },
   computed: {
-    ...mapGetters(['getCurrentArticle', 'getEmail']),
-    // Функция для поиска и вывода определенной статьи
-    CurrentArticle () {
-      return this.getCurrentArticle(this.$route.params.id)[0]
-    },
+    ...mapGetters(['getEmail']),
     email () {
       return this.getEmail
     }
   },
+  created () {
+    ArticleApi.fetchArticle(this.$route.params.id)
+      .then((data) => {
+        this.objCurrentArticle = data
+        this.objCurrentArticle.date = this.formatDate(data.date)
+
+        return data
+      })
+      .finally(() => {
+        this.isLoading = false
+      })
+      .catch(err => console.error(err))
+  },
   methods: {
+    formatDate,
     ...mapActions(['postComment']),
     async newComment () {
-      if (this.content === '') {
+      if (!this.content) {
         alert('Недопускается пустой комментарий')
         return
       }
 
       this.submited = true
 
-      // if (this.email === '') {
-      //   alert('Комментарии могут оставлять только авторизованные пользователи')
-      //   this.submited = false
-      //   return
-      // }
+      if (!this.email) {
+        alert('Комментарии могут оставлять только авторизованные пользователи')
+        this.submited = false
+        return
+      }
 
       const comm = new Comments(
         0,
@@ -166,10 +182,6 @@ export default {
 </script>
 
 <style>
-    .main{
-        min-height: 100vh
-    }
-
     .Post{
         border-radius: 0;
     }

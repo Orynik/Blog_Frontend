@@ -11,17 +11,17 @@ export default new Router({
       name: '4040',
       component: () => import('@/views/404')
     },
-    {
-      // Редирект для корретнной работы на GitLab Pages
-      path: '/',
-      redirect: '/blogongo-vue/'
-    },
+    // {
+    //   // Редирект для корретнной работы на GitLab Pages
+    //   path: '/',
+    //   redirect: '/blogongo-vue/'
+    // },
     {
       path: '*',
       redirect: '404'
     },
     {
-      path: '/blogongo-vue/',
+      path: '/',
       name: 'root',
       component: () => import('@/pages/ArticlesPage')
     },

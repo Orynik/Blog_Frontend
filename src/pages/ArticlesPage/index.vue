@@ -4,10 +4,10 @@
     appear
   >
     <b-container
-      class="main mt-3"
+      class="ArticlesPage mt-3"
     >
       <h1
-        class="main-title text-align-left"
+        class="ArticlesPage__title text-align-left"
       >
         Последние статьи
       </h1>
@@ -75,7 +75,7 @@
                 </li>
 
                 <li
-                  v-for="category in getCategories"
+                  v-for="category in arrCategories"
                   :key="category.category"
                 >
                   <span
@@ -102,8 +102,14 @@
   </transition>
 </template>
 <script>
+import ArticleApi from '@/pages/ArticlesPage/_api'
+
 import ArticlesNameItem from '@/pages/ArticlesPage/_components/ArticlesPageItem'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+
+import dataSort from '@/helpers/dataSort'
+import formatDate from '../../helpers/formatDate'
+import Article from '@/models/Article'
 
 export default {
   name: 'ArticlesPage',
@@ -113,51 +119,74 @@ export default {
   data () {
     return {
       viewsCategory: 'all',
+      arrArticles: [],
+      arrCategories: [],
       isloaded: false,
       isErrored: false,
       errortext: ''
     }
   },
   computed: {
-    ...mapGetters(['getCategories', 'getArticles']),
+    ...mapGetters(['getCategories']),
     Articles () {
-      if (this.viewsCategory === 'all') { // Сортировка статей по сатегориям
-        return this.getArticles
+      if (this.viewsCategory === 'all') { // Сортировка статей по категориям
+        return this.arrArticles
       } else {
-        return this.getArticles.filter(t => t.category === this.viewsCategory)
+        return this.arrArticles.filter(t => t.category === this.viewsCategory)
       }
     }
   },
   created () {
-    const loadingArticle = this.fetchArticles()
-    const loadingCategories = this.fetchCategories()
-    loadingArticle.then(
-      (result) => this.isloaded = true,
-      (error) => {
+    ArticleApi.fetchArticles()
+      .then((data) => {
+        this.isloaded = true
+
+        data.sort(dataSort)
+
+        this.arrArticles = data.map((item) => {
+          const article = Article.createForm(item)
+
+          article.date = formatDate(article.date)
+
+          return article
+        })
+
+        return data
+      })
+      .catch(error => {
         this.isErrored = true
         this.errortext = error
-      }
-    )
-    loadingCategories.then(
-      (result) => this.isloaded
-    )
+      })
+
+    ArticleApi.fetchCategories()
+      .then(
+        (data) => {
+          this.arrCategories = data
+
+          return data
+        }
+      )
+      .catch(error => {
+        console.error(error)
+      })
   },
   methods: {
-    ...mapActions(['fetchCategories', 'fetchArticles', 'fetchComments']),
     handlerCategory (category) {
       this.viewsCategory = category
     }
   }
 }
 </script>
-<style>
-    .main-title{
-        margin: 20px 0 25px 0;
+
+<style lang="scss">
+  .ArticlesPage {
+    color: black;
+    min-height: 100vh;
+
+    &__title {
+      margin: 20px 0 25px 0;
     }
-    .main{
-        color: black;
-        min-height: 100vh;
-    }
+  }
 
     .article-item{
         padding: 10px 15px 10px 15px;
