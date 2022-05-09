@@ -1,20 +1,18 @@
 <template>
   <div id="app">
-    <Header class="bg-black" />
-    <section class="main">
-      <router-view />
-    </section>
+    <TheHeader />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Header from '@/views/Header.vue'
+import TheHeader from '@/views/Header.vue'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    Header
+    TheHeader
   },
   async created () {
     await this.getEmailUser()

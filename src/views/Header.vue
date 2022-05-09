@@ -44,6 +44,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  name: 'TheHeader',
   computed: {
     isAuth () {
       return this.getStatusAuth()
