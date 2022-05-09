@@ -2,14 +2,6 @@ import api from '@/api/index'
 
 export default {
   actions: {
-    async fetchArticles (ctx) {
-      const articles = await api.getArticles()
-      ctx.commit('updateArticles', articles)
-    },
-    async fetchCategories (ctx) {
-      const categories = await api.getCategories()
-      ctx.commit('updateCategories', categories)
-    },
     async postArticle (ctx, article) {
       let currentArticleID = 0
       const arrayOfArticles = ctx.state.articles
@@ -37,12 +29,6 @@ export default {
     }
   },
   mutations: {
-    updateArticles (state, articles) {
-      state.articles = articles
-    },
-    updateCategories (state, categories) {
-      state.categories = categories
-    },
     addComment (state, comment) {
       comment.date = new Date(comment.date).toLocaleString('ru', {
         month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'
@@ -54,17 +40,6 @@ export default {
     categories: []
   },
   getters: {
-    getArticles (state) {
-      return state.articles
-    },
-
-    // Поиск нужной статьи после роутинга на страницу XXX:8080/articles/:id
-    getCurrentArticle (state) {
-      return id => state.articles.filter(item => {
-        return item.id === id
-      })
-    },
-
     getCategories (state) {
       return state.categories
     }

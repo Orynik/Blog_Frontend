@@ -5,7 +5,22 @@
       "title": "test",
       "content": "data",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 1,
+          "idArticle": 1,
+          "author": "Orynik",
+          "text": "2",
+          "date": "2020-05-28T02:17:36.856Z"
+        },
+        {
+          "id": 17,
+          "idArticle": 1,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:36:44.269Z"
+        }
+      ],
       "date": "2020-05-28T01:32:29.413Z",
       "category": "Golang",
       "author": "orynik"
@@ -15,7 +30,22 @@
       "title": "тест 3",
       "content": "проверка #2",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 2,
+          "idArticle": 2,
+          "author": "Orynik",
+          "text": "23",
+          "date": "2020-05-28T02:18:35.782Z"
+        },
+        {
+          "id": 18,
+          "idArticle": 2,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:37:36.060Z"
+        }
+      ],
       "date": "2020-05-28T02:02:37.170Z",
       "category": "Golang",
       "author": "orynik"
@@ -25,7 +55,211 @@
       "title": "3",
       "content": "123",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 3,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "3",
+          "date": "2020-05-28T02:22:16.663Z"
+        },
+        {
+          "id": 4,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "2",
+          "date": "2020-05-28T16:04:15.462Z"
+        },
+        {
+          "id": 5,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "3",
+          "date": "2020-05-28T16:18:02.647Z"
+        },
+        {
+          "id": 6,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "2",
+          "date": "2020-05-28T16:20:13.868Z"
+        },
+        {
+          "id": 7,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "roma",
+          "date": "2020-05-28T16:20:26.157Z"
+        },
+        {
+          "id": 8,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "123",
+          "date": "2020-05-28T16:20:48.846Z"
+        },
+        {
+          "id": 9,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "2",
+          "date": "2020-05-28T16:27:52.833Z"
+        },
+        {
+          "id": 10,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "3",
+          "date": "2020-05-28T16:33:57.502Z"
+        },
+        {
+          "id": 11,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:34:19.262Z"
+        },
+        {
+          "id": 12,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "312123",
+          "date": "2020-05-28T16:34:52.968Z"
+        },
+        {
+          "id": 13,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4124",
+          "date": "2020-05-28T16:35:27.944Z"
+        },
+        {
+          "id": 14,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "3",
+          "date": "2020-05-28T16:35:42.086Z"
+        },
+        {
+          "id": 15,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4124124",
+          "date": "2020-05-28T16:36:14.821Z"
+        },
+        {
+          "id": 16,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "24214",
+          "date": "2020-05-28T16:36:28.846Z"
+        },
+        {
+          "id": 19,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:39:47.717Z"
+        },
+        {
+          "id": 20,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "124124",
+          "date": "2020-05-28T16:40:11.020Z"
+        },
+        {
+          "id": 21,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:40:58.838Z"
+        },
+        {
+          "id": 22,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:42:16.346Z"
+        },
+        {
+          "id": 23,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4214",
+          "date": "2020-05-28T16:42:26.626Z"
+        },
+        {
+          "id": 24,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4124",
+          "date": "2020-05-28T16:42:46.882Z"
+        },
+        {
+          "id": 25,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "412",
+          "date": "2020-05-28T16:44:06.857Z"
+        },
+        {
+          "id": 26,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4124",
+          "date": "2020-05-28T16:44:28.737Z"
+        },
+        {
+          "id": 27,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "3123",
+          "date": "2020-05-28T16:45:02.217Z"
+        },
+        {
+          "id": 28,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "45",
+          "date": "2020-05-28T16:45:58.016Z"
+        },
+        {
+          "id": 29,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "4",
+          "date": "2020-05-28T16:46:22.088Z"
+        },
+        {
+          "id": 30,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "2",
+          "date": "2020-05-30T10:35:39.823Z"
+        },
+        {
+          "id": 31,
+          "idArticle": 3,
+          "author": "Orynik",
+          "text": "23",
+          "date": "2020-06-02T14:52:59.675Z"
+        },
+        {
+          "id": 32,
+          "idArticle": 3,
+          "author": "durak1@gmail.ru",
+          "text": "4324",
+          "date": "2020-06-04T07:18:15.169Z"
+        },
+        {
+          "id": 33,
+          "idArticle": 3,
+          "author": "durak1@gmail.ru",
+          "text": "nu i cho",
+          "date": "2020-06-04T07:20:44.420Z"
+        }
+      ],
       "date": "2020-05-28T02:20:04.375Z",
       "category": "JavaScript",
       "author": "orynik"
@@ -35,7 +269,22 @@
       "title": "Da da ya",
       "content": "rqwrqrqr",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 34,
+          "idArticle": 4,
+          "author": "durak1@gmail.ru",
+          "text": "nu vnature",
+          "date": "2020-06-04T07:30:10.399Z"
+        },
+        {
+          "id": 35,
+          "idArticle": 4,
+          "author": "cookezy@cocc.ru",
+          "text": "И не поспоришь",
+          "date": "2020-06-04T07:30:39.791Z"
+        }
+      ],
       "date": "2020-06-04T07:27:23.938Z",
       "category": "JavaScript",
       "author": "durak1@gmail.ru"
@@ -65,7 +314,15 @@
       "title": "3123",
       "content": "12123",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 36,
+          "idArticle": 7,
+          "author": "durak1@gmail.ru",
+          "text": "123123",
+          "date": "2020-06-05T09:04:11.644Z"
+        }
+      ],
       "date": "2020-06-05T03:27:46.992Z",
       "category": "JavaScript",
       "author": "durak1@gmail.ru"
@@ -75,7 +332,36 @@
       "title": "e1231241",
       "content": "qwrqwrqwrqwr",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 37,
+          "idArticle": 8,
+          "author": "durak1@gmail.ru",
+          "text": "3",
+          "date": "2020-06-05T09:22:12.098Z"
+        },
+        {
+          "id": 38,
+          "idArticle": 8,
+          "author": "durak1@gmail.ru",
+          "text": "3",
+          "date": "2020-06-05T09:23:05.056Z"
+        },
+        {
+          "id": 39,
+          "idArticle": 8,
+          "author": "durak1@gmail.ru",
+          "text": "41241241",
+          "date": "2020-06-05T09:23:14.741Z"
+        },
+        {
+          "id": 40,
+          "idArticle": 8,
+          "author": "durak1@gmail.ru",
+          "text": "Ну так то да",
+          "date": "2020-06-05T09:25:48.992Z"
+        }
+      ],
       "date": "2020-06-05T09:21:20.766Z",
       "category": "JavaScript",
       "author": "durak1@gmail.ru"
@@ -85,7 +371,22 @@
       "title": "4",
       "content": "3",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 41,
+          "idArticle": 9,
+          "author": "durak1@gmail.ru",
+          "text": "3",
+          "date": "2020-06-05T09:52:35.408Z"
+        },
+        {
+          "id": 42,
+          "idArticle": 9,
+          "author": "durak1@gmail.ru",
+          "text": "3",
+          "date": "2020-06-05T09:52:37.049Z"
+        }
+      ],
       "date": "2020-06-05T09:34:20.745Z",
       "category": "JavaScript",
       "author": "durak1@gmail.ru"
@@ -103,327 +404,22 @@
   ],
   "Categories": [
     {
-      "name": "Frontend"
+      "category": "Frontend"
     },
     {
-      "name": "Backend"
+      "category": "Backend"
     },
     {
-      "name": "C#"
+      "category": "C#"
     },
     {
-      "name": "Golang"
+      "category": "Golang"
     },
     {
-      "name": "JavaScript"
+      "category": "JavaScript"
     },
     {
-      "name": "Другое"
-    }
-  ],
-  "Comments": [
-    {
-      "id": 1,
-      "idArticle": 1,
-      "author": "Orynik",
-      "text": "2",
-      "date": "2020-05-28T02:17:36.856Z"
-    },
-    {
-      "id": 2,
-      "idArticle": 2,
-      "author": "Orynik",
-      "text": "23",
-      "date": "2020-05-28T02:18:35.782Z"
-    },
-    {
-      "id": 3,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "3",
-      "date": "2020-05-28T02:22:16.663Z"
-    },
-    {
-      "id": 4,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "2",
-      "date": "2020-05-28T16:04:15.462Z"
-    },
-    {
-      "id": 5,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "3",
-      "date": "2020-05-28T16:18:02.647Z"
-    },
-    {
-      "id": 6,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "2",
-      "date": "2020-05-28T16:20:13.868Z"
-    },
-    {
-      "id": 7,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "roma",
-      "date": "2020-05-28T16:20:26.157Z"
-    },
-    {
-      "id": 8,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "123",
-      "date": "2020-05-28T16:20:48.846Z"
-    },
-    {
-      "id": 9,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "2",
-      "date": "2020-05-28T16:27:52.833Z"
-    },
-    {
-      "id": 10,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "3",
-      "date": "2020-05-28T16:33:57.502Z"
-    },
-    {
-      "id": 11,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:34:19.262Z"
-    },
-    {
-      "id": 12,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "312123",
-      "date": "2020-05-28T16:34:52.968Z"
-    },
-    {
-      "id": 13,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4124",
-      "date": "2020-05-28T16:35:27.944Z"
-    },
-    {
-      "id": 14,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "3",
-      "date": "2020-05-28T16:35:42.086Z"
-    },
-    {
-      "id": 15,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4124124",
-      "date": "2020-05-28T16:36:14.821Z"
-    },
-    {
-      "id": 16,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "24214",
-      "date": "2020-05-28T16:36:28.846Z"
-    },
-    {
-      "id": 17,
-      "idArticle": 1,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:36:44.269Z"
-    },
-    {
-      "id": 18,
-      "idArticle": 2,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:37:36.060Z"
-    },
-    {
-      "id": 19,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:39:47.717Z"
-    },
-    {
-      "id": 20,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "124124",
-      "date": "2020-05-28T16:40:11.020Z"
-    },
-    {
-      "id": 21,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:40:58.838Z"
-    },
-    {
-      "id": 22,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:42:16.346Z"
-    },
-    {
-      "id": 23,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4214",
-      "date": "2020-05-28T16:42:26.626Z"
-    },
-    {
-      "id": 24,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4124",
-      "date": "2020-05-28T16:42:46.882Z"
-    },
-    {
-      "id": 25,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "412",
-      "date": "2020-05-28T16:44:06.857Z"
-    },
-    {
-      "id": 26,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4124",
-      "date": "2020-05-28T16:44:28.737Z"
-    },
-    {
-      "id": 27,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "3123",
-      "date": "2020-05-28T16:45:02.217Z"
-    },
-    {
-      "id": 28,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "45",
-      "date": "2020-05-28T16:45:58.016Z"
-    },
-    {
-      "id": 29,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "4",
-      "date": "2020-05-28T16:46:22.088Z"
-    },
-    {
-      "id": 30,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "2",
-      "date": "2020-05-30T10:35:39.823Z"
-    },
-    {
-      "id": 31,
-      "idArticle": 3,
-      "author": "Orynik",
-      "text": "23",
-      "date": "2020-06-02T14:52:59.675Z"
-    },
-    {
-      "id": 32,
-      "idArticle": 3,
-      "author": "durak1@gmail.ru",
-      "text": "4324",
-      "date": "2020-06-04T07:18:15.169Z"
-    },
-    {
-      "id": 33,
-      "idArticle": 3,
-      "author": "durak1@gmail.ru",
-      "text": "nu i cho",
-      "date": "2020-06-04T07:20:44.420Z"
-    },
-    {
-      "id": 34,
-      "idArticle": 4,
-      "author": "durak1@gmail.ru",
-      "text": "nu vnature",
-      "date": "2020-06-04T07:30:10.399Z"
-    },
-    {
-      "id": 35,
-      "idArticle": 4,
-      "author": "cookezy@cocc.ru",
-      "text": "И не поспоришь",
-      "date": "2020-06-04T07:30:39.791Z"
-    },
-    {
-      "id": 36,
-      "idArticle": 7,
-      "author": "durak1@gmail.ru",
-      "text": "123123",
-      "date": "2020-06-05T09:04:11.644Z"
-    },
-    {
-      "id": 37,
-      "idArticle": 8,
-      "author": "durak1@gmail.ru",
-      "text": "3",
-      "date": "2020-06-05T09:22:12.098Z"
-    },
-    {
-      "id": 38,
-      "idArticle": 8,
-      "author": "durak1@gmail.ru",
-      "text": "3",
-      "date": "2020-06-05T09:23:05.056Z"
-    },
-    {
-      "id": 39,
-      "idArticle": 8,
-      "author": "durak1@gmail.ru",
-      "text": "41241241",
-      "date": "2020-06-05T09:23:14.741Z"
-    },
-    {
-      "id": 40,
-      "idArticle": 8,
-      "author": "durak1@gmail.ru",
-      "text": "Ну так то да",
-      "date": "2020-06-05T09:25:48.992Z"
-    },
-    {
-      "id": 41,
-      "idArticle": 9,
-      "author": "durak1@gmail.ru",
-      "text": "3",
-      "date": "2020-06-05T09:52:35.408Z"
-    },
-    {
-      "id": 42,
-      "idArticle": 9,
-      "author": "durak1@gmail.ru",
-      "text": "3",
-      "date": "2020-06-05T09:52:37.049Z"
-    },
-    {
-      "id": 43
-    },
-    {
-      "id": 44
-    },
-    {
-      "id": 45
+      "category": "Другое"
     }
   ],
   "profile": {
