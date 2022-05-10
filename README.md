@@ -1,10 +1,20 @@
-# Курсовая работа по теме "Разработка SPA-приложения `Блог` "
+# Курсовая работа по теме "Разработка SPA-приложения `Блог`"
+## Бекенд распологается по [ссылке](https://github.com/Orynik/Backend_Blog)
+
+В данный момент vue-приложение перерабатывается(упрощается логика, убираются излишки, обновляются библиотеки и т.д), вот примерная карта доработок, которые должны произойти:
+ - [x] Добавление линтера и стандартных настроек для удобства и соблюдения единообразия
+ - [ ] Пересмотр необходимости в действиях vuex (т.к в данный момент туда нагружена логика, которая должна была выполнятся на бек части)
+ - [ ] Перевести стили на scss синтаксис + восстановить порядок стилей (они должны быть прописаны там, где используются)
+ - [ ] Пересмотреть роутинг и вынести некоторые проверки хуки (beforeEnter и подобные)
+  * * *
+ ### Рефактор CreateArticle:
+- [ ] As first, create component autocomplete for select categories article
+- [ ] As Second, create compontent toaster, for render notification about success or fail
+- [ ] Add check auth status in hook beforeEnter
+- [ ] Add editor.js for writing articles
+- [ ] Start refactor styles (replace bootstrap styles)
 * * *
-### Репозиторий разделен на две части: Backend и Frontend, ниже прикреплена оригинальная ссылка на курсовой
-Оригинал работы: https://gitlab.com/Orynik/blogongo-vue \
-Frontend: https://github.com/Orynik/Frontend_Blog \
-Backend: https://github.com/Orynik/Backend_Blog
-* * *
+## Технологии
 В качестве основных технологий использовались:
 * Vue.js (Фреймворк javascript)
     * Vuex (Вспомогательное хранилище, упрощающее разработку)
@@ -12,45 +22,20 @@ Backend: https://github.com/Orynik/Backend_Blog
     * json-server (Для тестирвания преложения, на время отсутствия реального RESTful-сервиса на Golang)
 * Golang (Для написания своего RESTful-сервиса)
 
-## Как запустить? (С использованием заглушки json-server)
+## Как запустить?
 * * *
-* Клонировать репозиторий к себе на компьютер по http или по SSH
-> git clone https://gitlab.com/Orynik/blogongo-vue.git
+* Клонировать репозиторий к себе на компьютер
+> git clone https://github.com/Orynik/Blog_Frontend.git && cd Blog_Frontend
 
 * Запустить средство установки зависимостей
-> npm install
-
-* Запустить в консоли фейковый rest.api
-> npm run rest
+> npm i
 
 * Запустить сам проект в dev режиме
 > npm run serve
 
-* Перейти по ссылке, которая была выведена в конце прошлого пункта (обычно, это localhost:8080)
+* Перейти по ссылке, которая была выведена в конце прошлого пункта (по умолчанию, это localhost:8080)
 
-## Как запустить? (С использованием RESTful-сервиса на Golang)
-* * * 
-#### Примечание
-##### Для корректного запуска требуется наличие на устройстве запуска СУБД MySQL (Паролем на root, в конфиг файле 'Q1qqqqq!'), компилятора Golang и настроенного GOPATH
-* * *
-* Клонировать репозиторий к себе на компьютер по http или по SSH
-> git clone https://gitlab.com/Orynik/blogongo-vue.git
+### В случае отсутсвтия возможности развернуть полноценный бекенд, можно воспользоваться библиотекой json-server
 
-* Создать базу данных и импортировать туда таблицы
-> 1. `mysql -u root -p `
-> 2. `create database user;`
-> 3.  `use user;`
-> 4. `source <путь-до-папки-с-проектом>/backend/migrations/latest.sql`
-> Если все прошло удачно, то при запуске команды show tables будут отображены 4 таблицы:
-> articles, сomments, users, category
-
-* Скомпилировать файл запуска сервера и запустить
-> 1. `cd backend && make build`
-> 2. `./apiserver` (Для Linux) или `apiserver.exe` (для Windows)
-
-* Запустить средство установки зависимостей для фронтенд части
-> 1. `cd - && npm install`
-> 2. `npm run serve`
-
-* Перейти по ссылке, которая была выведена в конце прошлого пункта (обычно, это localhost:8080)
-* RESTful-api располагается на localhost:4444
+* Запустить в консоли фейковый rest.api
+> npm run rest
