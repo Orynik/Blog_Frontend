@@ -36,7 +36,9 @@
       <span
         class="logout category"
         @click="clear()"
-      >Выйти</span>
+      >
+        Выйти
+      </span>
     </b-navbar-nav>
   </b-navbar>
 </template>

@@ -138,7 +138,7 @@
                 <button
                   type="button"
                   class="btn btn-primary ml-auto form-submit"
-                  @click="validateForm()"
+                  @click.prevent="validateForm()"
                 >
                   Отправить
                 </button>
@@ -224,21 +224,22 @@ export default {
   methods: {
     ...mapActions(['postArticle']),
     validateForm () {
-      if (this.isErrored) this.isErrored = false
-
+      this.isErrored = false
       this.validateErrors = {}
 
       if (this.content && this.title && this.category) {
         this.isEmpty = false
-        this.deployArticle().then(
-          (result) => {
-            if (result === 'done') {
-              this.isCreated = true
-            } else {
-              this.isErrored = true
-            }
-          }
-        )
+        this.deployArticle()
+          .then((result) => {
+            if (result !== 'done') throw new Error('something wrong')
+
+            this.isCreated = true
+
+            return result
+          })
+          .catch(err => {
+            console.error(err)
+          })
       } else {
         if (!this.content) {
           this.validateErrors.content = 'Поле с текстом не может быть пустым'

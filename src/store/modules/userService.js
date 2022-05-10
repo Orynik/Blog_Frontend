@@ -3,16 +3,11 @@ import api from '@/api/userService'
 export default {
   actions: {
     async register (ctx, user) {
-      const request = await api.register(user).catch(
+      return await api.register(user).catch(
         (error) => {
-          if (error === 'Error: server errored') {
-            return 'Ошибка сервера. Попробуйте повторить запрос позже'
-          } else {
-            return 'Ошибка сервера. Попробуйте повторить запрос позже'
-          }
+          return 'Ошибка сервера. Попробуйте повторить запрос позже', error
         }
       )
-      return request
     },
     async login (ctx, user) {
       const request = await api.login(user).catch(
@@ -26,17 +21,22 @@ export default {
           }
         }
       )
-      if (request === true) {
+      if (request) {
         ctx.commit('updateAuth', user.email)
-        return request
-      } else {
-        return request
       }
+      return request
     },
     async getEmailUser (ctx) {
       if (document.cookie.length) {
-        const email = await api.cookiesLogin()
-        ctx.commit('updateAuth', email)
+        const request = await api.cookiesLogin()
+
+        // FIXME:Временный костыль на отсутствие бека
+        if (request !== undefined) {
+          ctx.commit('updateAuth', request.email)
+        } else {
+          ctx.commit('updateAuth', 'dkrovel@gmail.com')
+        }
+
         return true
       }
     }
@@ -56,7 +56,7 @@ export default {
   },
   state: {
     isAuthed: false,
-    email: ''
+    email: 'dkrovel@gmail.com'
   },
   getters: {
     getStatusAuth (store) {

@@ -50,6 +50,6 @@ export default {
       }
     )
 
-    return await request.email
+    return await request
   }
 }

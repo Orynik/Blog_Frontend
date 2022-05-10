@@ -51,12 +51,12 @@
 
         <b-textarea
           id="comment-texts"
-          v-model="content"
+          v-model="strContent"
         />
 
         <button
           class="btn btn-primary mt-2"
-          :disabled="submited"
+          :disabled="isSubmited"
           @click="newComment"
         >
           Отправить комментарий
@@ -112,18 +112,15 @@ export default {
   name: 'ArticlePage',
   data () {
     return {
-      content: '',
-      submited: false,
+      strContent: '',
+      isSubmited: false,
       isLoading: true,
       isErrored: false,
       objCurrentArticle: {}
     }
   },
   computed: {
-    ...mapGetters(['getEmail']),
-    email () {
-      return this.getEmail
-    }
+    ...mapGetters(['getEmail'])
   },
   created () {
     ArticleApi.fetchArticle(this.$route.params.id)
@@ -141,41 +138,41 @@ export default {
   methods: {
     formatDate,
     ...mapActions(['postComment']),
-    async newComment () {
-      if (!this.content) {
+    newComment () {
+      if (!this.strContent) {
         alert('Недопускается пустой комментарий')
         return
       }
 
-      this.submited = true
+      this.isSubmited = true
 
-      if (!this.email) {
+      if (!this.getEmail) {
         alert('Комментарии могут оставлять только авторизованные пользователи')
-        this.submited = false
+        this.isSubmited = false
         return
       }
 
       const comm = new Comments(
         0,
         this.CurrentArticle.id,
-        this.email,
-        this.content,
+        this.getEmail,
+        this.strContent,
         new Date()
       )
 
-      await this.postComment(
-        comm
-      ).then(
-        () => {
+      this.postComment(comm)
+        .then((data) => {
           this.isErrored = false
-          this.submited = false
-          this.content = ''
-        },
-        () => {
+          this.isSubmited = false
+          this.strContent = ''
+
+          return data
+        })
+        .catch(err => {
           this.isErrored = true
-          this.submited = false
-        }
-      )
+          this.isSubmited = false
+          console.error(err)
+        })
     }
   }
 }
