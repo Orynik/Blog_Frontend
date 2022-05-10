@@ -10,8 +10,8 @@ export default {
       )
     },
     async login (ctx, user) {
-      const request = await api.login(user).catch(
-        (error) => {
+      const request = await api.login(user)
+        .catch((error) => {
           if (error === 'Error: not auth') {
             return 'Неверно введены логин или пароль.'
           } if (error === 'Error: server errored') {
@@ -19,8 +19,7 @@ export default {
           } else {
             return 'Ошибка сервера. Попробуйте повторить запрос позже'
           }
-        }
-      )
+        })
       if (request) {
         ctx.commit('updateAuth', user.email)
       }

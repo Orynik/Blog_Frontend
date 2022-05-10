@@ -105,7 +105,11 @@
                     class="form-control"
                     name="category-list"
                   >
-                    <option />
+                    <option
+                      value="Backend"
+                    >
+                      Backend
+                    </option>
 
                     <option
                       v-for="item in getCategories"
@@ -123,7 +127,7 @@
                   <label
                     for="title"
                   >
-                    заголовок статьи:
+                    Заголовок статьи:
                   </label><br>
 
                   <input
@@ -199,8 +203,9 @@
   </transition>
 </template>
 <script>
+import ArticleApi from '@/pages/ArticlesPage/_api'
+
 import { mapGetters, mapActions } from 'vuex'
-import Article from '../../../../models/Article'
 
 export default {
   data () {
@@ -229,15 +234,21 @@ export default {
 
       if (this.content && this.title && this.category) {
         this.isEmpty = false
-        this.deployArticle()
-          .then((result) => {
-            if (result !== 'done') throw new Error('something wrong')
+
+        ArticleApi.postArticle({
+          title: this.title,
+          email: this.email,
+          content: this.content,
+          date: new Date(),
+          category: this.category
+        })
+          .then(result => {
+            // if (result !== 'done') throw new Error('something wrong')
 
             this.isCreated = true
 
             return result
-          })
-          .catch(err => {
+          }).catch(err => {
             console.error(err)
           })
       } else {
@@ -261,18 +272,6 @@ export default {
 
         this.isEmpty = true
       }
-    },
-    async deployArticle () {
-      const article = new Article(
-        0,
-        this.title,
-        this.email,
-        this.content,
-        new Date(),
-        this.category
-      )
-
-      return await this.postArticle(article)
     }
   }
 }

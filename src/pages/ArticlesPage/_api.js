@@ -27,11 +27,15 @@ export default {
         return data.json()
       })
   },
-  async postArticle (article) {
-    return fetch(`${RestURL}/articles/post`, {
+  postArticle (article) {
+    return fetch(`${RestURL}/articles`, {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(article)
+    }).then((data) => {
+      return data.json()
+    }).catch(err => {
+      console.error(err)
     })
   }
 }

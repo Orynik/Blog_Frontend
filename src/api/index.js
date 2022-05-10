@@ -3,7 +3,6 @@ import Comments from '@/models/Comments'
 import dataSort from '@/helpers/dataSort'
 
 // Файлы с запросами к серверу
-import reqArticles from '@/api/request/requestArticles'
 import reqComments from '@/api/request/requestComments'
 
 export default {
@@ -19,9 +18,6 @@ export default {
 
       return Comments.createComment(item)
     })
-  },
-  async postArticle (article) {
-    return await reqArticles.postArticle(article)
   },
   async postComment (comment) {
     return await reqComments.postComment(comment)
