@@ -232,7 +232,7 @@ export default {
         this.isEmpty = false
         this.deployArticle().then(
           (result) => {
-            if (result == 'done') {
+            if (result === 'done') {
               this.isCreated = true
             } else {
               this.isErrored = true
@@ -277,73 +277,73 @@ export default {
 }
 </script>
 <style scoped>
-    .tab-first{
-        margin-left: 17px;
-    }
+.tab-first {
+  margin-left: 17px;
+}
 
-    textarea{
-        margin-bottom: 10px;
-        width: 100%;
-        height: 400px;
-    }
+textarea {
+  margin-bottom: 10px;
+  width: 100%;
+  height: 400px;
+}
 
-    .form-submit{
-        margin-bottom: 0;
-        flex-basis: 230px;
-    }
+.form-submit {
+  margin-bottom: 0;
+  flex-basis: 230px;
+}
 
-    .tabs {
-      /* max-width: 350px; */
-      margin-left: auto;
-      margin-right: auto;
-    }
+.tabs {
+  /* max-width: 350px; */
+  margin-left: auto;
+  margin-right: auto;
+}
 
-    .tab{
-        margin-bottom: 0;
-        border: 1px solid gray;
-        border-bottom: 0;
-        padding: 0 5px 0 5px;
+.tab {
+  margin-bottom: 0;
+  border: 1px solid gray;
+  border-bottom: 0;
+  padding: 0 5px 0 5px;
 
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        background: rgba(219, 219, 219, 0.726);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: rgba(219, 219, 219, 0.726);
 
-        transition: all ease-out 0.35s;
-    }
+  transition: all ease-out 0.35s;
+}
 
-    .tabs > label{
-        margin-right: 25px;
-    }
+.tabs > label {
+  margin-right: 25px;
+}
 
-    .tabs>input[type="radio"] {
-      display: none;
-    }
+.tabs > input[type="radio"] {
+  display: none;
+}
 
-    .tabs>input[type="radio"]:checked+.tab {
-        background: #17a2b8 ;
-    }
+.tabs > input[type="radio"]:checked + .tab {
+  background: #17a2b8;
+}
 
-    .tabs>div {
-      /* скрыть контент по умолчанию */
-      border: 1px solid rgb(121, 121, 121);
-      padding: 10px 15px;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
+.tabs > div {
+  /* скрыть контент по умолчанию */
+  border: 1px solid rgb(121, 121, 121);
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
 
-    .content,
-    .preview{
-        display: none;
-    }
+.content,
+.preview {
+  display: none;
+}
 
-    /* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
-    #tab-btn-1:checked~.content,
-    #tab-btn-2:checked~.preview{
-      display: block;
-    }
+/* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
+#tab-btn-1:checked ~ .content,
+#tab-btn-2:checked ~ .preview {
+  display: block;
+}
 
-    .content > form{
-        height: 100%;
-        width: 100%;
-    }
+.content > form {
+  height: 100%;
+  width: 100%;
+}
 </style>

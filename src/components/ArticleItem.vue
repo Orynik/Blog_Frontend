@@ -23,7 +23,7 @@
         </div>
 
         <h4
-            class="article-title"
+          class="article-title"
         >
           {{ CurrentArticle.title }}
         </h4>
@@ -45,7 +45,7 @@
       </b-alert>
 
       <div
-          class="createComments mb-5"
+        class="createComments mb-5"
       >
         <h3>Добавить комментарий:</h3>
 
@@ -144,7 +144,7 @@ export default {
           this.submited = false
           this.content = ''
         },
-        (error) => {
+        () => {
           this.isErrored = true
           this.submited = false
         }
@@ -165,22 +165,22 @@ export default {
 </script>
 
 <style>
-    .main{
-        min-height: 100vh
-    }
+.main {
+  min-height: 100vh
+}
 
-    .Post{
-        border-radius: 0;
-    }
+.Post {
+  border-radius: 0;
+}
 
-    .commentsAuthor{
-        color: #17a2b8 ;
-    }
+.commentsAuthor {
+  color: #17a2b8;
+}
 
-    .commentsContent{
-        margin-left: 5px;
-        padding-left: 10px;
-        border-left: 2px rgba(128, 128, 128, 0.479) solid;
-        border-radius: 2px;
-    }
+.commentsContent {
+  margin-left: 5px;
+  padding-left: 10px;
+  border-left: 2px rgba(128, 128, 128, 0.479) solid;
+  border-radius: 2px;
+}
 </style>

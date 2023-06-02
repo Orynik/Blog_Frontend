@@ -12,9 +12,9 @@ export default {
     if ((await response).ok) {
       const data = await response.json()
       /* Сменил, так как статический xxx/Article.json неправильно обрабатывает json,
-            и не разбивает его Object.values в [0] индекс, а нормальный REST заполянет
-            весь массив
-            */
+                  и не разбивает его Object.values в [0] индекс, а нормальный REST заполянет
+                  весь массив
+                  */
       return await Object.values(data)
     } else {
       throw new Error(`Ошибка HTTP: ${response.status}`)
